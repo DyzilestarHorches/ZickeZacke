@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
     //the below is not yet consider / under construction
     @Override
     public void resize(int width, int height) {
-
+        renderer.resize(width, height);
     }
 
     @Override

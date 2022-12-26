@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zickezacke.nclib.gameObject.GameObject;
 import com.zickezacke.nclib.gameObject.import3D.Instance3D;
 
@@ -27,6 +30,10 @@ public class Renderer {
     private SpriteBatch spriteBatch;
     private CameraInputController camera2DController;
 
+    //ViewPort
+    private Viewport viewport2D;
+    private Viewport viewport3D;
+
     public Renderer(GameWorld gameWorld){
         this.gameWorld = gameWorld;
     }
@@ -38,20 +45,18 @@ public class Renderer {
             modelBatch = new ModelBatch();
             camera3DController = new CameraInputController(camera3D);
             Gdx.input.setInputProcessor(camera3DController);
+            viewport3D = new ScreenViewport(camera3D);
         }
         //2D Camera
         if (gameWorld.hasCamera2D()){
             this.camera2D = gameWorld.getCamera2D();
             spriteBatch = new SpriteBatch();
             camera2DController = new CameraInputController(camera2D);
+            viewport2D = new ScreenViewport(camera2D);
         }
+
+
         this.environment = gameWorld.getEnvironment();
-
-
-
-
-
-
     }
 
     public void render(){
@@ -66,7 +71,11 @@ public class Renderer {
             spriteBatch.begin();
             for (int i = 0; i < gameObjects.size(); i++){
                 Texture tmpTexture = gameObjects.get(i).getTexture();
-                if (tmpTexture != null) spriteBatch.draw(tmpTexture, 0f, 0f);
+                if (tmpTexture != null && !gameObjects.get(i).isUI()) {
+                    Vector2 position = gameObjects.get(i).getPosition2D();
+                    Vector2 size = gameObjects.get(i).getSize2D();
+                    spriteBatch.draw(tmpTexture, position.x, position.y, size.x, size.y);
+                }
             }
             spriteBatch.end();
         }
@@ -86,10 +95,23 @@ public class Renderer {
             spriteBatch.begin();
             for (int i = 0; i < gameObjects.size(); i++){
                 Texture tmpTexture = gameObjects.get(i).getTexture();
-                if (tmpTexture != null && gameObjects.get(i).isUI()) spriteBatch.draw(tmpTexture, 0f, 0f);
+                if (tmpTexture != null && gameObjects.get(i).isUI()) {
+                    Vector2 position = gameObjects.get(i).getPosition2D();
+                    Vector2 size = gameObjects.get(i).getSize2D();
+                    spriteBatch.draw(tmpTexture, position.x, position.y, size.x, size.y);
+                }
             }
             spriteBatch.end();
         }
 
+    }
+    public void resize(int width, int height){
+        if (gameWorld.hasCamera2D()) viewport2D.update(width, height);
+        if (gameWorld.hasCamera3D()) viewport3D.update(width, height);
+        List<GameObject> gameObjects = new ArrayList<>();
+        gameObjects = gameWorld.getGameObjects();
+        for (GameObject gameObject: gameObjects) {
+            gameObject.resize(width, height);
+        }
     }
 }

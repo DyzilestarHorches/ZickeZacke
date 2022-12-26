@@ -3,10 +3,15 @@ package com.zickezacke.nclib.gameObject;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.zickezacke.nclib.component.Component;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 import com.zickezacke.nclib.gameObject.import3D.Instance3D;
 import com.zickezacke.nclib.gameObject.import3D.Model3D;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameObject {
     protected int id;
@@ -19,6 +24,12 @@ public class GameObject {
     protected Texture texture;
     protected boolean isUI;
     protected boolean isActive;
+
+    protected Vector2 position2D = new Vector2(0,0);   //pivot, left-down
+    protected Vector2 size2D = new Vector2(100, 100); //size, width height
+
+    protected List<Component> components = new ArrayList<>();
+
 
     public GameObject(){}
     public GameObject(int id){
@@ -51,6 +62,7 @@ public class GameObject {
     }
 
     public void Update(){
+        if (!isActive) return;
         objectUpdate();
         // update position of model
         if (source3D != null && position3D != null){
@@ -63,12 +75,19 @@ public class GameObject {
         objectLateUpdate();
     }
 
+    public void resize(int width, int height){
+        for (Component component: components) {
+            component.resize(width, height);
+        }
+    }
     //overrides
     public void objectInit(){} //before creation
     public void objectStart(){} //after creation
 
     public void objectUpdate(){}    //before render
     public void objectLateUpdate(){}    //after render
+
+
 
     //getters
     public Instance3D getModel(){
@@ -81,5 +100,12 @@ public class GameObject {
 
     public boolean isUI(){
         return this.isUI;
+    }
+
+    public Vector2 getPosition2D(){
+        return this.position2D;
+    }
+    public Vector2 getSize2D(){
+        return this.size2D;
     }
 }
