@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zickezacke.nclib.gameObject.GameObject;
+import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Instance3D;
 
 
@@ -66,6 +67,10 @@ public class Renderer {
         List<GameObject> gameObjects = new ArrayList<>();
         gameObjects = gameWorld.getGameObjects();
 
+        //load 3D game objects
+        List<GameObject3D> gameObjects3D = new ArrayList<>();
+        gameObjects3D = gameWorld.getGameObjects3D();
+
         //2D render background
         if (gameWorld.hasCamera2D()){
             spriteBatch.begin();
@@ -83,8 +88,8 @@ public class Renderer {
         //3D render
         if (gameWorld.hasCamera3D()){
             modelBatch.begin(camera3D);
-            for (int i = 0; i < gameObjects.size(); i++){
-                Instance3D tmpInstance = gameObjects.get(i).getModel();
+            for (int i = 0; i < gameObjects3D.size(); i++){
+                Instance3D tmpInstance = gameObjects3D.get(i).getModel();
                 if (tmpInstance != null) modelBatch.render(tmpInstance, environment);
             }
             modelBatch.end();
@@ -112,6 +117,12 @@ public class Renderer {
         gameObjects = gameWorld.getGameObjects();
         for (GameObject gameObject: gameObjects) {
             gameObject.resize(width, height);
+        }
+
+        List<GameObject3D> gameObjects3D = new ArrayList<>();
+        gameObjects = gameWorld.getGameObjects();
+        for (GameObject3D gameObject3D: gameObjects3D) {
+            gameObject3D.resize(width, height);
         }
     }
 }

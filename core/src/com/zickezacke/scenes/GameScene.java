@@ -9,7 +9,7 @@ public class GameScene extends GameWorld {
         super(has3DCamera, has2DCamera);
     }
     public void Begin(){
-        gameObjects.add(new testObject(101));
+        gameObjects3D.add(new testObject(101));
         //gameObjects.add(new backGround(102));
         //gameObjects.add(new backGround3D(103));
     }

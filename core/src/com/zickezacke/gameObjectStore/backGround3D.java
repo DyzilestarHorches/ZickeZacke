@@ -2,8 +2,9 @@ package com.zickezacke.gameObjectStore;
 
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.gameObject.GameObject;
+import com.zickezacke.nclib.gameObject.GameObject3D;
 
-public class backGround3D extends GameObject {
+public class backGround3D extends GameObject3D {
     public backGround3D(int id){
         super(id);
     }

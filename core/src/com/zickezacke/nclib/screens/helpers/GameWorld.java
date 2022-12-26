@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.zickezacke.nclib.gameObject.GameObject;
+import com.zickezacke.nclib.gameObject.GameObject3D;
 
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class GameWorld {
     protected PerspectiveCamera camera3D;
     protected OrthographicCamera camera2D;
     protected List<GameObject> gameObjects = new ArrayList<>();
+    protected List<GameObject3D> gameObjects3D = new ArrayList<>();
 
     public GameWorld(){
 
@@ -56,12 +58,19 @@ public class GameWorld {
         for (int i = 0; i < gameObjects.size(); i++){
             gameObjects.get(i).Start();
         }
+
+        for (int i = 0; i < gameObjects3D.size(); i++){
+            gameObjects3D.get(i).Start();
+        }
     }
 
     //called in render, call every gameObject update
     public void Update(){
         for (int i = 0; i < gameObjects.size(); i++){
             gameObjects.get(i).Update();
+        }
+        for (int i = 0; i < gameObjects3D.size(); i++) {
+            gameObjects3D.get(i).Update();
         }
     }
 
@@ -72,6 +81,9 @@ public class GameWorld {
     //temporary, should return only the model of game objects
     public List<GameObject> getGameObjects(){
         return gameObjects;
+    }
+    public List<GameObject3D> getGameObjects3D(){
+        return gameObjects3D;
     }
     public boolean hasCamera3D(){
         if (camera3D != null) return true;

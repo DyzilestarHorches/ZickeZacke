@@ -5,10 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject;
+import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 
 
-public class testObject extends GameObject {
+public class testObject extends GameObject3D {
 
     private boolean isMoving;
 
@@ -20,7 +21,6 @@ public class testObject extends GameObject {
         position3D = new Vector3(0f, 0f, -10f);
     }
     public void objectStart(){
-
         isMoving = false;
     }
     public void animation(){
@@ -72,6 +72,7 @@ public class testObject extends GameObject {
 
     }
     public void objectUpdate(){
+        Gdx.app.log("3DGO","Update");
         animation();
         movement();
         openMenu();

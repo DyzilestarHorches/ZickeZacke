@@ -1,44 +1,44 @@
 package com.zickezacke.nclib.gameObject;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.component.Component;
+import com.zickezacke.nclib.gameObject.import3D.Animation3D;
+import com.zickezacke.nclib.gameObject.import3D.Instance3D;
+import com.zickezacke.nclib.gameObject.import3D.Model3D;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameObject {
+public class GameObject3D{
     protected int id;
+    protected Vector3 position3D;
+    protected Vector3 scale3D;
+    protected String source3D;
 
-    protected String source2D;
-    protected Texture texture;
-    protected Vector2 position2D = new Vector2(0,0);   //pivot, left-down
-    protected Vector2 size2D = new Vector2(100, 100); //size, width height
+    protected Instance3D model3D;
+    protected Animation3D animation3D;
 
-    protected boolean isUI;
     protected boolean isActive;
 
     protected List<Component> components = new ArrayList<>();
 
-
-    public GameObject(){}
-    public GameObject(int id){
-        this(id, false);
-    }
-    public GameObject(int id, boolean isUI){
+    public GameObject3D(){}
+    public GameObject3D(int id){
         this.id = id;
-        this.isUI = isUI;
         this.isActive = true;
+        this.scale3D = new Vector3(1, 1, 1);
     }
+
     public void Start(){
         objectInit();
         // update position of model
-
-        //2D sprite
-        if (source2D != null){
-            texture = new Texture(Gdx.files.internal(source2D));
+        //3D model
+        if (source3D != null && position3D != null){
+            model3D = new Model3D(source3D, position3D).getModel();
+            animation3D = new Animation3D(model3D);
         }
+
         objectStart();
     }
 
@@ -46,8 +46,11 @@ public class GameObject {
         if (!isActive) return;
         objectUpdate();
         // update position of model
-
-
+        if (source3D != null && position3D != null){
+            model3D.setTranslation(position3D);
+            model3D.setScale(scale3D);
+            animation3D.update(Gdx.graphics.getDeltaTime());
+        }
 
         objectLateUpdate();
     }
@@ -67,19 +70,10 @@ public class GameObject {
 
 
     //getters
-    public Texture getTexture() {return this.texture;}
+    public Instance3D getModel(){
+        return this.model3D;
+    }
     public int getId(){
         return this.id;
-    }
-
-    public boolean isUI(){
-        return this.isUI;
-    }
-
-    public Vector2 getPosition2D(){
-        return this.position2D;
-    }
-    public Vector2 getSize2D(){
-        return this.size2D;
     }
 }
