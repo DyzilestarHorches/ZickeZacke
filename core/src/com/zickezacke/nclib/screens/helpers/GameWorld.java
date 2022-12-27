@@ -1,6 +1,9 @@
 package com.zickezacke.nclib.screens.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -11,6 +14,7 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 //not perfect to the ideology, would be improved when needed!
@@ -22,6 +26,8 @@ public class GameWorld {
     protected List<GameObject> gameObjects = new ArrayList<>();
     protected List<GameObject3D> gameObjects3D = new ArrayList<>();
 
+    protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
     public GameWorld(){
 
     }
@@ -29,11 +35,14 @@ public class GameWorld {
     public GameWorld(boolean has3DCamera, boolean has2DCamera){
         if (has3DCamera){
             camera3D = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         }
         if (has2DCamera){
             camera2D = new OrthographicCamera();
         }
         environment = new Environment();
+
+        inputMultiplexer.addProcessor(create2DInputeHandler());
     }
 
     //camera and environment default set up
@@ -74,7 +83,21 @@ public class GameWorld {
         }
     }
 
-    //getters
+    //release memory when changeScreen
+    public void dispose(){
+        for (GameObject gameObject : gameObjects) {
+            gameObject.dispose();
+            //gameObjects.remove(gameObject);
+        }
+
+
+        for (GameObject3D gameObject3D : gameObjects3D) {
+            gameObject3D.dispose();
+            //gameObjects3D.remove(gameObject3D);
+        }
+    }
+
+    //region getters
     public Environment getEnvironment(){
         return this.environment;
     }
@@ -102,6 +125,37 @@ public class GameWorld {
         return this.camera3D;
     }
 
+    public InputMultiplexer getInputMultiplexer(){
+        return this.inputMultiplexer;
+    }
+    //endregion
     //override methods
     public void Begin(){}
+
+    //region support method
+    public InputAdapter create2DInputeHandler(){
+        InputAdapter inputAdapter2D = new InputAdapter(){
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                for (GameObject gameObject: gameObjects) {
+                    if (gameObject.checkClick(screenX, screenY))
+                        if (button == 0)
+                            Gdx.app.log("Input", Integer.toString(gameObject.getId()));
+                        gameObject.MouseDown(screenX, screenY);
+                }
+                return false;
+            }
+
+            @Override
+            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+                for (GameObject gameObject: gameObjects) {
+                    if (gameObject.checkClick(screenX, screenY))
+                        gameObject.MouseUp(screenX, screenY);
+                }
+                return false;
+            }
+        };
+        return inputAdapter2D;
+    }
+    //endregion
 }

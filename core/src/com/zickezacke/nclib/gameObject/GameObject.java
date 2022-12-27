@@ -46,12 +46,28 @@ public class GameObject {
         if (!isActive) return;
         objectUpdate();
         // update position of model
-
+        //if (checkClick(Gdx.input))
 
 
         objectLateUpdate();
     }
 
+    public boolean checkClick(int x, int y){
+        if (x < this.position2D.x || x > this.position2D.x + this.size2D.x)
+            return false;
+        if (y < this.position2D.y || y > this.position2D.y + this.size2D.y)
+            return false;
+        return true;
+    }
+
+    public void MouseDown(int x, int y){}
+
+    public void MouseUp(int x, int y){}
+
+    public void dispose(){
+        texture.dispose();
+    }
+    //region support methods
     public void resize(int width, int height){
         for (Component component: components) {
             component.resize(width, height);
@@ -82,4 +98,6 @@ public class GameObject {
     public Vector2 getSize2D(){
         return this.size2D;
     }
+
+    //endregion
 }

@@ -1,6 +1,7 @@
 package com.zickezacke.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.zickezacke.nclib.screens.GameScreen;
 import com.zickezacke.scenes.GameScene;
 import com.zickezacke.scenes.MenuScene;
@@ -24,6 +25,7 @@ public class ZickeZacke extends Game {
 	public void create () {
 		instance.gameScreens.add(new GameScreen(0, new GameScene(true, true)));	//default game screen is 0
 		instance.gameScreens.add(new GameScreen(1, new MenuScene(false, true)));
+
 		instance.setScreen(gameScreens.get(0));
 	}
 
@@ -32,6 +34,7 @@ public class ZickeZacke extends Game {
 		for (GameScreen gameScreen: gameScreens) {
 			if (gameScreen.getId() == id){
 				instance.setScreen(gameScreen);
+				Gdx.app.log("Number of Screen", Integer.toString(instance.gameScreens.size()));
 			}
 		}
 	}

@@ -22,13 +22,13 @@ public class GameScreen implements Screen {
     public GameScreen(int id, GameWorld gameWorld){
         this.id = id;
         this.gameWorld = gameWorld;
+        gameWorld.Start();
     }
 
     //override interface, execute when scene starts, before any render
     @Override
     public void show() {
         if (gameWorld != null){
-            gameWorld.Start();
             renderer = new Renderer(gameWorld);
             renderer.Start();
         }
@@ -41,6 +41,9 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         if (gameWorld != null){
             gameWorld.Update();
+
+        }
+        if (renderer != null){
             renderer.render();
         }
     }
@@ -53,7 +56,7 @@ public class GameScreen implements Screen {
     //the below is not yet consider / under construction
     @Override
     public void resize(int width, int height) {
-        renderer.resize(width, height);
+        if (renderer != null)renderer.resize(width, height);
     }
 
     @Override
@@ -69,10 +72,16 @@ public class GameScreen implements Screen {
     @Override
     public void hide() {
 
+        renderer.dispose();
+        renderer = null;
+        //gameWorld.dispose();
+        //gameWorld = null;
+        Gdx.app.log("Screen Dispose", Integer.toString(id));
     }
 
     @Override
     public void dispose() {
-
+        //gameWorld.dispose();
+        //renderer.dispose();
     }
 }

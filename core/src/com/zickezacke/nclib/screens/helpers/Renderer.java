@@ -1,6 +1,7 @@
 package com.zickezacke.nclib.screens.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -40,12 +41,16 @@ public class Renderer {
     }
 
     public void Start(){
+        //input handler
+        InputMultiplexer multiplexer = gameWorld.getInputMultiplexer();
         //3D Camera
         if (gameWorld.hasCamera3D()){
             this.camera3D = gameWorld.getCamera3D();
             modelBatch = new ModelBatch();
             camera3DController = new CameraInputController(camera3D);
-            Gdx.input.setInputProcessor(camera3DController);
+
+            multiplexer.addProcessor(camera3DController);
+
             viewport3D = new ScreenViewport(camera3D);
         }
         //2D Camera
@@ -56,8 +61,9 @@ public class Renderer {
             viewport2D = new ScreenViewport(camera2D);
         }
 
-
         this.environment = gameWorld.getEnvironment();
+
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     public void render(){
@@ -72,7 +78,7 @@ public class Renderer {
         gameObjects3D = gameWorld.getGameObjects3D();
 
         //2D render background
-        if (gameWorld.hasCamera2D()){
+        if (spriteBatch != null){
             spriteBatch.begin();
             for (int i = 0; i < gameObjects.size(); i++){
                 Texture tmpTexture = gameObjects.get(i).getTexture();
@@ -86,10 +92,11 @@ public class Renderer {
         }
 
         //3D render
-        if (gameWorld.hasCamera3D()){
+        if (modelBatch != null){
             modelBatch.begin(camera3D);
             for (int i = 0; i < gameObjects3D.size(); i++){
                 Instance3D tmpInstance = gameObjects3D.get(i).getModel();
+                //Gdx.app.log("Screen id", Integer.toString(gameObjects3D.get(i).getId()));
                 if (tmpInstance != null) modelBatch.render(tmpInstance, environment);
             }
             modelBatch.end();
@@ -124,5 +131,21 @@ public class Renderer {
         for (GameObject3D gameObject3D: gameObjects3D) {
             gameObject3D.resize(width, height);
         }
+    }
+
+    //release memory when change screen
+    public void dispose(){
+        //gameWorld.dispose();
+        if (modelBatch != null)
+        {
+            modelBatch.dispose();
+            modelBatch = null;
+        }
+
+        if (spriteBatch != null) {
+            spriteBatch.dispose();
+            spriteBatch = null;
+        }
+        Gdx.app.log("Renderer dispose", "yes");
     }
 }

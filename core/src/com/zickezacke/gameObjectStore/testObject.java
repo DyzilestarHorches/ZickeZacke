@@ -72,7 +72,6 @@ public class testObject extends GameObject3D {
 
     }
     public void objectUpdate(){
-        Gdx.app.log("3DGO","Update");
         animation();
         movement();
         openMenu();

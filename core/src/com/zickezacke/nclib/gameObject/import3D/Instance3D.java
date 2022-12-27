@@ -501,4 +501,8 @@ public class Instance3D implements RenderableProvider {
         this.transform.scale(scale.x, scale.y, scale.z);
         //this.transform.setToScaling(scale.x, scale.y, scale.z);
     }
+
+    public void dispose(){
+        //if (model != null) model.dispose();
+    }
 }

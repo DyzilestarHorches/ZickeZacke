@@ -17,6 +17,7 @@ public class GameObject3D{
     protected String source3D;
 
     protected Instance3D model3D;
+    protected Model3D model;
     protected Animation3D animation3D;
 
     protected boolean isActive;
@@ -35,7 +36,8 @@ public class GameObject3D{
         // update position of model
         //3D model
         if (source3D != null && position3D != null){
-            model3D = new Model3D(source3D, position3D).getModel();
+            model = new Model3D(source3D, position3D);
+            model3D = model.getModel();
             animation3D = new Animation3D(model3D);
         }
 
@@ -59,6 +61,11 @@ public class GameObject3D{
         for (Component component: components) {
             component.resize(width, height);
         }
+    }
+
+    public void dispose(){
+        model.dispose();
+        model3D.dispose();
     }
     //overrides
     public void objectInit(){} //before creation
