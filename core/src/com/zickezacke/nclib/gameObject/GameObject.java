@@ -15,6 +15,7 @@ public class GameObject {
     protected Texture texture;
     protected Vector2 position2D = new Vector2(0,0);   //pivot, left-down
     protected Vector2 size2D = new Vector2(100, 100); //size, width height
+    protected Vector2 oldScreenSize = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
     protected boolean isUI;
     protected boolean isActive;
@@ -60,9 +61,11 @@ public class GameObject {
         return true;
     }
 
-    public void MouseDown(int x, int y){}
+    public void MouseDown(int x, int y, int pointer, int button){
 
-    public void MouseUp(int x, int y){}
+    }
+
+    public void MouseUp(int x, int y, int pointer, int button){}
 
     public void dispose(){
         texture.dispose();
@@ -72,6 +75,11 @@ public class GameObject {
         for (Component component: components) {
             component.resize(width, height);
         }
+
+        /*if (isUI){
+            size2D.x *= width/oldScreenSize.x;
+            size2D.y *= height/oldScreenSize.y;
+        }*/
     }
     //overrides
     public void objectInit(){} //before creation

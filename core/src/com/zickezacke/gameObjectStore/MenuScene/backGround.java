@@ -8,15 +8,15 @@ import com.zickezacke.nclib.screens.helpers.UIHelpers;
 public class backGround extends GameObject {
     private UIHelpers uiHelpers = new UIHelpers();
 
-    public backGround(int id){
-        super(id);
+    public backGround(int id, boolean isUi){
+        super(id, isUi);
         components.add(uiHelpers);
     }
 
     @Override
     public void objectInit() {
         source2D = "./UI_demo/menu_layout.jpg";
-        position2D = new Vector2(100,100);
+        position2D = new Vector2(0,0);
         size2D = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 }

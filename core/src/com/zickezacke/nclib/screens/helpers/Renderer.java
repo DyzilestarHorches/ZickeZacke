@@ -146,6 +146,6 @@ public class Renderer {
             spriteBatch.dispose();
             spriteBatch = null;
         }
-        Gdx.app.log("Renderer dispose", "yes");
+        //Gdx.app.log("Renderer dispose", "yes");
     }
 }

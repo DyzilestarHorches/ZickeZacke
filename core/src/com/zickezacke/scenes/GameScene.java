@@ -13,7 +13,7 @@ public class GameScene extends GameWorld {
     public void Begin(){
         gameObjects3D.add(new testObject(100));
         gameObjects3D.add(new Ground(101));
-        Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
+        //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
         //gameObjects.add(new backGround(102));
         //gameObjects.add(new backGround3D(103));
     }

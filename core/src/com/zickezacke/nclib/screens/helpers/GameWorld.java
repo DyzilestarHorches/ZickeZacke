@@ -137,11 +137,12 @@ public class GameWorld {
         InputAdapter inputAdapter2D = new InputAdapter(){
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                screenY = Gdx.graphics.getHeight() - screenY;
                 for (GameObject gameObject: gameObjects) {
-                    if (gameObject.checkClick(screenX, screenY))
-                        if (button == 0)
-                            Gdx.app.log("Input", Integer.toString(gameObject.getId()));
-                        gameObject.MouseDown(screenX, screenY);
+                    Gdx.app.log(Integer.toString(screenX), Integer.toString(screenY));
+                    if (gameObject.checkClick(screenX, screenY)) {
+                        gameObject.MouseDown(screenX, screenY, pointer, button);
+                    }
                 }
                 return false;
             }
@@ -150,7 +151,7 @@ public class GameWorld {
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
                 for (GameObject gameObject: gameObjects) {
                     if (gameObject.checkClick(screenX, screenY))
-                        gameObject.MouseUp(screenX, screenY);
+                        gameObject.MouseUp(screenX, screenY, pointer, button);
                 }
                 return false;
             }

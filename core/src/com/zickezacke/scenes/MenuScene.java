@@ -12,7 +12,7 @@ public class MenuScene extends GameWorld {
 
     public void Begin(){
         //gameObjects.add(new backGround(102));
-        gameObjects.add(new backGround(101));
-        gameObjects.add(new logo(102));
+        gameObjects.add(new backGround(101, true));
+        gameObjects.add(new logo(102, true));
     }
 }

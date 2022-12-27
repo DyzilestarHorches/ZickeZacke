@@ -1,12 +1,13 @@
 package com.zickezacke.gameObjectStore.MenuScene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject;
 
 public class logo extends GameObject {
-    public logo(int id){
-        super(id);
+    public logo(int id, boolean isUi){
+        super(id, isUi);
     }
 
     @Override
@@ -17,7 +18,8 @@ public class logo extends GameObject {
     }
 
     @Override
-    public void MouseDown(int x, int y) {
-        ZickeZacke.getInstance().setScreen(0);
+    public void MouseDown(int x, int y, int cursor, int button) {
+        if (button == 0)
+            ZickeZacke.getInstance().setScreen(0);
     }
 }

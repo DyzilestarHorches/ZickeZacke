@@ -31,6 +31,8 @@ public class GameScreen implements Screen {
         if (gameWorld != null){
             renderer = new Renderer(gameWorld);
             renderer.Start();
+            //Gdx.app.log(Integer.toString(Gdx.graphics.getWidth()),Integer.toString(Gdx.graphics.getHeight()));
+            //renderer.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
     }
 
@@ -56,7 +58,8 @@ public class GameScreen implements Screen {
     //the below is not yet consider / under construction
     @Override
     public void resize(int width, int height) {
-        if (renderer != null)renderer.resize(width, height);
+        //Gdx.app.log(Integer.toString(width),Integer.toString(height));
+        if (renderer != null) renderer.resize(width, height);
     }
 
     @Override
