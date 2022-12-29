@@ -37,4 +37,8 @@ public class ZickeZacke extends Game {
 			}
 		}
 	}
+
+	public List<GameScreen> getGameScreens(){
+		return this.gameScreens;
+	}
 }

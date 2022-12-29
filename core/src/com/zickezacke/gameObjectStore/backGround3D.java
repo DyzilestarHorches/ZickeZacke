@@ -6,7 +6,7 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class backGround3D extends GameObject3D {
     public backGround3D(int id){
-        super(id);
+        super(id, false);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.zickezacke.gameObjectStore.testObject;
 
 
 public class GameScene extends GameWorld {
+
     public GameScene(boolean has3DCamera, boolean has2DCamera){
         super(has3DCamera, has2DCamera);
     }

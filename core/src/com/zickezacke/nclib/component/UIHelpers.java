@@ -1,4 +1,4 @@
-package com.zickezacke.nclib.screens.helpers;
+package com.zickezacke.nclib.component;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -37,5 +37,6 @@ public class UIHelpers extends Component {
             shapeRenderer.line( i * partWidth, 0, i * partWidth,screenHeight);
         }
         shapeRenderer.end();
+        shapeRenderer.dispose();
     }
 }

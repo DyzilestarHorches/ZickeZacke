@@ -54,6 +54,9 @@ public class GameScreen implements Screen {
     public int getId(){
         return this.id;
     }
+    public GameWorld getGameWorld(){
+        return this.gameWorld;
+    }
 
     //the below is not yet consider / under construction
     @Override

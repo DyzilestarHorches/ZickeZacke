@@ -9,6 +9,11 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Plane;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
+import com.badlogic.gdx.math.collision.Ray;
 import com.zickezacke.nclib.gameObject.GameObject;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
@@ -28,6 +33,7 @@ public class GameWorld {
 
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
+
     public GameWorld(){
 
     }
@@ -42,7 +48,8 @@ public class GameWorld {
         }
         environment = new Environment();
 
-        inputMultiplexer.addProcessor(create2DInputeHandler());
+        if (camera2D != null)inputMultiplexer.addProcessor(create2DInputHandler());
+        if (camera3D != null)inputMultiplexer.addProcessor(create3DInputHandler());
     }
 
     //camera and environment default set up
@@ -133,7 +140,7 @@ public class GameWorld {
     public void Begin(){}
 
     //region support method
-    public InputAdapter create2DInputeHandler(){
+    public InputAdapter create2DInputHandler(){
         InputAdapter inputAdapter2D = new InputAdapter(){
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -157,6 +164,143 @@ public class GameWorld {
             }
         };
         return inputAdapter2D;
+    }
+
+    public static boolean isIntersect (Ray ray, BoundingBox box, Vector3 intersection) {
+        Vector3 v1 = new Vector3();
+        Vector3 v2 = new Vector3();
+        if (box.contains(ray.origin)) {
+            if (intersection != null) intersection.set(ray.origin);
+            return true;
+        }
+        float lowest = 0, t;
+        boolean hit = false;
+
+        // min x
+        if (ray.origin.x <= box.min.x && ray.direction.x > 0) {
+            t = (box.min.x - ray.origin.x) / ray.direction.x;
+            if (t >= 0) {
+                v2.set(ray.direction).scl(t).add(ray.origin);
+                if (v2.y >= box.min.y && v2.y <= box.max.y && v2.z >= box.min.z && v2.z <= box.max.z && (!hit || t < lowest)) {
+                    hit = true;
+                    lowest = t;
+                }
+            }
+        }
+        // max x
+        if (ray.origin.x >= box.max.x && ray.direction.x < 0) {
+            t = (box.max.x - ray.origin.x) / ray.direction.x;
+            if (t >= 0) {
+                v2.set(ray.direction).scl(t).add(ray.origin);
+                if (v2.y >= box.min.y && v2.y <= box.max.y && v2.z >= box.min.z && v2.z <= box.max.z && (!hit || t < lowest)) {
+                    hit = true;
+                    lowest = t;
+                }
+            }
+        }
+        // min y
+        if (ray.origin.y <= box.min.y && ray.direction.y > 0) {
+            t = (box.min.y - ray.origin.y) / ray.direction.y;
+            if (t >= 0) {
+                v2.set(ray.direction).scl(t).add(ray.origin);
+                if (v2.x >= box.min.x && v2.x <= box.max.x && v2.z >= box.min.z && v2.z <= box.max.z && (!hit || t < lowest)) {
+                    hit = true;
+                    lowest = t;
+                }
+            }
+        }
+        // max y
+        if (ray.origin.y >= box.max.y && ray.direction.y < 0) {
+            t = (box.max.y - ray.origin.y) / ray.direction.y;
+            if (t >= 0) {
+                v2.set(ray.direction).scl(t).add(ray.origin);
+                if (v2.x >= box.min.x && v2.x <= box.max.x && v2.z >= box.min.z && v2.z <= box.max.z && (!hit || t < lowest)) {
+                    hit = true;
+                    lowest = t;
+                }
+            }
+        }
+        // min z
+        if (ray.origin.z <= box.min.z && ray.direction.z > 0) {
+            t = (box.min.z - ray.origin.z) / ray.direction.z;
+            if (t >= 0) {
+                v2.set(ray.direction).scl(t).add(ray.origin);
+                if (v2.x >= box.min.x && v2.x <= box.max.x && v2.y >= box.min.y && v2.y <= box.max.y && (!hit || t < lowest)) {
+                    hit = true;
+                    lowest = t;
+                }
+            }
+        }
+        // max z
+        if (ray.origin.z >= box.max.z && ray.direction.z < 0) {
+            t = (box.max.z - ray.origin.z) / ray.direction.z;
+            if (t >= 0) {
+                v2.set(ray.direction).scl(t).add(ray.origin);
+                if (v2.x >= box.min.x && v2.x <= box.max.x && v2.y >= box.min.y && v2.y <= box.max.y && (!hit || t < lowest)) {
+                    hit = true;
+                    lowest = t;
+                }
+            }
+        }
+        if (hit && intersection != null) {
+            intersection.set(ray.direction).scl(lowest).add(ray.origin);
+            if (intersection.x < box.min.x) {
+                intersection.x = box.min.x;
+            } else if (intersection.x > box.max.x) {
+                intersection.x = box.max.x;
+            }
+            if (intersection.y < box.min.y) {
+                intersection.y = box.min.y;
+            } else if (intersection.y > box.max.y) {
+                intersection.y = box.max.y;
+            }
+            if (intersection.z < box.min.z) {
+                intersection.z = box.min.z;
+            } else if (intersection.z > box.max.z) {
+                intersection.z = box.max.z;
+            }
+        }
+        return hit;
+    }
+
+    public GameObject3D getObject (int screenX, int screenY) {
+        camera3D.update();
+        Ray ray = camera3D.getPickRay(screenX, screenY);
+        float distance = -1;
+        int choose = -1;
+
+        for (int i = 0; i < gameObjects3D.size(); i++){
+            BoundingBox bb = gameObjects3D.get(i).getBounds();
+            Vector3 intersect = new Vector3();
+            if (isIntersect(ray, bb, intersect)){
+                float tmpDist = ray.origin.dst(intersect);
+                if (distance == -1 ||  tmpDist < distance){
+                    distance = tmpDist;
+                    choose = i;
+                }
+            }
+        }
+        if (choose != -1) return gameObjects3D.get(choose);
+        return null;
+    }
+
+    public InputAdapter create3DInputHandler(){
+        InputAdapter inputAdapter3D = new InputAdapter(){
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                GameObject3D gameObject3D = getObject(screenX, screenY);
+                if (gameObject3D != null) gameObject3D.MouseDown(screenX, screenY, pointer, button);
+                return false;
+            }
+
+            @Override
+            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+                GameObject3D gameObject3D = getObject(screenX, screenY);
+                if (gameObject3D != null) gameObject3D.MouseUp(screenX, screenY, pointer, button);
+                return false;
+            }
+        };
+        return inputAdapter3D;
     }
     //endregion
 }

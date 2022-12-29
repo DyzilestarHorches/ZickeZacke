@@ -2,8 +2,12 @@ package com.zickezacke.gameObjectStore;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
+import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
@@ -12,13 +16,15 @@ import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 public class testObject extends GameObject3D {
 
     private boolean isMoving;
+    private BoundingVisual boundingVisual = new BoundingVisual();
 
     public testObject(int id){
-        super(id);
+        super(id, true);
     }
     public void objectInit(){
         source3D = "demo.g3db";
-        position3D = new Vector3(0f, 0f, -10f);
+        position3D = new Vector3(0f, 0f, -2f);
+        components.add(boundingVisual);
     }
     public void objectStart(){
         isMoving = false;
@@ -72,8 +78,33 @@ public class testObject extends GameObject3D {
 
     }
     public void objectUpdate(){
+
+        //bounds.getCenter(center);
+        //Gdx.app.log("Center", bounds..toString());
+        //Gdx.app.log("scale", model3D.transform.getScale(new Vector3()).toString());
+        boundingVisual.drawBox(dimensions, bounds, Color.BLUE);
+
+       /* ShapeRenderer shapeRenderer = new ShapeRenderer();
+        PerspectiveCamera camera3D = ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld().getCamera3D();
+
+        shapeRenderer.setProjectionMatrix(camera3D.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.LIME);
+        Vector3 trf = new Vector3();
+        model3D.transform.getTranslation(trf);
+        shapeRenderer.box(
+                trf.x, trf.y, trf.z,
+                10, 10, 10
+        );
+        shapeRenderer.end();*/
+
         animation();
         movement();
         openMenu();
+    }
+
+    @Override
+    public void MouseDown(int screenX, int screenY, int pointer, int button) {
+        Gdx.app.log("Mouse", "Down");
     }
 }

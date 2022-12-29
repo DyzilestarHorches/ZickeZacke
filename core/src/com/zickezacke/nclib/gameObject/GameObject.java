@@ -15,7 +15,7 @@ public class GameObject {
     protected Texture texture;
     protected Vector2 position2D = new Vector2(0,0);   //pivot, left-down
     protected Vector2 size2D = new Vector2(100, 100); //size, width height
-    protected Vector2 oldScreenSize = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    //protected Vector2 oldScreenSize = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
     protected boolean isUI;
     protected boolean isActive;

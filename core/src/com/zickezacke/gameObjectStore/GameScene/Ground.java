@@ -1,11 +1,12 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class Ground extends GameObject3D {
     public Ground(int id){
-        super(id);
+        super(id, false);
     }
 
     @Override
@@ -13,5 +14,10 @@ public class Ground extends GameObject3D {
         source3D = "./game_scene/main_ground_demo.g3db";
         position3D = new Vector3(0, 0, -10);
         scale3D = new Vector3(1, 1, 1);
+    }
+
+    @Override
+    public void MouseDown(int screenX, int screenY, int pointer, int button) {
+        Gdx.app.log("really","yes");
     }
 }

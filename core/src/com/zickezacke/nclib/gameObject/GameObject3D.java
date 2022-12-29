@@ -1,7 +1,13 @@
 package com.zickezacke.nclib.gameObject;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
+import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.component.Component;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 import com.zickezacke.nclib.gameObject.import3D.Instance3D;
@@ -13,6 +19,8 @@ import java.util.List;
 public class GameObject3D{
     protected int id;
     protected Vector3 position3D;
+    protected Vector3 prePos3D;
+    protected Vector3 distance3D;
     protected Vector3 scale3D;
     protected String source3D;
 
@@ -21,14 +29,20 @@ public class GameObject3D{
     protected Animation3D animation3D;
 
     protected boolean isActive;
+    protected boolean hasBound;
 
     protected List<Component> components = new ArrayList<>();
 
+    public final Vector3 center = new Vector3();
+    public final Vector3 dimensions = new Vector3();
+    protected final BoundingBox bounds = new BoundingBox();
+
     public GameObject3D(){}
-    public GameObject3D(int id){
+    public GameObject3D(int id, boolean hasBound){
         this.id = id;
         this.isActive = true;
         this.scale3D = new Vector3(1, 1, 1);
+        this.hasBound = hasBound;
     }
 
     public void Start(){
@@ -36,9 +50,18 @@ public class GameObject3D{
         // update position of model
         //3D model
         if (source3D != null && position3D != null){
+            prePos3D = position3D.cpy();
             model = new Model3D(source3D, position3D);
             model3D = model.getModel();
             animation3D = new Animation3D(model3D);
+
+            if (hasBound){
+                model3D.calculateBoundingBox(bounds);
+                bounds.mul(model3D.transform);
+                bounds.getDimensions(dimensions);
+                bounds.getCenter(center);
+            }
+
         }
 
         objectStart();
@@ -48,10 +71,21 @@ public class GameObject3D{
         if (!isActive) return;
         objectUpdate();
         // update position of model
+
+        distance3D = position3D.cpy().sub(prePos3D);
+        //Gdx.app.log("Center", distance3D.toString());
+        prePos3D.x = position3D.x;  prePos3D.y = position3D.y; prePos3D.z= position3D.z;
         if (source3D != null && position3D != null){
             model3D.setTranslation(position3D);
             model3D.setScale(scale3D);
             animation3D.update(Gdx.graphics.getDeltaTime());
+
+            //bounds.mul(new Matrix4(distance3D, new Quaternion().idt(), new Vector3(1, 1, 1)));
+        }
+
+        if (hasBound && bounds != null){
+            bounds.getCenter(center);
+            bounds.mul(new Matrix4(distance3D, new Quaternion().idt(), new Vector3(1, 1, 1)));
         }
 
         objectLateUpdate();
@@ -66,6 +100,9 @@ public class GameObject3D{
     public void dispose(){
         model.dispose();
         model3D.dispose();
+        for (Component component : components){
+            component.dispose();
+        }
     }
     //overrides
     public void objectInit(){} //before creation
@@ -74,7 +111,8 @@ public class GameObject3D{
     public void objectUpdate(){}    //before render
     public void objectLateUpdate(){}    //after render
 
-
+    public void MouseDown(int screenX, int screenY, int pointer, int button){}
+    public void MouseUp(int screenX, int screenY, int pointer, int button){}
 
     //getters
     public Instance3D getModel(){
@@ -82,5 +120,8 @@ public class GameObject3D{
     }
     public int getId(){
         return this.id;
+    }
+    public BoundingBox getBounds(){
+        return this.bounds;
     }
 }
