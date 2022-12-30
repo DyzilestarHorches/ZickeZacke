@@ -1,8 +1,7 @@
 package com.zickezacke.scenes;
 
-import com.badlogic.gdx.Gdx;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
-import com.zickezacke.nclib.screens.helpers.GameWorld;
+import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 import com.zickezacke.gameObjectStore.testObject;
 
 

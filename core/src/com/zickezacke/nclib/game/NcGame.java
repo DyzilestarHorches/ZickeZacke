@@ -1,10 +1,7 @@
 package com.zickezacke.nclib.game;
 
 import com.badlogic.gdx.Game;
-import com.zickezacke.game.ZickeZacke;
-import com.zickezacke.nclib.screens.GameScreen;
-import com.zickezacke.scenes.GameScene;
-import com.zickezacke.scenes.MenuScene;
+import com.zickezacke.nclib.game.screens.GameScreen;
 
 import java.util.ArrayList;
 import java.util.List;

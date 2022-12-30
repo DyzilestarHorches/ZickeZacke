@@ -1,10 +1,10 @@
-package com.zickezacke.nclib.screens;
+package com.zickezacke.nclib.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.zickezacke.nclib.screens.helpers.GameWorld;
-import com.zickezacke.nclib.screens.helpers.Renderer;
+import com.zickezacke.nclib.game.screens.helpers.GameWorld;
+import com.zickezacke.nclib.game.screens.helpers.Renderer;
 
 //class to create scenes (e.g GameScene, MainMenu,...)
 public class GameScreen implements Screen {

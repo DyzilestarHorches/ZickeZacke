@@ -1,4 +1,8 @@
+<<<<<<< HEAD:core/src/com/zickezacke/nclib/component/UIHelpers.java
 package com.zickezacke.nclib.component;
+=======
+package com.zickezacke.nclib.game.screens.helpers;
+>>>>>>> UI_chesse:core/src/com/zickezacke/nclib/game/screens/helpers/UIHelpers.java
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
