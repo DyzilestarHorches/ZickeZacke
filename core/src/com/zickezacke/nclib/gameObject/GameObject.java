@@ -10,7 +10,6 @@ import java.util.List;
 
 public class GameObject {
     protected int id;
-
     protected String source2D;
     protected Texture texture;
     protected Vector2 position2D = new Vector2(0,0);   //pivot, left-down
@@ -52,7 +51,8 @@ public class GameObject {
 
         objectLateUpdate();
     }
-
+    // change texture after render
+    public void setTexture(String newTexture){texture = new Texture(Gdx.files.internal(newTexture));}
     public boolean checkClick(int x, int y){
         if (x < this.position2D.x || x > this.position2D.x + this.size2D.x)
             return false;

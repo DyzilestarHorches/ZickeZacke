@@ -2,7 +2,7 @@ package com.zickezacke.gameObjectStore;
 
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.nclib.gameObject.GameObject;
-import com.zickezacke.nclib.screens.helpers.UIHelpers;
+import com.zickezacke.nclib.game.screens.helpers.UIHelpers;
 
 public class backGround extends GameObject {
     UIHelpers uiHelpers;

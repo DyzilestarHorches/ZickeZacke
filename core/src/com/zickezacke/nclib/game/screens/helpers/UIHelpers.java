@@ -1,4 +1,4 @@
-package com.zickezacke.nclib.screens.helpers;
+package com.zickezacke.nclib.game.screens.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
