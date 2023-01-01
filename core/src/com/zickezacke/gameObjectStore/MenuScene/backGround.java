@@ -9,8 +9,8 @@ import com.zickezacke.nclib.gameObject.GameObject;
 public class backGround extends GameObject {
     private UIHelpers uiHelpers = new UIHelpers();
 
-    public backGround(int id, boolean isUi){
-        super(id, isUi);
+    public backGround(int id){
+        super(id);
         components.add(uiHelpers);
     }
 

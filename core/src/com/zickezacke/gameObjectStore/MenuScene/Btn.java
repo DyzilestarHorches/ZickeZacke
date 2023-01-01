@@ -1,5 +1,6 @@
 package com.zickezacke.gameObjectStore.MenuScene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject;
@@ -28,5 +29,10 @@ public class Btn extends GameObject {
     @Override
     public void objectInit() {
         source2D = type;
+    }
+
+    @Override
+    public void objectUpdate() {
+        Gdx.app.log("dmm","may");
     }
 }

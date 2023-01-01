@@ -81,6 +81,7 @@ public class Renderer {
         if (spriteBatch != null){
             spriteBatch.begin();
             for (int i = 0; i < gameObjects.size(); i++){
+                if(!gameObjects .get(i).isActive()) continue;
                 Texture tmpTexture = gameObjects.get(i).getTexture();
                 if (tmpTexture != null && !gameObjects.get(i).isUI()) {
                     Vector2 position = gameObjects.get(i).getPosition2D();
@@ -106,6 +107,7 @@ public class Renderer {
         if (gameWorld.hasCamera2D()){
             spriteBatch.begin();
             for (int i = 0; i < gameObjects.size(); i++){
+                if(!gameObjects .get(i).isActive()) continue;
                 Texture tmpTexture = gameObjects.get(i).getTexture();
                 if (tmpTexture != null && gameObjects.get(i).isUI()) {
                     Vector2 position = gameObjects.get(i).getPosition2D();

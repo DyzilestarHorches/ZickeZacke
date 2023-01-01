@@ -51,6 +51,8 @@ public class GameObject {
 
         objectLateUpdate();
     }
+    // set active of object
+    public void setActive(boolean isActive){this.isActive = isActive;}
     // change texture after render
     public void setTexture(String newTexture){texture = new Texture(Gdx.files.internal(newTexture));}
     public boolean checkClick(int x, int y){
@@ -91,6 +93,7 @@ public class GameObject {
 
 
     //getters
+    public boolean isActive(){return this.isActive;}
     public Texture getTexture() {return this.texture;}
     public int getId(){
         return this.id;
