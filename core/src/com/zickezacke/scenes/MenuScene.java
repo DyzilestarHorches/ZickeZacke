@@ -32,10 +32,11 @@ public class MenuScene extends GameWorld {
         gameObjects.add(new selectBtn3(108,Btn.select_btn_3));
         gameObjects.add(new notiScene(109));
         gameObjects.add(new backBtn_0(110,Btn.back_btn));
+        gameObjects.add(new Btn(111));
     }
 
     @Override
-    public void Update() {
+    public void worldUpdate() {
         //update number of player
         ZickeZacke.playerList = new boolean[]{selectBtn0.getState(),
                 selectBtn1.getState(),

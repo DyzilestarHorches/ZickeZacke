@@ -21,6 +21,11 @@ public class Btn extends GameObject {
     public int cellWidth =  1280/12;
     public int cellHeight = 720/10;
     private String type;
+
+    //test
+    public Btn(int id){
+        super(id, true);
+    }
     public Btn(int id,String type){
         super(id,true);
         this.type = type;

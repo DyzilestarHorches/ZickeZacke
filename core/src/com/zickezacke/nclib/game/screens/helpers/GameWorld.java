@@ -82,7 +82,10 @@ public class GameWorld {
 
     //called in render, call every gameObject update
     public void Update(){
+        worldUpdate();
         for (int i = 0; i < gameObjects.size(); i++){
+            Gdx.app.log(Integer.toString(i), Boolean.toString(gameObjects.get(i).isActive()));
+
             gameObjects.get(i).Update();
         }
         for (int i = 0; i < gameObjects3D.size(); i++) {
@@ -103,6 +106,9 @@ public class GameWorld {
             //gameObjects3D.remove(gameObject3D);
         }
     }
+
+    //region override methods
+    public void worldUpdate(){}
 
     //region getters
     public Environment getEnvironment(){
