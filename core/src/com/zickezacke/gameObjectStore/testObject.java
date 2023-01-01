@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
+import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject;
 import com.zickezacke.nclib.gameObject.GameObject3D;

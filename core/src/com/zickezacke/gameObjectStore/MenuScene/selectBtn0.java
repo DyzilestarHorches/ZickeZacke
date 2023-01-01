@@ -1,6 +1,7 @@
 package com.zickezacke.gameObjectStore.MenuScene;
 
 import com.badlogic.gdx.math.Vector2;
+import com.zickezacke.gameObjectStore.GameScene.Chicken;
 
 public class selectBtn0 extends Btn{
     private static boolean isChoose;
@@ -17,10 +18,11 @@ public class selectBtn0 extends Btn{
         isChoose = !isChoose;
         if(isChoose){
             setTexture(Btn.selected_btn_0);
+
         }else{
             setTexture(Btn.select_btn_0);
         }
     }
-    static public boolean getState(){return isChoose;}
+    public static boolean getState(){return isChoose;}
 
 }

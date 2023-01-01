@@ -21,6 +21,6 @@ public class selectBtn3 extends Btn{
             setTexture(Btn.select_btn_3);
         }
     }
-    static boolean getState(){return isChoose;}
+    public static boolean getState(){return isChoose;}
 
 }

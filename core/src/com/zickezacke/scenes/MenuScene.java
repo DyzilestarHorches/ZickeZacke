@@ -26,7 +26,5 @@ public class MenuScene extends GameWorld {
         gameObjects.add(new selectBtn1(106,Btn.select_btn_1));
         gameObjects.add(new selectBtn2(107,Btn.select_btn_2));
         gameObjects.add(new selectBtn3(108,Btn.select_btn_3));
-
-
     }
 }

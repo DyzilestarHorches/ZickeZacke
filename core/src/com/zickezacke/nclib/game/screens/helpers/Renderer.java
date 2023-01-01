@@ -95,6 +95,7 @@ public class Renderer {
         if (modelBatch != null){
             modelBatch.begin(camera3D);
             for (int i = 0; i < gameObjects3D.size(); i++){
+                if (!gameObjects3D.get(i).isActive()) continue;
                 Instance3D tmpInstance = gameObjects3D.get(i).getModel();
                 //Gdx.app.log("Screen id", Integer.toString(gameObjects3D.get(i).getId()));
                 if (tmpInstance != null) modelBatch.render(tmpInstance, environment);
