@@ -4,8 +4,6 @@ import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-import com.zickezacke.gameObjectStore.testObject;
-
 
 import java.io.Console;
 
