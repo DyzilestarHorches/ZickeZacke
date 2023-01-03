@@ -15,10 +15,9 @@ public class GameScene extends GameWorld {
     public void Begin(){
         //gameObjects3D.add(new testObject(100));
         gameObjects3D.add(new Ground(101));
-        gameObjects3D.add(new Chicken(105));
-        OctTiles num = new OctTiles(106);
-        num.setPosition(0,0,1);
-        gameObjects3D.add(num);
+        gameObjects3D.add(new Chicken(101,0,0,0));
+
+
 
         //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
         //gameObjects.add(new backGround(102));

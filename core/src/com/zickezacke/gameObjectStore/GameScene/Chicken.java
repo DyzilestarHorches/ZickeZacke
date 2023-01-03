@@ -9,7 +9,10 @@ import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 public class Chicken extends GameObject3D {
     private boolean isMoving;
     private BoundingVisual boundingVisual = new BoundingVisual();
-    public Chicken(int id){super(id, true);}
+    public Chicken(int id, int x, int y, int z){
+        super(id, true);
+        setPosition(x,y,z);
+    }
 
     public void setPosition(int x, int y, int z){
         position3D = new Vector3(x,y,z);
@@ -20,7 +23,6 @@ public class Chicken extends GameObject3D {
         source3D = "demo.g3db";
         scale3D = new Vector3(1,1,1);
         components.add(boundingVisual);
-
     }
 
     public void objectStart(){
