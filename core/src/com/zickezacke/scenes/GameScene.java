@@ -47,7 +47,9 @@ public class GameScene extends GameWorld {
         currentFrame++;
 
         if (isRunning) {
-
+            if (currentFrame % 60 == 0) {
+                isRunning = false;
+            }
         } else {
             startNextPlayer();
         }
