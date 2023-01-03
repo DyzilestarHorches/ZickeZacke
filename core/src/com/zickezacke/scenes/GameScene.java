@@ -6,6 +6,8 @@ import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 
 import java.io.Console;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GameScene extends GameWorld {
@@ -18,6 +20,12 @@ public class GameScene extends GameWorld {
     private int currentPlayer;
     private int totalPlayer;
 
+    private List<Chicken> players = new ArrayList<>();
+    private int[] chickenPositions = {0, 0, 0,
+                                    0, 0, 1,
+                                    0, 0, 2,
+                                    0, 0, 3};
+
     public GameScene(boolean has3DCamera, boolean has2DCamera)
     {
         super(has3DCamera, has2DCamera);
@@ -28,9 +36,16 @@ public class GameScene extends GameWorld {
     }
 
     public void Begin(){
-        //gameObjects3D.add(new testObject(100));
+        int pos = 0;
+
         gameObjects3D.add(new Ground(101));
-        gameObjects3D.add(new Chicken(105,0,0,0));
+        for (int i = 105; i < 109; i++) {
+            Chicken chicken = new Chicken(i, chickenPositions[pos], chickenPositions[pos + 1], chickenPositions[pos + 2]);
+            players.add(chicken);
+            gameObjects3D.add(chicken);
+            pos += 3;
+        }
+
         gameObjects3D.add(new OctTiles(106,0,0,2));
 
 
