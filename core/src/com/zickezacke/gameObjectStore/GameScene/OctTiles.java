@@ -7,7 +7,10 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class OctTiles extends GameObject3D {
     private BoundingVisual boundingVisual = new BoundingVisual();
-    public OctTiles(int id){super (id,true);}
+    public OctTiles(int id,int x, int y, int z){
+        super(id,true);
+        setPosition(x,y,z);
+    }
 
     public void setPosition(int x, int y, int z){
         position3D = new Vector3(x,y,z);

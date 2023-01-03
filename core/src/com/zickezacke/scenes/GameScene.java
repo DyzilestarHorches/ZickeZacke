@@ -15,7 +15,8 @@ public class GameScene extends GameWorld {
     public void Begin(){
         //gameObjects3D.add(new testObject(100));
         gameObjects3D.add(new Ground(101));
-        gameObjects3D.add(new Chicken(101,0,0,0));
+        gameObjects3D.add(new Chicken(105,0,0,0));
+        gameObjects3D.add(new OctTiles(106,0,0,2));
 
 
 
