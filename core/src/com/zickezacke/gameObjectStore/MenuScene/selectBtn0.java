@@ -1,7 +1,6 @@
 package com.zickezacke.gameObjectStore.MenuScene;
 
 import com.badlogic.gdx.math.Vector2;
-import com.zickezacke.gameObjectStore.GameScene.Chicken;
 
 public class selectBtn0 extends Btn{
     private static boolean isChoose;

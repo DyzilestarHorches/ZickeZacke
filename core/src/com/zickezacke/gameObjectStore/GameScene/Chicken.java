@@ -1,9 +1,7 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn0;
 import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
@@ -13,12 +11,16 @@ public class Chicken extends GameObject3D {
     private BoundingVisual boundingVisual = new BoundingVisual();
     public Chicken(int id){super(id, true);}
 
+    public void setPosition(int x, int y, int z){
+        position3D = new Vector3(x,y,z);
+    }
+
     @java.lang.Override
     public void objectInit() {
         source3D = "demo.g3db";
-        position3D = new Vector3(0,0,0);
         scale3D = new Vector3(1,1,1);
         components.add(boundingVisual);
+
     }
 
     public void objectStart(){
@@ -42,9 +44,12 @@ public class Chicken extends GameObject3D {
             }, 0f);
     }
 
+    public void move(){
+
+    }
+
     @java.lang.Override
     public void objectUpdate() {
-        isActive = selectBtn0.getState();
         boundingVisual.drawBox(dimensions,bounds, Color.ORANGE);
         animation();
     }
