@@ -6,6 +6,9 @@ import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class OctTiles extends GameObject3D {
+    private boolean Default = true;
+    private boolean Trigger = true;
+    private int count = 0;
     private BoundingVisual boundingVisual = new BoundingVisual();
     public OctTiles(int id,int x, int y, int z){
         super(id,true);
@@ -25,8 +28,19 @@ public class OctTiles extends GameObject3D {
 
     @java.lang.Override
     public void MouseUp(int screenX, int screenY, int pointer, int button) {
-        model3D.setRotation(new Vector3(0,0,1),180f);
+        Trigger = !Trigger;
     }
 
-
+    @java.lang.Override
+    public void objectUpdate() {
+        super.objectUpdate();
+        if(Default != Trigger){
+            model3D.setRotation(new Vector3(0,0,1), 3f);
+            count++;
+            if(count == 60){
+                Trigger = !Trigger;
+                count = 0;
+            }
+        }
+    }
 }
