@@ -13,6 +13,7 @@ import java.util.List;
 public class ZickeZacke extends Game {
 	private List<GameScreen> gameScreens = new ArrayList<>();	//store all screens
 
+
 	//singleton
 	private static ZickeZacke instance = new ZickeZacke();
 

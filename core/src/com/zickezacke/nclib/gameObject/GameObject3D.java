@@ -115,6 +115,9 @@ public class GameObject3D{
     public void MouseUp(int screenX, int screenY, int pointer, int button){}
 
     //getters
+    public boolean isActive(){
+        return this.isActive;
+    }
     public Instance3D getModel(){
         return this.model3D;
     }
