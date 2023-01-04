@@ -8,10 +8,13 @@ import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 
 public class Chicken extends GameObject3D {
     private boolean isMoving;
+
+    private Color color;
     private BoundingVisual boundingVisual = new BoundingVisual();
-    public Chicken(int id, int x, int y, int z){
+    public Chicken(int id, int x, int y, int z, Color color){
         super(id, true);
         setPosition(x,y,z);
+        this.color = color;
     }
 
     public void setPosition(int x, int y, int z){
@@ -52,7 +55,7 @@ public class Chicken extends GameObject3D {
 
     @java.lang.Override
     public void objectUpdate() {
-        boundingVisual.drawBox(dimensions,bounds, Color.ORANGE);
+        boundingVisual.drawBox(dimensions,bounds, color);
         animation();
     }
 }
