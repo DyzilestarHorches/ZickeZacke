@@ -5,7 +5,6 @@ import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,6 @@ public class GameScene extends GameWorld {
         currentPlayer = 0;
         totalPlayer = 4;
     }
-
     public void Begin() {
         gameObjects3D.add(new Ground(101));
         for (int i = 105; i < 109; i++) {

@@ -51,6 +51,8 @@ public class GameObject {
 
         objectLateUpdate();
     }
+    // set isActive var
+    public  void setActive(boolean isActive){this.isActive = isActive;}
     // change texture after render
     public void setTexture(String newTexture){texture = new Texture(Gdx.files.internal(newTexture));}
     public boolean checkClick(int x, int y){

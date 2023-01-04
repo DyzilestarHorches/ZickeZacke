@@ -1,8 +1,12 @@
 package com.zickezacke.scenes;
 
+import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.MenuScene.Btn;
+import com.zickezacke.gameObjectStore.MenuScene.backBtn;
+import com.zickezacke.gameObjectStore.MenuScene.backBtn_0;
 import com.zickezacke.gameObjectStore.MenuScene.backGround;
 import com.zickezacke.gameObjectStore.MenuScene.howBtn;
+import com.zickezacke.gameObjectStore.MenuScene.notiScene;
 import com.zickezacke.gameObjectStore.MenuScene.playBtn;
 import com.zickezacke.gameObjectStore.MenuScene.selectBtn0;
 import com.zickezacke.gameObjectStore.MenuScene.selectBtn1;
@@ -26,5 +30,16 @@ public class MenuScene extends GameWorld {
         gameObjects.add(new selectBtn1(106,Btn.select_btn_1));
         gameObjects.add(new selectBtn2(107,Btn.select_btn_2));
         gameObjects.add(new selectBtn3(108,Btn.select_btn_3));
+        gameObjects.add(new notiScene(109));
+        gameObjects.add(new backBtn_0(110,Btn.back_btn));
+    }
+
+    @Override
+    public void Update() {
+        super.Update();
+        ZickeZacke.playerList = new boolean[] {selectBtn0.getState(),
+                                                selectBtn1.getState(),
+                                                selectBtn2.getState(),
+                                                selectBtn3.getState()};
     }
 }

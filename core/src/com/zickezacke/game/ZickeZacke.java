@@ -22,7 +22,8 @@ public class ZickeZacke extends Game {
 	}
 
 	public ZickeZacke(){} //prevent new object
-
+	public static boolean[] playerList;
+	public static int playerCount = 0;
 	@Override
 	public void create () {
 		instance.gameScreens.add(new GameScreen(0, new GameScene(true, true)));	//default game screen is 0

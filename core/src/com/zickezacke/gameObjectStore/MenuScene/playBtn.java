@@ -16,13 +16,16 @@ public class playBtn extends Btn{
 
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
-        boolean[] arr = {selectBtn0.getState(),
-                selectBtn1.getState(),
-                selectBtn2.getState(),
-                selectBtn3.getState()};
+        ZickeZacke.playerCount = 0;
+        for(boolean i : ZickeZacke.playerList) {if(i){ZickeZacke.playerCount++;}}
         if(button == 0){
-            for(boolean i : arr){Gdx.app.log("player join: ", String.valueOf(i));}
-            ZickeZacke.getInstance().setScreen(0);
+            if(ZickeZacke.playerCount < 2){
+                thisMenuScene.getGameObjects().get(8).setActive(true);
+                thisMenuScene.getGameObjects().get(9).setActive(true);
+            }else{
+                thisMenuScene.getGameObjects().get(8).setActive(false);
+                thisMenuScene.getGameObjects().get(9).setActive(false);
+                ZickeZacke.getInstance().setScreen(0);}
         }
     }
 
