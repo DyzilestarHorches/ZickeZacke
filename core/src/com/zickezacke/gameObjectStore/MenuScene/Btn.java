@@ -38,6 +38,6 @@ public class Btn extends GameObject {
 
     @Override
     public void objectUpdate() {
-        Gdx.app.log("dmm","may");
+
     }
 }

@@ -84,8 +84,6 @@ public class GameWorld {
     public void Update(){
         worldUpdate();
         for (int i = 0; i < gameObjects.size(); i++){
-            Gdx.app.log(Integer.toString(i), Boolean.toString(gameObjects.get(i).isActive()));
-
             gameObjects.get(i).Update();
         }
         for (int i = 0; i < gameObjects3D.size(); i++) {
