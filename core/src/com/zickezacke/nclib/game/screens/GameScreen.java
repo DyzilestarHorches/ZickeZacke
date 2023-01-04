@@ -78,7 +78,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
-
+        gameWorld.Hide();
         renderer.dispose();
         renderer = null;
         //gameWorld.dispose();

@@ -144,6 +144,7 @@ public class GameWorld {
     //override methods
     public void Begin(){}
     public void Show(){}
+    public void Hide(){}
     //region support method
     public InputAdapter create2DInputHandler(){
         InputAdapter inputAdapter2D = new InputAdapter(){
