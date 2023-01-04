@@ -6,14 +6,17 @@ import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 
 public class backBtn_0 extends Btn {
-    public backBtn_0(int id, String type){super(id,type);}
+    public backBtn_0(int id, String type){
+        super(id,type);
+        setActive(false);
+    }
 
     @Override
     public void objectInit() {
         super.objectInit();
         position2D = new Vector2((float) 5.67*cellWidth,(float) 2.5*cellHeight);
         size2D = new Vector2(1*cellHeight,1*cellHeight);
-        setActive(false);
+
     }
 
     @Override
@@ -23,9 +26,9 @@ public class backBtn_0 extends Btn {
 
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
-        if(button == 0){
+        if(button == 0) {
             thisMenuScene.getGameObjects().get(8).setActive(false);
-            setActive(false);
+            this.setActive(false);
         }
     }
 }

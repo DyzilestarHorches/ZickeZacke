@@ -19,9 +19,7 @@ public class playBtn extends Btn{
 
     @Override
     public void objectUpdate() {
-        Gdx.app.log("dmm","may");
         thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
-        if(thisMenuScene != null){Gdx.app.log("dmm","may");}
     }
 
     @Override

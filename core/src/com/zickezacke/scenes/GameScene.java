@@ -39,18 +39,20 @@ public class GameScene extends GameWorld {
         isRunning = true;
         isEnd = false;
         currentPlayer = 0;
-        totalPlayer = 4;
     }
+
     public void Begin() {
         gameObjects3D.add(new Ground(101));
+
         for (int i = 105; i < 109; i++) {
             Chicken chicken = new Chicken(i, eggTilePosition[i - 105][0], eggTilePosition[i - 105][1], eggTilePosition[i - 105][2], colors[i - 105]);
+
             players.add(chicken);
             gameObjects3D.add(chicken);
 
         }
 
-        gameObjects3D.add(new OctTiles(106,0,0,2));
+        gameObjects3D.add(new OctTiles(110,0,0,2));
 
 
 
@@ -63,6 +65,8 @@ public class GameScene extends GameWorld {
     @Override
     public void Update() {
         super.Update();
+        totalPlayer = ZickeZacke.playerCount;
+
         currentFrame++;
 
         if (isEnd) {
