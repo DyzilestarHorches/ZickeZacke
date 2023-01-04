@@ -27,7 +27,12 @@ public class GameScene extends GameWorld {
     private int currentPlayer;
     private int totalPlayer;
 
+    // list to manage player
     private List<Chicken> players = new ArrayList<>();
+
+    // list to manage OctTile
+    private List<OctTiles> octTiles = new ArrayList<>();
+
     private int[][] eggTilePosition = {{0, 0, 0},
                                         {0, 0, 1},
                                         {0, 0, 2},
@@ -52,6 +57,19 @@ public class GameScene extends GameWorld {
                                         {0, 0, 21},
                                         {0, 0, 22},
                                         {0, 0, 23}};
+
+    private int[][] octTilePosition = {{0, 0, 0},
+                                        {0, 0, 1},
+                                        {0, 0, 2},
+                                        {0, 0, 3},
+                                        {0, 0, 4},
+                                        {0, 0, 5},
+                                        {0, 0, 6},
+                                        {0, 0, 7},
+                                        {0, 0, 8},
+                                        {0, 0, 9},
+                                        {0, 0, 10},
+                                        {0, 0, 11}};
 
     public GameScene(boolean has3DCamera, boolean has2DCamera)
     {
@@ -79,9 +97,14 @@ public class GameScene extends GameWorld {
 
         }
 
-        gameObjects3D.add(new OctTiles(110,0,0,4));
+        for (int i = 0; i < 12; i++) {
+            OctTiles octTile = new OctTiles(i+2000,octTilePosition[i][0],
+                                                        octTilePosition[i][1],
+                                                        octTilePosition[i][2]);
 
-
+            gameObjects3D.add(octTile);
+            octTiles.add(octTile);
+        }
 
         //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
         //gameObjects.add(new backGround(102));
@@ -131,7 +154,7 @@ public class GameScene extends GameWorld {
     }
 
     public void getMovement() {
-        players.get(currentPlayer+105).move();
+        players.get(currentPlayer).move();
     }
 
     public boolean spaceKeyPressed() {
