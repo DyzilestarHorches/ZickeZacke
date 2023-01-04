@@ -152,12 +152,12 @@ public class GameWorld {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 screenY = Gdx.graphics.getHeight() - screenY;
                 for (GameObject gameObject: gameObjects) {
-                    if (gameObject.isActive()) {
+
                         Gdx.app.log(Integer.toString(screenX), Integer.toString(screenY));
                         if (gameObject.checkClick(screenX, screenY)) {
                             gameObject.MouseDown(screenX, screenY, pointer, button);
                         }
-                    }
+
                 }
                 return false;
             }

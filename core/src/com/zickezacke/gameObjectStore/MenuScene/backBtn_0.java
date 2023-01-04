@@ -20,12 +20,12 @@ public class backBtn_0 extends Btn {
     }
 
     @Override
-    public void objectUpdate() {
-        thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
-    }
-
-    @Override
     public void MouseDown(int x, int y, int pointer, int button) {
+        if (!isActive) {
+            Gdx.app.log("DMMMMMMMMMMM", "MHHHHHHHHHHHHHHH");
+            return;
+        }
+
         if(button == 0) {
             thisMenuScene.getGameObjects().get(8).setActive(false);
             this.setActive(false);
