@@ -1,5 +1,6 @@
 package com.zickezacke.scenes;
 
+import com.badlogic.gdx.graphics.Color;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
@@ -11,6 +12,7 @@ import java.util.List;
 
 
 public class GameScene extends GameWorld {
+    private Color[] colors = {Color.ORANGE, Color.RED, Color.GREEN, Color.CHARTREUSE};
 
     private  int currentFrame = 0;
     // determines if the game is in player's turn
@@ -21,10 +23,10 @@ public class GameScene extends GameWorld {
     private int totalPlayer;
 
     private List<Chicken> players = new ArrayList<>();
-    private int[] chickenPositions = {0, 0, 0,
-                                    0, 0, 1,
-                                    0, 0, 2,
-                                    0, 0, 3};
+    private int[][] eggTilePosition = {{0, 0, 0},
+                                        {0, 0, 1},
+                                        {0, 0, 2},
+                                        {0, 0, 3}};
 
     public GameScene(boolean has3DCamera, boolean has2DCamera)
     {
@@ -35,15 +37,12 @@ public class GameScene extends GameWorld {
         totalPlayer = 4;
     }
 
-    public void Begin(){
-        int pos = 0;
-
+    public void Begin() {
         gameObjects3D.add(new Ground(101));
         for (int i = 105; i < 109; i++) {
-            Chicken chicken = new Chicken(i, chickenPositions[pos], chickenPositions[pos + 1], chickenPositions[pos + 2]);
+            Chicken chicken = new Chicken(i, eggTilePosition[i-105][0], eggTilePosition[i-105][1], eggTilePosition[i-105][2], colors[i-105]);
             players.add(chicken);
             gameObjects3D.add(chicken);
-            pos += 3;
         }
 
         gameObjects3D.add(new OctTiles(106,0,0,2));
@@ -62,9 +61,11 @@ public class GameScene extends GameWorld {
         currentFrame++;
 
         if (isRunning) {
-            if (currentFrame % 60 == 0) {
+            if (currentFrame % 300 == 0) {
                 isRunning = false;
             }
+
+
         } else {
             startNextPlayer();
         }
@@ -83,4 +84,7 @@ public class GameScene extends GameWorld {
         isRunning = true;
     }
 
+    public void randomizeTiles() {
+        
+    }
 }

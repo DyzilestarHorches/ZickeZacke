@@ -6,6 +6,9 @@ import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class OctTiles extends GameObject3D {
+
+    private boolean occupy = false;
+
     private boolean Default = true;
     private boolean Trigger = true;
     private int count = 0;
@@ -43,4 +46,8 @@ public class OctTiles extends GameObject3D {
             }
         }
     }
+
+    public void setOccupy(boolean state) {this.occupy = state;}
+
+    public boolean getOccupy() {return  this.occupy;}
 }
