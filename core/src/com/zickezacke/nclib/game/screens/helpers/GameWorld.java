@@ -84,8 +84,6 @@ public class GameWorld {
     public void Update(){
         worldUpdate();
         for (int i = 0; i < gameObjects.size(); i++){
-            Gdx.app.log(Integer.toString(i), Boolean.toString(gameObjects.get(i).isActive()));
-
             gameObjects.get(i).Update();
         }
         for (int i = 0; i < gameObjects3D.size(); i++) {
@@ -141,32 +139,36 @@ public class GameWorld {
     public InputMultiplexer getInputMultiplexer(){
         return this.inputMultiplexer;
     }
+
     //endregion
     //override methods
     public void Begin(){}
-
+    public void Show(){}
     //region support method
     public InputAdapter create2DInputHandler(){
         InputAdapter inputAdapter2D = new InputAdapter(){
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 screenY = Gdx.graphics.getHeight() - screenY;
-                for (GameObject gameObject: gameObjects) {
+                for (int i = gameObjects.size() - 1; i >= 0; i--) {
+                    if (!gameObjects.get(i).isActive()) continue;
+                        if (gameObjects.get(i).checkClick(screenX, screenY)) {
 
-                        Gdx.app.log(Integer.toString(screenX), Integer.toString(screenY));
-                        if (gameObject.checkClick(screenX, screenY)) {
-                            gameObject.MouseDown(screenX, screenY, pointer, button);
+                            gameObjects.get(i).MouseDown(screenX, screenY, pointer, button);
+                            return true;
                         }
-
                 }
                 return false;
             }
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                for (GameObject gameObject: gameObjects) {
-                    if (gameObject.checkClick(screenX, screenY))
-                        gameObject.MouseUp(screenX, screenY, pointer, button);
+                for (int i = gameObjects.size() - 1; i >= 0; i--) {
+                    if (!gameObjects.get(i).isActive()) continue;
+                    if (gameObjects.get(i).checkClick(screenX, screenY)) {
+                        gameObjects.get(i).MouseDown(screenX, screenY, pointer, button);
+                        return true;
+                    }
                 }
                 return false;
             }
