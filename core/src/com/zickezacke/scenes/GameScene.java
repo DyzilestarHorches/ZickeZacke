@@ -1,5 +1,6 @@
 package com.zickezacke.scenes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
@@ -12,7 +13,7 @@ import java.util.List;
 
 
 public class GameScene extends GameWorld {
-    private Color[] colors = {Color.ORANGE, Color.RED, Color.GREEN, Color.CHARTREUSE};
+    private Color[] colors = {Color.ORANGE, Color.RED, Color.GREEN, Color.GRAY};
 
     private  int currentFrame = 0;
     // determines if the game is in player's turn
@@ -40,9 +41,10 @@ public class GameScene extends GameWorld {
     public void Begin() {
         gameObjects3D.add(new Ground(101));
         for (int i = 105; i < 109; i++) {
-            Chicken chicken = new Chicken(i, eggTilePosition[i-105][0], eggTilePosition[i-105][1], eggTilePosition[i-105][2], colors[i-105]);
+            Chicken chicken = new Chicken(i, eggTilePosition[i - 105][0], eggTilePosition[i - 105][1], eggTilePosition[i - 105][2], colors[i - 105]);
             players.add(chicken);
             gameObjects3D.add(chicken);
+
         }
 
         gameObjects3D.add(new OctTiles(106,0,0,2));
