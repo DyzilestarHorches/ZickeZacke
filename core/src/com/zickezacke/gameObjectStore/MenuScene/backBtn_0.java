@@ -7,6 +7,7 @@ import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 
 public class backBtn_0 extends Btn {
     public backBtn_0(int id, String type){super(id,type);}
+
     @Override
     public void objectInit() {
         super.objectInit();

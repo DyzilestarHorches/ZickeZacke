@@ -1,6 +1,11 @@
 package com.zickezacke.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.zickezacke.gameObjectStore.MenuScene.selectBtn0;
+import com.zickezacke.gameObjectStore.MenuScene.selectBtn1;
+import com.zickezacke.gameObjectStore.MenuScene.selectBtn2;
+import com.zickezacke.gameObjectStore.MenuScene.selectBtn3;
 import com.zickezacke.nclib.game.screens.GameScreen;
 import com.zickezacke.scenes.GameScene;
 import com.zickezacke.scenes.HowScene;
@@ -24,15 +29,13 @@ public class ZickeZacke extends Game {
 	public ZickeZacke(){} //prevent new object
 	public static boolean[] playerList;
 	public static int playerCount = 0;
+
 	@Override
 	public void create () {
 		instance.gameScreens.add(new GameScreen(0, new GameScene(true, true)));	//default game screen is 0
 		instance.gameScreens.add(new GameScreen(1, new MenuScene(false, true)));
 		instance.gameScreens.add(new GameScreen(2, new HowScene(false,true)));
 		instance.gameScreens.add(new GameScreen(3, new SettingScene(false,true)));
-		
-
-
 		instance.setScreen(gameScreens.get(1));
 	}
 

@@ -1,6 +1,8 @@
 package com.zickezacke.gameObjectStore.MenuScene;
 
 import com.badlogic.gdx.math.Vector2;
+import com.zickezacke.game.ZickeZacke;
+
 import com.zickezacke.nclib.gameObject.GameObject;
 
 public class notiScene extends GameObject {
@@ -13,4 +15,5 @@ public class notiScene extends GameObject {
         size2D = new Vector2(1280,720);
         setActive(false);
     }
+
 }

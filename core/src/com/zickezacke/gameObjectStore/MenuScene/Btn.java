@@ -1,5 +1,6 @@
 package com.zickezacke.gameObjectStore.MenuScene;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
@@ -21,7 +22,9 @@ public class Btn extends GameObject {
     public int cellWidth =  1280/12;
     public int cellHeight = 720/10;
     private String type;
+
     public GameWorld thisMenuScene;
+
 
     public Btn(int id){
         super(id, true);

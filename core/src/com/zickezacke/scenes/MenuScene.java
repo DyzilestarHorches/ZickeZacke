@@ -22,7 +22,7 @@ public class MenuScene extends GameWorld {
 
     public void Begin(){
         //gameObjects.add(new backGround(102));
-        gameObjects.add(new backGround(101, true));
+        gameObjects.add(new backGround(101));
         gameObjects.add(new playBtn(102,Btn.play_btn));
         gameObjects.add(new settingBtn(103,Btn.setting_btn));
         gameObjects.add(new howBtn(104,Btn.how_btn));
@@ -32,14 +32,15 @@ public class MenuScene extends GameWorld {
         gameObjects.add(new selectBtn3(108,Btn.select_btn_3));
         gameObjects.add(new notiScene(109));
         gameObjects.add(new backBtn_0(110,Btn.back_btn));
+        gameObjects.add(new Btn(111));
     }
 
     @Override
-    public void Update() {
-        super.Update();
-        ZickeZacke.playerList = new boolean[] {selectBtn0.getState(),
-                                                selectBtn1.getState(),
-                                                selectBtn2.getState(),
-                                                selectBtn3.getState()};
+    public void worldUpdate() {
+        //update number of player
+        ZickeZacke.playerList = new boolean[]{selectBtn0.getState(),
+                selectBtn1.getState(),
+                selectBtn2.getState(),
+                selectBtn3.getState()};
     }
 }
