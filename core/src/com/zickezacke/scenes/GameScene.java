@@ -1,6 +1,9 @@
 package com.zickezacke.scenes;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
@@ -10,9 +13,11 @@ import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
+import sun.jvm.hotspot.gc.shared.Space;
+
 
 public class GameScene extends GameWorld {
-    private Color[] colors = {Color.ORANGE, Color.RED, Color.GREEN, Color.CHARTREUSE};
+    private Color[] colors = {Color.ORANGE, Color.RED, Color.GREEN, Color.BLUE};
 
     private  int currentFrame = 0;
     // determines if the game is in player's turn
@@ -60,18 +65,24 @@ public class GameScene extends GameWorld {
         super.Update();
         currentFrame++;
 
-        if (isRunning) {
-            if (currentFrame % 300 == 0) {
-                isRunning = false;
-            }
-
-
-        } else {
-            startNextPlayer();
-        }
-
         if (isEnd) {
             System.out.println("Winner winner chicken dinner");
+        } else {
+            if (isRunning) {
+                if (currentFrame % 60 == 0) {
+                    isRunning = false;
+                } else if (currentFrame % 350 == 0) {
+                    isEnd = true;
+                }
+
+                if (spaceKeyPressed()) {
+                    getMovement();
+                }
+
+
+            } else {
+                startNextPlayer();
+            }
         }
     }
 
@@ -85,6 +96,14 @@ public class GameScene extends GameWorld {
     }
 
     public void randomizeTiles() {
-        
+
+    }
+
+    public void getMovement() {
+        players.get(currentPlayer+105).move();
+    }
+
+    public boolean spaceKeyPressed() {
+        return Gdx.input.isKeyPressed(Input.Keys.SPACE);
     }
 }

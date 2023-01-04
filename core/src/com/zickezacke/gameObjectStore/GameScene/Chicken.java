@@ -50,7 +50,7 @@ public class Chicken extends GameObject3D {
     }
 
     public void move(){
-
+        System.out.println(getId() + "moves");
     }
 
     @java.lang.Override

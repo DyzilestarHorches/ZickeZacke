@@ -7,10 +7,15 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class OctTiles extends GameObject3D {
 
+    private static final int FLIP_FRAME = 60;
+
+    private static boolean inAnimation = false;
+
     private boolean occupy = false;
 
     private boolean Default = true;
     private boolean Trigger = true;
+
     private int count = 0;
     private BoundingVisual boundingVisual = new BoundingVisual();
     public OctTiles(int id,int x, int y, int z){
@@ -31,17 +36,21 @@ public class OctTiles extends GameObject3D {
 
     @java.lang.Override
     public void MouseUp(int screenX, int screenY, int pointer, int button) {
-        Trigger = !Trigger;
+        if (!inAnimation) {
+            Trigger = !Trigger;
+            inAnimation = true;
+        }
     }
 
     @java.lang.Override
     public void objectUpdate() {
         super.objectUpdate();
         if(Default != Trigger){
-            model3D.setRotation(new Vector3(0,0,1), 3f);
+            model3D.setRotation(new Vector3(0,0,1), 180f/FLIP_FRAME);
             count++;
-            if(count == 60){
+            if(count == FLIP_FRAME){
                 Trigger = !Trigger;
+                inAnimation = false;
                 count = 0;
             }
         }
