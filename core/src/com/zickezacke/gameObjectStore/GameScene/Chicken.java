@@ -50,7 +50,7 @@ public class Chicken extends GameObject3D {
     }
 
     public void move(){
-        System.out.println(getId() + "moves");
+        position3D.x += 10/60f;
     }
 
     @java.lang.Override
@@ -58,5 +58,4 @@ public class Chicken extends GameObject3D {
         boundingVisual.drawBox(dimensions,bounds, color);
         animation();
     }
-
 }

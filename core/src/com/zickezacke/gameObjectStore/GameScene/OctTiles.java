@@ -1,6 +1,5 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
