@@ -17,6 +17,7 @@ public class howBtn extends Btn {
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
         if(button == 0){
+            isActive = false;
             ZickeZacke.getInstance().setScreen(2);
         }
     }

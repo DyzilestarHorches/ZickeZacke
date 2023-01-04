@@ -3,27 +3,43 @@ package com.zickezacke.gameObjectStore.MenuScene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.game.ZickeZacke;
+import com.zickezacke.nclib.game.screens.helpers.GameWorld;
+
 
 public class playBtn extends Btn{
     public playBtn(int id, String type){super(id, type);}
-
+    GameWorld thisMenuScene;
     @Override
     public void objectInit() {
         super.objectInit();
+        isActive = true;
         position2D = new Vector2(5*cellWidth, 2*cellHeight);
         size2D = new Vector2(2*cellWidth,1*cellHeight);
     }
 
     @Override
+    public void objectUpdate() {
+        Gdx.app.log("dmm","may");
+        thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
+        if(thisMenuScene != null){Gdx.app.log("dmm","may");}
+    }
+
+    @Override
     public void MouseDown(int x, int y, int pointer, int button) {
-        boolean[] arr = {selectBtn0.getState(),
-                selectBtn1.getState(),
-                selectBtn2.getState(),
-                selectBtn3.getState()};
+
+        ZickeZacke.playerCount = 0;
+        for(boolean i : ZickeZacke.playerList) {if(i){ZickeZacke.playerCount++;}}
         if(button == 0){
-            for(boolean i : arr){Gdx.app.log("player join: ", String.valueOf(i));}
-            ZickeZacke.getInstance().setScreen(0);
+            if(ZickeZacke.playerCount < 2){
+                thisMenuScene.getGameObjects().get(8).setActive(true);
+                thisMenuScene.getGameObjects().get(9).setActive(true);
+            }else{
+                thisMenuScene.getGameObjects().get(8).setActive(false);
+                thisMenuScene.getGameObjects().get(9).setActive(false);
+                ZickeZacke.getInstance().setScreen(0);
+            }
         }
+
     }
 
 }
