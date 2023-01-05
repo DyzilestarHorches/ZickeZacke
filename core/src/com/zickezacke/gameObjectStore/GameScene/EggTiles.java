@@ -34,5 +34,9 @@ public class EggTiles extends GameObject3D {
 
     public void setOccupy(boolean state) {this.occupy = state;}
 
+    public String getType() {
+        return this.type;
+    }
+
     public boolean getOccupy() {return  this.occupy;}
 }

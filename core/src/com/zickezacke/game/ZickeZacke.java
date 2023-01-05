@@ -24,7 +24,7 @@ public class ZickeZacke extends Game {
 
 	public ZickeZacke(){} //prevent new object
 	public static boolean[] playerList;
-	public static int playerCount = 0;
+	public static int playerCount = 4;
 
 	@Override
 	public void create () {
@@ -32,7 +32,7 @@ public class ZickeZacke extends Game {
 		instance.gameScreens.add(new GameScreen(1, new MenuScene(false, true)));
 		instance.gameScreens.add(new GameScreen(2, new HowScene(false,true)));
 		instance.gameScreens.add(new GameScreen(3, new SettingScene(false,true)));
-		instance.setScreen(gameScreens.get(1));
+		instance.setScreen(gameScreens.get(0));
 	}
 
 

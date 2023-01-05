@@ -1,13 +1,15 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
 import com.badlogic.gdx.math.Vector3;
+import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
+import com.zickezacke.scenes.GameScene;
 
 public class OctTiles extends GameObject3D {
-    private static final int FLIP_FRAME = 60;
+    private static final int FLIP_FRAME = 10;
 
-    private static final int PAUSE_FRAME = 60;
+    private static final int PAUSE_FRAME = 10;
 
     private static boolean inAnimation = false;
 
@@ -18,6 +20,7 @@ public class OctTiles extends GameObject3D {
     private int timer = 0;
     private int count = 0;
     private BoundingVisual boundingVisual = new BoundingVisual();
+
     private String type;
 
     public OctTiles(int id, int type,float x, float y, float z){
@@ -39,16 +42,23 @@ public class OctTiles extends GameObject3D {
     }
 
     @java.lang.Override
-    public void MouseUp(int screenX, int screenY, int pointer, int button) {
+    public void MouseDown(int screenX, int screenY, int pointer, int button) {
         if (!inAnimation) {
             Trigger = !Trigger;
             inAnimation = true;
+            GameScene gameScene = (GameScene) ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld();
+            gameScene.typeClicked = this.type;
         }
     }
 
     @java.lang.Override
     public void objectUpdate() {
         super.objectUpdate();
+
+        flip();
+    }
+
+    public void flip() {
         if(Trigger){
             model3D.setRotation(new Vector3(0,0,1), 180f/FLIP_FRAME);
             count++;

@@ -11,7 +11,9 @@ import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 import java.io.Console;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import sun.jvm.hotspot.gc.shared.Space;
@@ -28,13 +30,18 @@ public class GameScene extends GameWorld {
     private int currentPlayer;
     private int totalPlayer;
 
+    private boolean isJumping = false;
+
+    private int nextTile;
+    public String typeClicked = "-1";
+
     // list to manage player
     private List<Chicken> players = new ArrayList<>();
 
     // list to manage OctTile
     private List<OctTiles> octTiles = new ArrayList<>();
 
-    // list to manage OctTile
+    // list to manage EggTile
     private List<EggTiles> eggTiles = new ArrayList<>();
 
     private  float eggOffset = 1.3f;
@@ -65,6 +72,7 @@ public class GameScene extends GameWorld {
                                         {3f*eggOffset, 0, -3f*eggOffset},
                                         {3.5f*eggOffset, 0, -2f*eggOffset},
                                         {3.75f*eggOffset, 0, -1f*eggOffset}};
+
     float octOffset = 1.3f;
     private float[][] octTilePosition = {{0.5f*octOffset, 0, 0.5f*octOffset},
                                         {1.5f*octOffset, 0, 0.5f*octOffset},
@@ -118,15 +126,18 @@ public class GameScene extends GameWorld {
 
     public void Show() {
         totalPlayer = ZickeZacke.playerCount;
-        int distancing = (24 - totalPlayer) / totalPlayer;
+        int distancing = (24 - totalPlayer) / totalPlayer + 1;
         for (int i = 1000; i < 1000+totalPlayer; i++) {
             Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
                     eggTilePosition[(i - 1000)*distancing][1],
                     eggTilePosition[(i - 1000)*distancing][2],
-                    colors[i - 1000]);
+                    colors[i - 1000],
+                    (i-1000)*distancing);
 
             players.add(chicken);
             gameObjects3D.add(chicken);
+
+            eggTiles.get((i-1000)*distancing).setOccupy(true);
 
             chicken.Start();
         }
@@ -138,19 +149,18 @@ public class GameScene extends GameWorld {
         currentFrame++;
 
         if (isEnd) {
-            //System.out.println("Winner winner chicken dinner");
+            System.out.println("Winner winner chicken dinner");
         } else {
             if (isRunning) {
-                if (currentFrame % 60 == 0) {
-                    isRunning = false;
-                } else if (currentFrame % 350 == 0) {
-                    isEnd = true;
-                }
+                nextTile = findUnOccupy();
 
-                if (spaceKeyPressed()) {
-                    getMovement();
+                if (eggTiles.get(nextTile).getType().equals(typeClicked)) {
+                    setPosition();
+                    typeClicked = "-1";
+                    eggTiles.get(nextTile).setOccupy(true);
+                    eggTiles.get((nextTile-1)%24).setOccupy(false);
+                    players.get(currentPlayer).setTile(nextTile);
                 }
-
 
             } else {
                 startNextPlayer();
@@ -171,11 +181,25 @@ public class GameScene extends GameWorld {
 
     }
 
-    public void getMovement() {
-        players.get(currentPlayer).move();
+    public void setPosition() {
+            players.get(currentPlayer).setDesPosition(eggTilePosition[nextTile][0],
+                    eggTilePosition[nextTile][1],
+                    eggTilePosition[nextTile][2]);
+
     }
 
     public boolean spaceKeyPressed() {
         return Gdx.input.isKeyPressed(Input.Keys.SPACE);
     }
+
+    public int findUnOccupy() {
+        int i = players.get(currentPlayer).getTile();
+        for (int j = 1; j < 23; j++) {
+            if (!eggTiles.get((i+j)%24).getOccupy()) {
+                return (i+j)%24;
+            }
+        }
+        return -1;
+    }
+
 }
