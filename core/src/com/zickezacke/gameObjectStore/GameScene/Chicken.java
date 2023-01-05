@@ -11,13 +11,13 @@ public class Chicken extends GameObject3D {
 
     private Color color;
     private BoundingVisual boundingVisual = new BoundingVisual();
-    public Chicken(int id, int x, int y, int z, Color color){
+    public Chicken(int id, float x, float y, float z, Color color){
         super(id, true);
         setPosition(x,y,z);
         this.color = color;
     }
 
-    public void setPosition(int x, int y, int z){
+    public void setPosition(float x, float y, float z){
         position3D = new Vector3(x,y,z);
     }
 

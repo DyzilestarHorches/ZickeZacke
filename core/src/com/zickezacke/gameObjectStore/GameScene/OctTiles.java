@@ -18,19 +18,22 @@ public class OctTiles extends GameObject3D {
     private int timer = 0;
     private int count = 0;
     private BoundingVisual boundingVisual = new BoundingVisual();
-    public OctTiles(int id,int x, int y, int z){
+    private String type;
+
+    public OctTiles(int id, int type,float x, float y, float z){
         super(id,true);
         setPosition(x,y,z);
+        this.type = String.valueOf(type);
     }
 
-    public void setPosition(int x, int y, int z){
+    public void setPosition(float x, float y, float z){
         position3D = new Vector3(x,y,z);
     }
 
 
     @java.lang.Override
     public void objectInit() {
-        source3D = "card_pick_0.g3db";
+        source3D = "./Cards/" + type + "/oct_card.g3db";
         scale3D = new Vector3(1,1,1);
         components.add(boundingVisual);
     }

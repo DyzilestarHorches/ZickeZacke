@@ -18,7 +18,7 @@ public class Ground extends GameObject3D {
 
     @Override
     public void objectStart() {
-        position3D.set(-offset3D.x, - offset3D.y + scale3D.y/2, -offset3D.z);
+        position3D.set(-offset3D.x, - offset3D.y+2f, -offset3D.z);
     }
 
     @Override
