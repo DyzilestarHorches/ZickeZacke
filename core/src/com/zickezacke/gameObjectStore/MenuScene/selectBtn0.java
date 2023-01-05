@@ -17,12 +17,7 @@ public class selectBtn0 extends Btn{
         isChoose = !isChoose;
         if(isChoose){
             setTexture(Btn.selected_btn_0);
-
-        }else{
-            setTexture(Btn.select_btn_0);
         }
     }
     public static boolean getState(){return isChoose;}
-
-
 }
