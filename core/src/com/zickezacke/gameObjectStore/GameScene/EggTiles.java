@@ -6,6 +6,7 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class EggTiles extends GameObject3D {
     private BoundingVisual boundingVisual = new BoundingVisual();
+    private boolean condition = true;
     private boolean occupy = false;
     public EggTiles(int id){super(id,true);}
 
@@ -23,4 +24,6 @@ public class EggTiles extends GameObject3D {
     public void setOccupy(boolean state) {this.occupy = state;}
 
     public boolean getOccupy() {return  this.occupy;}
+
+    public boolean getCondition() {return this.condition;}
 }

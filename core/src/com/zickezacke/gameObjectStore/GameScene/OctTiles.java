@@ -56,7 +56,7 @@ public class OctTiles extends GameObject3D {
                 Trigger = !Trigger;
                 count = 0;
                 Timer = true;
-                position3D.y -= 1f;
+
             }
         }
 
@@ -72,11 +72,10 @@ public class OctTiles extends GameObject3D {
         if(Back){
             model3D.setRotation(new Vector3(0, 0, 1), -180f / FLIP_FRAME);
             count++;
-            position3D.y += 10/600f;
+            position3D.y -= 10/600f;
             if (count == FLIP_FRAME) {
                 Back = !Back;
                 count = 0;
-                position3D.y -= 1f;
                 inAnimation = false;
             }
         }
