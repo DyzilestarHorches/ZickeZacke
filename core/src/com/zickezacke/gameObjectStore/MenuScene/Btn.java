@@ -23,7 +23,7 @@ public class Btn extends GameObject {
     public int cellHeight = 720/10;
     private String type;
 
-    public GameWorld thisMenuScene;
+    public static GameWorld thisMenuScene;
 
 
     public Btn(int id){

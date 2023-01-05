@@ -6,6 +6,7 @@ public class selectBtn0 extends Btn{
     private static boolean isChoose;
     public selectBtn0(int id, String type){super(id,type);}
 
+
     @Override
     public void objectInit() {
         super.objectInit();

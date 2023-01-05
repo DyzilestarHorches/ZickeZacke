@@ -33,4 +33,5 @@ public class selectBtn extends Btn{
         }
     }
 
+    public boolean getState(){return isChoose;}
 }

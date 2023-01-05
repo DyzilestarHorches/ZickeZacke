@@ -43,9 +43,9 @@ public class MenuScene extends GameWorld {
     @Override
     public void worldUpdate() {
         //update number of player
-        ZickeZacke.playerList = new boolean[]{selectBtn0.getState(),
-                selectBtn1.getState(),
-                selectBtn2.getState(),
-                selectBtn3.getState()};
+        ZickeZacke.playerList = new boolean[] {Btn.thisMenuScene.getGameObjects().get(4).getState(),
+                Btn.thisMenuScene.getGameObjects().get(5).getState(),
+                Btn.thisMenuScene.getGameObjects().get(6).getState(),
+                Btn.thisMenuScene.getGameObjects().get(7).getState()};
     }
 }
