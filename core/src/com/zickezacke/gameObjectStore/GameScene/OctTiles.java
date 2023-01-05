@@ -49,6 +49,11 @@ public class OctTiles extends GameObject3D {
     @java.lang.Override
     public void objectUpdate() {
         super.objectUpdate();
+        animation();
+
+    }
+
+    public void animation(){
         if(Trigger){
             model3D.setRotation(new Vector3(0,0,1), 180f/FLIP_FRAME);
             count++;
@@ -81,4 +86,5 @@ public class OctTiles extends GameObject3D {
             }
         }
     }
+    public String getType(){return this.type;}
 }
