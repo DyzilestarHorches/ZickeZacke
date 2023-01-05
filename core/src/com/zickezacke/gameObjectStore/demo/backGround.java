@@ -1,4 +1,4 @@
-package com.zickezacke.gameObjectStore;
+package com.zickezacke.gameObjectStore.demo;
 
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.nclib.component.UIHelpers;

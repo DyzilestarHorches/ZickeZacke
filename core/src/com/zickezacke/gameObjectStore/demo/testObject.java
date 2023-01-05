@@ -1,4 +1,4 @@
-package com.zickezacke.gameObjectStore;
+package com.zickezacke.gameObjectStore.demo;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
