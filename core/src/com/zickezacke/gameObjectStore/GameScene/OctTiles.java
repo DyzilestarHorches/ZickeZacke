@@ -7,11 +7,9 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 public class OctTiles extends GameObject3D {
     private static final int FLIP_FRAME = 60;
 
-    private static final int PAUSE_FRAME = 100;
+    private static final int PAUSE_FRAME = 60;
 
     private static boolean inAnimation = false;
-
-    private boolean occupy = false;
 
     private boolean Trigger = false;
     private boolean Back = false;
@@ -81,8 +79,4 @@ public class OctTiles extends GameObject3D {
             }
         }
     }
-
-    public void setOccupy(boolean state) {this.occupy = state;}
-
-    public boolean getOccupy() {return  this.occupy;}
 }

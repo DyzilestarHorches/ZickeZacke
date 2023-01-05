@@ -84,19 +84,6 @@ public class GameScene extends GameWorld {
 
         gameObjects3D.add(new Ground(101));
 
-        totalPlayer = ZickeZacke.playerCount;
-        int distancing = (24 - totalPlayer) / totalPlayer;
-        for (int i = 1000; i < 1000+totalPlayer; i++) {
-            Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
-                                            eggTilePosition[(i - 1000)*distancing][1],
-                                            eggTilePosition[(i - 1000)*distancing][2],
-                                            colors[i - 1000]);
-
-            players.add(chicken);
-            gameObjects3D.add(chicken);
-
-        }
-
         for (int i = 0; i < 12; i++) {
             OctTiles octTile = new OctTiles(i+2000,octTilePosition[i][0],
                                                         octTilePosition[i][1],
@@ -111,12 +98,25 @@ public class GameScene extends GameWorld {
         //gameObjects.add(new backGround3D(103));
     }
 
+    public void Show() {
+        totalPlayer = ZickeZacke.playerCount;
+        int distancing = (24 - totalPlayer) / totalPlayer;
+        for (int i = 1000; i < 1000+totalPlayer; i++) {
+            Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
+                    eggTilePosition[(i - 1000)*distancing][1],
+                    eggTilePosition[(i - 1000)*distancing][2],
+                    colors[i - 1000]);
+
+            players.add(chicken);
+            gameObjects3D.add(chicken);
+
+            chicken.Start();
+        }
+    }
+
 
     @Override
-    public void Update() {
-        super.Update();
-        totalPlayer = ZickeZacke.playerCount;
-
+    public void worldUpdate() {
         currentFrame++;
 
         if (isEnd) {
