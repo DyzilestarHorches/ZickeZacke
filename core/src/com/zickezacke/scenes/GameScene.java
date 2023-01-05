@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
+import com.zickezacke.gameObjectStore.GameScene.EggTiles;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
@@ -33,43 +34,51 @@ public class GameScene extends GameWorld {
     // list to manage OctTile
     private List<OctTiles> octTiles = new ArrayList<>();
 
-    private int[][] eggTilePosition = {{0, 0, 0},
-                                        {0, 0, 1},
-                                        {0, 0, 2},
-                                        {0, 0, 3},
-                                        {0, 0, 4},
-                                        {0, 0, 5},
-                                        {0, 0, 6},
-                                        {0, 0, 7},
-                                        {0, 0, 8},
-                                        {0, 0, 9},
-                                        {0, 0, 10},
-                                        {0, 0, 11},
-                                        {0, 0, 12},
-                                        {0, 0, 13},
-                                        {0, 0, 14},
-                                        {0, 0, 15},
-                                        {0, 0, 16},
-                                        {0, 0, 17},
-                                        {0, 0, 18},
-                                        {0, 0, 19},
-                                        {0, 0, 20},
-                                        {0, 0, 21},
-                                        {0, 0, 22},
-                                        {0, 0, 23}};
+    // list to manage OctTile
+    private List<EggTiles> eggTiles = new ArrayList<>();
 
-    private int[][] octTilePosition = {{0, 0, 0},
-                                        {0, 0, 1},
-                                        {0, 0, 2},
-                                        {0, 0, 3},
-                                        {0, 0, 4},
-                                        {0, 0, 5},
-                                        {0, 0, 6},
-                                        {0, 0, 7},
-                                        {0, 0, 8},
-                                        {0, 0, 9},
-                                        {0, 0, 10},
-                                        {0, 0, 11}};
+    private  float eggOffset = 1.3f;
+    private float[][] eggTilePosition = {{4f*eggOffset, 0, 0f},
+                                        {3.75f*eggOffset, 0, 1f*eggOffset},
+                                        {3.5f*eggOffset, 0, 2f*eggOffset},
+                                        {3f*eggOffset, 0, 3f*eggOffset},
+                                        {2f*eggOffset, 0, 3.5f*eggOffset},
+                                        {1f*eggOffset, 0, 3.75f*eggOffset},
+
+                                        {0, 0, 4f*eggOffset},
+                                        {-1f*eggOffset, 0, 3.75f*eggOffset},
+                                        {-2f*eggOffset, 0, 3.5f*eggOffset},
+                                        {-3f*eggOffset, 0, 3f*eggOffset},
+                                        {-3.5f*eggOffset, 0, 2f*eggOffset},
+                                        {-3.75f*eggOffset, 0, 1f*eggOffset},
+
+                                        {-4f*eggOffset, 0, 0},
+                                        {-3.75f*eggOffset, 0, -1f*eggOffset},
+                                        {-3.5f*eggOffset, 0, -2f*eggOffset},
+                                        {-3f*eggOffset, 0, -3f*eggOffset},
+                                        {-2f*eggOffset, 0, -3.5f*eggOffset},
+                                        {-1f*eggOffset, 0, -3.75f*eggOffset},
+
+                                        {0, 0, -4f*eggOffset},
+                                        {1f*eggOffset, 0, -3.75f*eggOffset},
+                                        {2f*eggOffset, 0, -3.5f*eggOffset},
+                                        {3f*eggOffset, 0, -3f*eggOffset},
+                                        {3.5f*eggOffset, 0, -2f*eggOffset},
+                                        {3.75f*eggOffset, 0, -1f*eggOffset}};
+    float octOffset = 1.3f;
+    private float[][] octTilePosition = {{0.5f*octOffset, 0, 0.5f*octOffset},
+                                        {1.5f*octOffset, 0, 0.5f*octOffset},
+                                        {0.5f*octOffset, 0, 1.5f*octOffset},
+                                        {-0.5f*octOffset, 0, -0.5f*octOffset},
+                                        {-1.5f*octOffset, 0, -0.5f*octOffset},
+                                        {-0.5f*octOffset, 0, -1.5f*octOffset},
+                                        {0.5f*octOffset, 0, -0.5f*octOffset},
+                                        {1.5f*octOffset, 0, -0.5f*octOffset},
+                                        {0.5f*octOffset, 0, -1.5f*octOffset},
+                                        {-0.5f*octOffset, 0, 0.5f*octOffset},
+                                        {-1.5f*octOffset, 0, 0.5f*octOffset},
+                                        {-0.5f*octOffset, 0, 1.5f*octOffset}
+    };
 
     public GameScene(boolean has3DCamera, boolean has2DCamera)
     {
@@ -84,23 +93,19 @@ public class GameScene extends GameWorld {
 
         gameObjects3D.add(new Ground(101));
 
-        totalPlayer = ZickeZacke.playerCount;
-        int distancing = (24 - totalPlayer) / totalPlayer;
-        for (int i = 1000; i < 1000+totalPlayer; i++) {
-            Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
-                                            eggTilePosition[(i - 1000)*distancing][1],
-                                            eggTilePosition[(i - 1000)*distancing][2],
-                                            colors[i - 1000]);
+        for (int i = 0; i < 24; i++) {
+            EggTiles eggTile = new EggTiles(i+3000, (int)(i/2),eggTilePosition[i][0],
+                                                        eggTilePosition[i][1],
+                                                        eggTilePosition[i][2], 270f+(360f/24f)*i);
 
-            players.add(chicken);
-            gameObjects3D.add(chicken);
-
+            gameObjects3D.add(eggTile);
+            eggTiles.add(eggTile);
         }
 
         for (int i = 0; i < 12; i++) {
-            OctTiles octTile = new OctTiles(i+2000,octTilePosition[i][0],
-                                                        octTilePosition[i][1],
-                                                        octTilePosition[i][2]);
+             OctTiles octTile = new OctTiles(i+2000,i,octTilePosition[i][0],
+                                                          octTilePosition[i][1],
+                                                          octTilePosition[i][2]);
 
             gameObjects3D.add(octTile);
             octTiles.add(octTile);
@@ -111,12 +116,25 @@ public class GameScene extends GameWorld {
         //gameObjects.add(new backGround3D(103));
     }
 
+    public void Show() {
+        totalPlayer = ZickeZacke.playerCount;
+        int distancing = (24 - totalPlayer) / totalPlayer;
+        for (int i = 1000; i < 1000+totalPlayer; i++) {
+            Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
+                    eggTilePosition[(i - 1000)*distancing][1],
+                    eggTilePosition[(i - 1000)*distancing][2],
+                    colors[i - 1000]);
+
+            players.add(chicken);
+            gameObjects3D.add(chicken);
+
+            chicken.Start();
+        }
+    }
+
 
     @Override
-    public void Update() {
-        super.Update();
-        totalPlayer = ZickeZacke.playerCount;
-
+    public void worldUpdate() {
         currentFrame++;
 
         if (isEnd) {

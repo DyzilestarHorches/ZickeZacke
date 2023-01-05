@@ -1,4 +1,4 @@
-package com.zickezacke.gameObjectStore;
+package com.zickezacke.gameObjectStore.demo;
 
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.gameObject.GameObject;
