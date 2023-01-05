@@ -76,7 +76,6 @@ public class testObject extends GameObject3D {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
             ZickeZacke.getInstance().setScreen(1);
         }
-
     }
     public void objectUpdate(){
 

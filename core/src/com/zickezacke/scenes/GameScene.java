@@ -52,7 +52,7 @@ public class GameScene extends GameWorld {
 
         }
 
-        gameObjects3D.add(new OctTiles(110,0,0,2));
+        gameObjects3D.add(new OctTiles(110,0,0,5));
 
 
 

@@ -2,10 +2,6 @@ package com.zickezacke.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn0;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn1;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn2;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn3;
 import com.zickezacke.nclib.game.screens.GameScreen;
 import com.zickezacke.scenes.GameScene;
 import com.zickezacke.scenes.HowScene;
