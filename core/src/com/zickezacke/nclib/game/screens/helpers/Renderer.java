@@ -2,6 +2,7 @@ package com.zickezacke.nclib.game.screens.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -118,7 +120,18 @@ public class Renderer {
             }
             spriteBatch.end();
         }
-
+        if (gameWorld.hasCamera3D()){
+            ShapeRenderer shapeRenderer = new ShapeRenderer();
+            shapeRenderer.setProjectionMatrix(camera3D.combined);
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            shapeRenderer.setColor(Color.RED);
+            shapeRenderer.line(0,10, 0, 0, -10, 0);
+            shapeRenderer.setColor(Color.GREEN);
+            shapeRenderer.line(10, 0, 0, -10, 0,0);
+            shapeRenderer.setColor(Color.BLUE);
+            shapeRenderer.line(0, 0, 10, 0, 0, -10);
+            shapeRenderer.end();
+        }
     }
     public void resize(int width, int height){
         if (gameWorld.hasCamera2D()) viewport2D.update(width, height);

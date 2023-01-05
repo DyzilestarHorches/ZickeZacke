@@ -120,7 +120,7 @@ public class GameScene extends GameWorld {
         currentFrame++;
 
         if (isEnd) {
-            System.out.println("Winner winner chicken dinner");
+            //System.out.println("Winner winner chicken dinner");
         } else {
             if (isRunning) {
                 if (currentFrame % 60 == 0) {
