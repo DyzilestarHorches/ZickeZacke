@@ -35,7 +35,7 @@ public class ZickeZacke extends Game {
 		instance.gameScreens.add(new GameScreen(1, new MenuScene(false, true)));
 		instance.gameScreens.add(new GameScreen(2, new HowScene(false,true)));
 		instance.gameScreens.add(new GameScreen(3, new SettingScene(false,true)));
-		instance.setScreen(gameScreens.get(0));
+		instance.setScreen(gameScreens.get(1));
 	}
 
 

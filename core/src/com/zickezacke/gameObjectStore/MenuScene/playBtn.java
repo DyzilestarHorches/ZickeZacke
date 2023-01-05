@@ -16,8 +16,6 @@ public class playBtn extends Btn{
         position2D = new Vector2(5*cellWidth, 2*cellHeight);
         size2D = new Vector2(2*cellWidth,1*cellHeight);
     }
-
-
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
         //thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
