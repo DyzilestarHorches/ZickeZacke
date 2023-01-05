@@ -18,6 +18,7 @@ public class GameObject {
 
     protected boolean isUI;
     protected boolean isActive;
+    protected boolean isText;
 
     protected List<Component> components = new ArrayList<>();
 
@@ -104,6 +105,7 @@ public class GameObject {
     public boolean isUI(){
         return this.isUI;
     }
+    public boolean isText(){return this.isText;}
 
     public Vector2 getPosition2D(){
         return this.position2D;

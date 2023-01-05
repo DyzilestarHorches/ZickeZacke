@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zickezacke.nclib.gameObject.GameObject;
 import com.zickezacke.nclib.gameObject.GameObject3D;
+import com.zickezacke.nclib.gameObject.TextObject;
 import com.zickezacke.nclib.gameObject.import3D.Instance3D;
 
 
@@ -110,12 +112,20 @@ public class Renderer {
         if (gameWorld.hasCamera2D()){
             spriteBatch.begin();
             for (int i = 0; i < gameObjects.size(); i++){
-                if(!gameObjects .get(i).isActive()) continue;
+                if(!gameObjects.get(i).isActive()) continue;
                 Texture tmpTexture = gameObjects.get(i).getTexture();
                 if (tmpTexture != null && gameObjects.get(i).isUI()) {
                     Vector2 position = gameObjects.get(i).getPosition2D();
                     Vector2 size = gameObjects.get(i).getSize2D();
                     spriteBatch.draw(tmpTexture, position.x, position.y, size.x, size.y);
+                }
+
+                if (gameObjects.get(i).isText()) {
+                    TextObject textObject = (TextObject) gameObjects.get(i);
+                    Vector2 position = gameObjects.get(i).getPosition2D();
+                    //Vector2 size = gameObjects.get(i).getSize2D();
+                    BitmapFont bitmapFont = textObject.getBitmapFont();
+                    bitmapFont.draw(spriteBatch, textObject.getTextValue(),position.x, position.y);
                 }
             }
             spriteBatch.end();
