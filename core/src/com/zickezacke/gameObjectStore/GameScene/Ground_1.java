@@ -4,16 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
-public class Ground extends GameObject3D {
-    public Ground(int id){
+public class Ground_1 extends GameObject3D {
+    public Ground_1(int id){
         super(id, false);
     }
 
     @Override
     public void objectInit() {
         source3D = "./game_scene/main_ground_demo.g3db";
-        position3D = new Vector3(0, 0, 0);
-       // scale3D = new Vector3(1, 1, 1);
+        position3D = new Vector3(0.5f, 0, 0);
+        scale3D = new Vector3(1, 1, 1);
     }
 
     @Override

@@ -75,9 +75,13 @@ public class GameObject3D{
         distance3D = position3D.cpy().sub(prePos3D);
         //Gdx.app.log("Center", distance3D.toString());
         prePos3D.x = position3D.x;  prePos3D.y = position3D.y; prePos3D.z= position3D.z;
+        if (source3D != null && position3D != null) {
+            model3D.setScale(scale3D);
+            return;
+        }
         if (source3D != null && position3D != null){
             model3D.setTranslation(position3D);
-            model3D.setScale(scale3D);
+            //model3D.setScale(scale3D);
             animation3D.update(Gdx.graphics.getDeltaTime());
 
             //bounds.mul(new Matrix4(distance3D, new Quaternion().idt(), new Vector3(1, 1, 1)));

@@ -8,7 +8,7 @@ import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 
 public class playBtn extends Btn{
     public playBtn(int id, String type){super(id, type);}
-    GameWorld thisMenuScene;
+
     @Override
     public void objectInit() {
         super.objectInit();
@@ -17,12 +17,6 @@ public class playBtn extends Btn{
         size2D = new Vector2(2*cellWidth,1*cellHeight);
     }
 
-    @Override
-    public void objectUpdate() {
-        Gdx.app.log("dmm","may");
-        thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
-        if(thisMenuScene != null){Gdx.app.log("dmm","may");}
-    }
 
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {

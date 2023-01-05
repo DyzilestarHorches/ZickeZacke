@@ -23,7 +23,8 @@ public class testObject extends GameObject3D {
     }
     public void objectInit(){
         source3D = "demo.g3db";
-        position3D = new Vector3(0f, 0f, -2f);
+        position3D = new Vector3(0f, 0f, -10f);
+        //scale3D = new Vector3(1.1f,1.1f,1.1f); cái gì đây
         components.add(boundingVisual);
     }
     public void objectStart(){
@@ -51,7 +52,7 @@ public class testObject extends GameObject3D {
             model3D.setRotation(new Vector3(0,0,1), 2f);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Z)){
-            model3D.setScale(new Vector3(1.1f,1.1f,1.1f));
+            model3D.setScale(new Vector3(1f,1f,1f));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
             Gdx.app.log("Object","Move");
