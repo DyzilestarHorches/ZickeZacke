@@ -125,7 +125,6 @@ public class Renderer {
                     Vector2 position = gameObjects.get(i).getPosition2D();
                     //Vector2 size = gameObjects.get(i).getSize2D();
                     BitmapFont bitmapFont = textObject.getBitmapFont();
-                    System.out.println(textObject.getId());
                     bitmapFont.draw(spriteBatch, textObject.getTextValue(),position.x, position.y);
                 }
             }
