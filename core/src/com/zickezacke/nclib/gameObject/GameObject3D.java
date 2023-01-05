@@ -21,7 +21,9 @@ public class GameObject3D{
     protected Vector3 position3D;
     protected Vector3 prePos3D;
     protected Vector3 distance3D;
-    protected Vector3 scale3D;
+    protected Vector3 scale3D = new Vector3();
+    protected Vector3 center3D = new Vector3();
+    protected Vector3 offset3D = new Vector3();
     protected String source3D;
 
     protected Instance3D model3D;
@@ -55,11 +57,17 @@ public class GameObject3D{
             model3D = model.getModel();
             animation3D = new Animation3D(model3D);
 
-            if (hasBound){
-                model3D.calculateBoundingBox(bounds);
-                bounds.mul(model3D.transform);
-                bounds.getDimensions(dimensions);
-                bounds.getCenter(center);
+            //use bound to calculate center and offset
+            model3D.calculateBoundingBox(bounds);
+            bounds.mul(model3D.transform);
+            bounds.getDimensions(dimensions);
+            bounds.getCenter(center);
+            offset3D.set(center.x - position3D.x, center.y - position3D.y, center.z - position3D.z);
+            scale3D.set(dimensions);
+            center3D.set(position3D.x + offset3D.x, position3D.y + offset3D.y, position3D.z + offset3D.z);
+
+            if (!hasBound){
+                bounds.clr();
             }
 
         }
@@ -77,9 +85,9 @@ public class GameObject3D{
         prePos3D.x = position3D.x;  prePos3D.y = position3D.y; prePos3D.z= position3D.z;
         if (source3D != null && position3D != null){
             model3D.setTranslation(position3D);
-            model3D.setScale(scale3D);
             animation3D.update(Gdx.graphics.getDeltaTime());
 
+            center3D.set(position3D.x + offset3D.x, position3D.y + offset3D.y, position3D.z + offset3D.z);
             //bounds.mul(new Matrix4(distance3D, new Quaternion().idt(), new Vector3(1, 1, 1)));
         }
 

@@ -6,6 +6,7 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class OctTiles extends GameObject3D {
     private static final int FLIP_FRAME = 60;
+    private static final  int PAUSE_FRAME = 60;
 
     private static final int PAUSE_FRAME = 100;
 

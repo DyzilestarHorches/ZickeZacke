@@ -27,11 +27,49 @@ public class GameScene extends GameWorld {
     private int currentPlayer;
     private int totalPlayer;
 
+    // list to manage player
     private List<Chicken> players = new ArrayList<>();
+
+    // list to manage OctTile
+    private List<OctTiles> octTiles = new ArrayList<>();
+
     private int[][] eggTilePosition = {{0, 0, 0},
                                         {0, 0, 1},
                                         {0, 0, 2},
-                                        {0, 0, 3}};
+                                        {0, 0, 3},
+                                        {0, 0, 4},
+                                        {0, 0, 5},
+                                        {0, 0, 6},
+                                        {0, 0, 7},
+                                        {0, 0, 8},
+                                        {0, 0, 9},
+                                        {0, 0, 10},
+                                        {0, 0, 11},
+                                        {0, 0, 12},
+                                        {0, 0, 13},
+                                        {0, 0, 14},
+                                        {0, 0, 15},
+                                        {0, 0, 16},
+                                        {0, 0, 17},
+                                        {0, 0, 18},
+                                        {0, 0, 19},
+                                        {0, 0, 20},
+                                        {0, 0, 21},
+                                        {0, 0, 22},
+                                        {0, 0, 23}};
+
+    private int[][] octTilePosition = {{0, 0, 0},
+                                        {0, 0, 1},
+                                        {0, 0, 2},
+                                        {0, 0, 3},
+                                        {0, 0, 4},
+                                        {0, 0, 5},
+                                        {0, 0, 6},
+                                        {0, 0, 7},
+                                        {0, 0, 8},
+                                        {0, 0, 9},
+                                        {0, 0, 10},
+                                        {0, 0, 11}};
 
     public GameScene(boolean has3DCamera, boolean has2DCamera)
     {
@@ -42,19 +80,31 @@ public class GameScene extends GameWorld {
     }
 
     public void Begin() {
+
+
         gameObjects3D.add(new Ground(101));
 
-        for (int i = 105; i < 109; i++) {
-            Chicken chicken = new Chicken(i, eggTilePosition[i - 105][0], eggTilePosition[i - 105][1], eggTilePosition[i - 105][2], colors[i - 105]);
+        totalPlayer = ZickeZacke.playerCount;
+        int distancing = (24 - totalPlayer) / totalPlayer;
+        for (int i = 1000; i < 1000+totalPlayer; i++) {
+            Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
+                                            eggTilePosition[(i - 1000)*distancing][1],
+                                            eggTilePosition[(i - 1000)*distancing][2],
+                                            colors[i - 1000]);
 
             players.add(chicken);
             gameObjects3D.add(chicken);
 
         }
 
-        gameObjects3D.add(new OctTiles(110,0,0,5));
+        for (int i = 0; i < 12; i++) {
+            OctTiles octTile = new OctTiles(i+2000,octTilePosition[i][0],
+                                                        octTilePosition[i][1],
+                                                        octTilePosition[i][2]);
 
-
+            gameObjects3D.add(octTile);
+            octTiles.add(octTile);
+        }
 
         //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
         //gameObjects.add(new backGround(102));
@@ -70,7 +120,7 @@ public class GameScene extends GameWorld {
         currentFrame++;
 
         if (isEnd) {
-            System.out.println("Winner winner chicken dinner");
+            //System.out.println("Winner winner chicken dinner");
         } else {
             if (isRunning) {
                 if (currentFrame % 60 == 0) {
@@ -104,7 +154,7 @@ public class GameScene extends GameWorld {
     }
 
     public void getMovement() {
-        players.get(currentPlayer+105).move();
+        players.get(currentPlayer).move();
     }
 
     public boolean spaceKeyPressed() {
