@@ -6,7 +6,6 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class OctTiles extends GameObject3D {
     private static final int FLIP_FRAME = 60;
-    private static final  int PAUSE_FRAME = 60;
 
     private static final int PAUSE_FRAME = 100;
 
@@ -55,7 +54,6 @@ public class OctTiles extends GameObject3D {
             position3D.y += 10/600f;
             if(count == FLIP_FRAME){
                 Trigger = !Trigger;
-                inAnimation = false;
                 count = 0;
                 Timer = true;
                 position3D.y -= 1f;
@@ -79,6 +77,7 @@ public class OctTiles extends GameObject3D {
                 Back = !Back;
                 count = 0;
                 position3D.y -= 1f;
+                inAnimation = false;
             }
         }
     }
