@@ -10,19 +10,12 @@ import com.zickezacke.gameObjectStore.GameScene.EggTiles;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-import java.io.Console;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import sun.jvm.hotspot.gc.shared.Space;
-
 
 public class GameScene extends GameWorld {
     private Color[] colors = {Color.ORANGE, Color.RED, Color.GREEN, Color.BLUE};
 
-    private  int currentFrame = 0;
     // determines if the game is in player's turn
     private boolean isRunning;
     // determines if one player have win
@@ -146,25 +139,22 @@ public class GameScene extends GameWorld {
 
     @Override
     public void worldUpdate() {
-        currentFrame++;
 
-        if (isEnd) {
-            System.out.println("Winner winner chicken dinner");
-        } else {
-            if (isRunning) {
-                nextTile = findUnOccupy();
+        if (isRunning) {
+            nextTile = findUnOccupy();
 
-                if (eggTiles.get(nextTile).getType().equals(typeClicked)) {
-                    setPosition();
-                    typeClicked = "-1";
-                    eggTiles.get(nextTile).setOccupy(true);
-                    eggTiles.get((nextTile-1)%24).setOccupy(false);
-                    players.get(currentPlayer).setTile(nextTile);
-                }
-
-            } else {
+            if (eggTiles.get(nextTile).getType().equals(typeClicked)) {
+                setPosition();
+                typeClicked = "-1";
+                eggTiles.get(nextTile).setOccupy(true);
+                eggTiles.get((nextTile-1)%24).setOccupy(false);
+                players.get(currentPlayer).setTile(nextTile);
+            } else if (!eggTiles.get(nextTile).getType().equals(typeClicked) && typeClicked != "-1") {
                 startNextPlayer();
+                typeClicked = "-1";
             }
+        } else {
+            Gdx.app.log("End", "Winner " + Integer.toString(currentPlayer));
         }
     }
 
