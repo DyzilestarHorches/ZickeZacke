@@ -2,13 +2,13 @@ package com.zickezacke.scenes;
 
 import com.badlogic.gdx.Gdx;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.EggTiles;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
+import com.zickezacke.gameObjectStore.GameScene.Tail;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,9 @@ public class GameScene extends GameWorld {
 
     // list to manage player
     private List<Chicken> players = new ArrayList<>();
+
+    // list to manage tails
+    private  List<Tail> tails = new ArrayList<>();
 
     // list to manage OctTile
     private List<OctTiles> octTiles = new ArrayList<>();
@@ -128,14 +131,18 @@ public class GameScene extends GameWorld {
                     eggTilePosition[(i - 1000)*distancing][1],
                     eggTilePosition[(i - 1000)*distancing][2],
                     colors[i - 1000],
-                    (i-1000)*distancing);
+                    (i-1000)*distancing,i-1000);
 
             players.add(chicken);
             gameObjects3D.add(chicken);
-
+            chicken.Start();
             eggTiles.get((i-1000)*distancing).setOccupy(true);
 
-            chicken.Start();
+            //add tails
+            Tail tmpTail = new Tail(i + 10, i-1000);
+            tails.add(tmpTail);
+            gameObjects3D.add(tmpTail);
+            tmpTail.Start();
         }
     }
 

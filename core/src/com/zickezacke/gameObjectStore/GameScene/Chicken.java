@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Chicken extends GameObject3D {
     private boolean isMoving;
@@ -26,14 +28,17 @@ public class Chicken extends GameObject3D {
 
     private float[] currentPos = new float[3];
     private float[] desPos = new float[3];
-
+    private int playerNum;
     private Color color;
     private BoundingVisual boundingVisual = new BoundingVisual();
-    public Chicken(int id, float x, float y, float z, Color color, int tile){
+    public Chicken(int id, float x, float y, float z,
+                   Color color, int tile, int playerNum){
         super(id, true);
         setPosition(x,y,z);
         this.color = color;
         this.tile = tile;
+        this.playerNum = playerNum;
+
     }
 
     public void setPosition(float x, float y, float z){
@@ -42,30 +47,17 @@ public class Chicken extends GameObject3D {
 
     @java.lang.Override
     public void objectInit() {
-        source3D = "demo.g3db";
+        source3D = "./Chickens/chicken_" + String.valueOf(playerNum) + ".g3db";
         scale3D = new Vector3(1,1,1);
         components.add(boundingVisual);
     }
 
     public void objectStart(){
-        isMoving = false;
+        //isMoving = false;
     }
     public void animation(){
         String Default = model3D.animations.get(0).id;
-        String Ani1 = model3D.animations.get(1).id;
-        if (!isMoving) animation3D.setAnimation(Default, 10);
-        if (isMoving)
-            animation3D.animate(Ani1, new Animation3D.AnimationListener(){
-                @Override
-                public void onEnd(Animation3D.AnimationDesc animation) {
-                    isMoving = false;
-                }
-
-                @Override
-                public void onLoop(Animation3D.AnimationDesc animation) {
-
-                }
-            }, 0f);
+        animation3D.setAnimation(Default, 10);
     }
 
     public void setCurrentPos() {

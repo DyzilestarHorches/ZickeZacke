@@ -38,15 +38,9 @@ public class chickenObject extends GameObject3D {
                 }
             }, 0f);
     }
-    public void Jump(){
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            this.isMoving = true;
-        }
-    }
 
     @Override
     public void objectUpdate() {
         animation();
-        Jump();
-    }
+            }
 }
