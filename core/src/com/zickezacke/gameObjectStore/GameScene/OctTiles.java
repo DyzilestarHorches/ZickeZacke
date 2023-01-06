@@ -3,6 +3,7 @@ package com.zickezacke.gameObjectStore.GameScene;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.component.BoundingVisual;
+import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.scenes.GameScene;
 
@@ -17,11 +18,12 @@ public class OctTiles extends GameObject3D {
     private boolean Back = false;
     private boolean Timer = false;
 
-    private int timer = 0;
     private int count = 0;
     private BoundingVisual boundingVisual = new BoundingVisual();
 
     private String type;
+
+    private GameScene thisGameScene;
 
     public OctTiles(int id, int type,float x, float y, float z){
         super(id,true);
@@ -46,15 +48,16 @@ public class OctTiles extends GameObject3D {
         if (!inAnimation) {
             Trigger = !Trigger;
             inAnimation = true;
-            GameScene gameScene = (GameScene) ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld();
-            gameScene.typeClicked = this.type;
+            thisGameScene.typeClicked = this.type;
         }
     }
 
     @java.lang.Override
     public void objectUpdate() {
         super.objectUpdate();
-
+        if (thisGameScene == null) {
+            thisGameScene = (GameScene) ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld();
+        }
         flip();
     }
 
@@ -72,9 +75,9 @@ public class OctTiles extends GameObject3D {
         }
 
         if(Timer){
-            timer++;
-            if(timer == PAUSE_FRAME){
-                timer = 0;
+            count++;
+            if(count == PAUSE_FRAME){
+                count = 0;
                 Timer = false;
                 Back = true;
             }

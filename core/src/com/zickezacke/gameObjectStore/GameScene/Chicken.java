@@ -20,24 +20,25 @@ public class Chicken extends GameObject3D {
 
     private int count = 0;
 
+    private int tail = 0;
+
     private boolean Trigger = false;
 
     private int tile;
 
-    private static boolean inAnimation = false;
-
     private float[] currentPos = new float[3];
     private float[] desPos = new float[3];
-    private int playerNum;
+    private final int playerNum;
     private Color color;
     private BoundingVisual boundingVisual = new BoundingVisual();
     public Chicken(int id, float x, float y, float z,
-                   Color color, int tile, int playerNum){
+                   Color color, int tile, int playerNum, int tail){
         super(id, true);
         setPosition(x,y,z);
         this.color = color;
         this.tile = tile;
         this.playerNum = playerNum;
+        this.tail = tail;
 
     }
 
@@ -74,12 +75,12 @@ public class Chicken extends GameObject3D {
         desPos[2] = z;
 
         Trigger = true;
-        inAnimation = true;
         isJumping = true;
     }
 
     public void move() {
         if (Trigger) {
+            count++;
             position3D.x += (desPos[0]-currentPos[0])/JUMP_FRAME;
             position3D.z += (desPos[2]-currentPos[2])/JUMP_FRAME;
 
@@ -87,7 +88,6 @@ public class Chicken extends GameObject3D {
 
             if (count == JUMP_FRAME) {
                 Trigger = false;
-                inAnimation = false;
                 isJumping = false;
                 count = 0;
             }
@@ -102,7 +102,6 @@ public class Chicken extends GameObject3D {
 
         if (isJumping) {
             move();
-            count++;
         }
 
     }
@@ -115,8 +114,14 @@ public class Chicken extends GameObject3D {
 
         float xNew = -xStar + count*xStar/JUMP_FRAME;
 
-        float yNew = (float) (HEIGHT_SCALE * ( -Math.pow(xNew, 2) - xStar * xNew));
-
-        return yNew;
+        return (float) (HEIGHT_SCALE * ( -Math.pow(xNew, 2) - xStar * xNew));
     }
+
+    public int getTail() {return this.tail;}
+
+    public void loseTail() {this.tail = 0;}
+
+    public void gainTail(int tailNumber) {this.tail += tailNumber;}
+
+    public int getPlayerNum() {return this.playerNum;}
 }

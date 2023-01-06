@@ -79,7 +79,7 @@ public class GameObject3D{
         if (!isActive) return;
         objectUpdate();
         // update position of model
-        System.out.println(id);
+
         distance3D = position3D.cpy().sub(prePos3D);
         //Gdx.app.log("Center", distance3D.toString());
         prePos3D.x = position3D.x;  prePos3D.y = position3D.y; prePos3D.z= position3D.z;
@@ -135,7 +135,7 @@ public class GameObject3D{
     public BoundingBox getBounds(){
         return this.bounds;
     }
-    public Vector3 getCNposition(){
+    public Vector3 getPosition3D(){
         return  this.position3D;
     }
 }
