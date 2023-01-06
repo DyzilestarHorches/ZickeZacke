@@ -152,8 +152,7 @@ public class GameScene extends GameWorld {
                 typeClicked = "-1";
                 eggTiles.get(nextTile).setOccupy(true);
 
-                eggTiles.get((currentTile)%24).setOccupy(false);
-
+                eggTiles.get(currentTile).setOccupy(false);
 
                 players.get(currentPlayer).setTile(nextTile);
                 Gdx.app.log("Player tile" + Integer.toString(currentPlayer), Integer.toString(players.get(currentPlayer).getTile()));
@@ -200,10 +199,5 @@ public class GameScene extends GameWorld {
             }
         }
         return -1;
-    }
-
-    public void moveTail() {
-
-        
     }
 }
