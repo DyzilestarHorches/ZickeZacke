@@ -158,7 +158,6 @@ public class GameScene extends GameWorld {
         if (isRunning) {
             if (eggTiles.get(nextTile).getType().equals(typeClicked)) {
                 moveChicken();
-                checkGainLoseTail();
                 resetTypeChecked();
 
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
@@ -218,6 +217,8 @@ public class GameScene extends GameWorld {
         eggTiles.get(currentTile).setOccupy(false);
 
         players.get(currentPlayer).setTile(nextTile);
+
+        checkGainLoseTail();
 
         updateTilesForPLayer();
     }
