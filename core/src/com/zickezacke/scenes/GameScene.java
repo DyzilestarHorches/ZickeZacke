@@ -26,6 +26,9 @@ public class GameScene extends GameWorld {
     private boolean isJumping = false;
 
     private int nextTile;
+
+    private int currentTile;
+
     public String typeClicked = "-1";
 
     // list to manage player
@@ -141,21 +144,33 @@ public class GameScene extends GameWorld {
     public void worldUpdate() {
 
         if (isRunning) {
+            currentTile = players.get(currentPlayer).getTile();
             nextTile = findUnOccupy();
 
             if (eggTiles.get(nextTile).getType().equals(typeClicked)) {
                 setPosition();
                 typeClicked = "-1";
                 eggTiles.get(nextTile).setOccupy(true);
-                eggTiles.get((nextTile-1)%24).setOccupy(false);
+
+                eggTiles.get((currentTile)%24).setOccupy(false);
+
+
                 players.get(currentPlayer).setTile(nextTile);
+                Gdx.app.log("Player tile" + Integer.toString(currentPlayer), Integer.toString(players.get(currentPlayer).getTile()));
+
+
+
             } else if (!eggTiles.get(nextTile).getType().equals(typeClicked) && typeClicked != "-1") {
                 startNextPlayer();
                 typeClicked = "-1";
             }
+
+
         } else {
             Gdx.app.log("End", "Winner " + Integer.toString(currentPlayer));
         }
+
+        moveTail();
     }
 
     /**
@@ -164,7 +179,6 @@ public class GameScene extends GameWorld {
     public void startNextPlayer() {
         currentPlayer = (currentPlayer + 1) % 4;
         System.out.println("Next player! " + currentPlayer);
-        isRunning = true;
     }
 
     public void randomizeTiles() {
@@ -178,10 +192,6 @@ public class GameScene extends GameWorld {
 
     }
 
-    public boolean spaceKeyPressed() {
-        return Gdx.input.isKeyPressed(Input.Keys.SPACE);
-    }
-
     public int findUnOccupy() {
         int i = players.get(currentPlayer).getTile();
         for (int j = 1; j < 23; j++) {
@@ -192,4 +202,8 @@ public class GameScene extends GameWorld {
         return -1;
     }
 
+    public void moveTail() {
+
+        
+    }
 }

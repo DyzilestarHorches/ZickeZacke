@@ -83,6 +83,8 @@ public class GameWorld {
     //called in render, call every gameObject update
     public void Update(){
         worldUpdate();
+
+
         for (int i = 0; i < gameObjects.size(); i++){
             gameObjects.get(i).Update();
         }
