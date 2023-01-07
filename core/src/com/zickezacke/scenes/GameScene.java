@@ -39,7 +39,7 @@ public class GameScene extends GameWorld {
     private final List<Chicken> players = new ArrayList<>();
 
     // list to manage tails
-    private  final List<Tail> tails = new ArrayList<>();
+    private final List<Tail> tails = new ArrayList<>();
 
     // list to manage OctTile
     private final List<OctTiles> octTiles = new ArrayList<>();
@@ -128,14 +128,15 @@ public class GameScene extends GameWorld {
     }
 
     public void Show() {
-        createChickenTail();
-        createUI();
+        createChickenTailUI();
+
         updateTilesForPLayer();
     }
     //getter
     public float[] getEggPosition(int i){return eggTilePosition[i];}
+
     // creates Chickens and Tails based on number of player
-    public void createChickenTail() {
+    public void createChickenTailUI() {
         //mapping playerList
         int[] chickenList = new int[ZickeZacke.playerCount];
         int j = 0;
@@ -148,9 +149,9 @@ public class GameScene extends GameWorld {
         int distancing = (24 - ZickeZacke.playerCount) / ZickeZacke.playerCount + 1;
         for (int i = 1000; i < 1000+ ZickeZacke.playerCount; i++) {
             Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
-                                eggTilePosition[(i - 1000)*distancing][1],
-                                eggTilePosition[(i - 1000)*distancing][2],
-                            (i-1000)*distancing,i-1000,chickenList[i-1000], 1);
+                            eggTilePosition[(i - 1000)*distancing][1],
+                            eggTilePosition[(i - 1000)*distancing][2],
+                        (i-1000)*distancing, chickenList[i-1000], 1);
 
             //add chickens
             players.add(chicken);
@@ -165,6 +166,11 @@ public class GameScene extends GameWorld {
             tails.add(tmpTail);
             gameObjects3D.add(tmpTail);
             tmpTail.Start();
+
+            nextTurnNoti noti = new nextTurnNoti(8000+i, chickenList[i-1000]);
+            gameObjects.add(noti);
+            nextTurnNotis.add(noti);
+            noti.Start();
         }
     }
 
@@ -173,9 +179,7 @@ public class GameScene extends GameWorld {
         if (isRunning) {
             if (eggTiles.get(nextTile).getType().equals(typeClicked)) {
                 checkGainLoseTail();
-
                 moveChicken();
-
                 updateTilesForPLayer();
 
                 resetTypeChecked();
@@ -210,11 +214,10 @@ public class GameScene extends GameWorld {
      */
     public void startNextPlayer() {
         currentPlayer = (currentPlayer + 1) % ZickeZacke.playerCount;
-        nextTurnNotis.get(players.get(currentPlayer).getPlayerFile()).setActive(true);
+        nextTurnNotis.get(currentPlayer).setActive(true);
         updateTilesForPLayer();
         System.out.println("Next player! " + currentPlayer);
     }
-
 
     public void randomizeTiles() {
 
@@ -224,7 +227,7 @@ public class GameScene extends GameWorld {
     public void ending() {
         Gdx.app.log("End", "Winner " + currentPlayer);
         ZickeZacke.winner = players.get(currentPlayer).getPlayerFile();
-        //ZickeZacke.getInstance().setScreen(4);
+        ZickeZacke.getInstance().setScreen(4);
         isEnd = false;
     }
 
@@ -245,8 +248,8 @@ public class GameScene extends GameWorld {
     }
     //rotate the tails
     public void rotateTails(){
-        for(Tail i : tails){
-            if(currentPlayer == i.getPlayerNum()){i.setTile(nextTile);}
+        for(Tail t : tails){
+            if(currentPlayer == t.getPlayerFile()){t.setTile(nextTile);}
         }
     }
     // finds the next unoccupied Tile
@@ -262,7 +265,7 @@ public class GameScene extends GameWorld {
     // checks if ends
     public void checkEnd() {
         for (Chicken c: players) {
-            Gdx.app.log("Tail" + c.getPlayerNum(), Integer.toString(c.getTail()));
+            Gdx.app.log("Tail" + c.getPlayerFile(), Integer.toString(c.getTail()));
             if (c.getTail() == ZickeZacke.playerCount) {
                 isRunning = false;
                 isEnd = true;
@@ -290,8 +293,8 @@ public class GameScene extends GameWorld {
 
                         // set Tail to the new Chicken
                         for (Tail t : tails) {
-                            if (t.getPlayerNum() == c.getPlayerNum()) {
-                                t.setPlayerNum(currentPlayer);
+                            if (t.getPlayerFile() == c.getPlayerFile()) {
+                                t.setPlayerFile(currentPlayer);
                             }
                         }
                     }
@@ -303,13 +306,5 @@ public class GameScene extends GameWorld {
         }
     }
 
-    //create UI
-    public void createUI(){
-        for(int i = 0; i < 4; i++){
-            nextTurnNoti noti = new nextTurnNoti(9000+i,i);
-            gameObjects.add(noti);
-            nextTurnNotis.add(noti);
-            noti.Start();
-        }
-    }
+
 }

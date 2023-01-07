@@ -11,10 +11,11 @@ public class Tail extends GameObject3D {
     private GameWorld thisGameScene;
 
     // The player has the Tail
-    private int playerNum;
+    private int playerFile;
 
     // get File to render the Tail
-    private final int playerFile;
+    private final int tailFile;
+
     private int tile;
     private int tileShift;
     private static final  int ROTATE_FRAME = 30;
@@ -22,15 +23,15 @@ public class Tail extends GameObject3D {
     private boolean trigger = false;
     private Chicken myChicken;
     //private BoundingVisual boundingVisual = new BoundingVisual();
-    public Tail(int id,int playerFile, int playerNum, int tile){
+    public Tail(int id,int tailFile, int playerFile, int tile){
         super(id, false);
+        this.tailFile = tailFile;
         this.playerFile = playerFile;
-        this.playerNum = playerNum;
         this.tile = tile;
     }
 
-    public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
-    public int getPlayerNum() {return this.playerNum;}
+    public void setPlayerFile(int playerFile) {this.playerFile = playerFile;}
+    public int getPlayerFile() {return this.playerFile;}
 
     @Override
     public void objectStart() {
@@ -40,11 +41,11 @@ public class Tail extends GameObject3D {
     @java.lang.Override
     public void objectInit() {
         thisGameScene = ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld();
-        source3D = "./Chickens/tail_" + String.valueOf(playerFile) + ".g3db";
+        source3D = "./Chickens/tail_" + String.valueOf(tailFile) + ".g3db";
         // chicken 0 -> get(37)
         //tail 0 added
         // chicken 1 -> get(39)
-        myChicken = (Chicken)(thisGameScene.getGameObjects3D().get(37+playerNum*2));
+        myChicken = (Chicken)(thisGameScene.getGameObjects3D().get(37+playerFile*2));
         if (myChicken != null){
             position3D = myChicken.getPosition3D();
         }
@@ -53,7 +54,7 @@ public class Tail extends GameObject3D {
 
     @Override
     public void objectUpdate() {
-        myChicken = (Chicken) (thisGameScene.getGameObjects3D().get(37+playerNum*2));
+        myChicken = (Chicken) (thisGameScene.getGameObjects3D().get(37+playerFile*2));
         if (myChicken != null){
             position3D = myChicken.getPosition3D();
         }

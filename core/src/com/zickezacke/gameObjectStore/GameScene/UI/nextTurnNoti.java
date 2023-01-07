@@ -5,11 +5,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.nclib.gameObject.GameObject;
 
 public class nextTurnNoti extends GameObject {
-    private int nextPlayer;
     private final int SHOW_FRAME = 30;
+    private final float CELL_WIDTH =  1280/12f;
+    private final float CELL_HEIGHT = 720/10f;
+
+    private int nextPlayer;
     private int count = 0;
-    public int cellWidth =  1280/12;
-    public int cellHeight = 720/10;
+
     public nextTurnNoti (int id, int nextPlayer){
         super(id,true);
         this.nextPlayer = nextPlayer;
@@ -18,8 +20,8 @@ public class nextTurnNoti extends GameObject {
     @Override
     public void objectInit() {
         source2D = "./UI_demo/next_noti_" + String.valueOf(nextPlayer) + ".png";
-        position2D = new Vector2(0*cellWidth,4*cellHeight);
-        size2D = new Vector2(12*cellWidth,2*cellHeight);
+        position2D = new Vector2(0*CELL_WIDTH,4*CELL_HEIGHT);
+        size2D = new Vector2(12*CELL_WIDTH,2*CELL_HEIGHT);
     }
 
     @Override

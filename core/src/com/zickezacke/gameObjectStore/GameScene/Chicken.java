@@ -23,15 +23,15 @@ public class Chicken extends GameObject3D {
     private int tileShift;
     private float[] currentPos = new float[3];
     private float[] desPos = new float[3];
-    private final int playerNum;
+
+    //
     private final int playerFile;
     public Chicken(int id, float x, float y, float z
-                   , int tile, int playerNum, int playerFile, int tail){
+                   , int tile, int playerFile, int tail){
 
         super(id, true);
         setPosition(x,y,z);
         this.tile = tile;
-        this.playerNum = playerNum;
         this.playerFile = playerFile;
         this.tail = tail;
 
@@ -43,7 +43,6 @@ public class Chicken extends GameObject3D {
 
     @java.lang.Override
     public void objectInit() {
-        Gdx.app.log("playernum", String.valueOf(playerNum));
         source3D = "./Chickens/chicken_" + String.valueOf(playerFile) + ".g3db";
         scale3D = new Vector3(1,1,1);
     }
@@ -125,8 +124,6 @@ public class Chicken extends GameObject3D {
     public void loseTail() {this.tail = 0;}
 
     public void gainTail(int tailNumber) {this.tail += tailNumber;}
-
-    public int getPlayerNum() {return this.playerNum;}
 
     public int getPlayerFile() {return this.playerFile;}
 }
