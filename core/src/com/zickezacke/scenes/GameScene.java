@@ -1,18 +1,22 @@
-package com.zickezacke.scenes;
 
-import com.badlogic.gdx.Gdx;
+        package com.zickezacke.scenes;
 
-import com.badlogic.gdx.graphics.Color;
-import com.zickezacke.game.ZickeZacke;
-import com.zickezacke.gameObjectStore.GameScene.Chicken;
-import com.zickezacke.gameObjectStore.GameScene.EggTiles;
-import com.zickezacke.gameObjectStore.GameScene.Ground;
-import com.zickezacke.gameObjectStore.GameScene.OctTiles;
-import com.zickezacke.gameObjectStore.GameScene.Tail;
-import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+        import com.badlogic.gdx.Gdx;
+
+        import com.badlogic.gdx.graphics.Color;
+        import com.zickezacke.game.ZickeZacke;
+        import com.zickezacke.gameObjectStore.GameScene.Chicken;
+        import com.zickezacke.gameObjectStore.GameScene.EggTiles;
+        import com.zickezacke.gameObjectStore.GameScene.Ground;
+        import com.zickezacke.gameObjectStore.GameScene.OctTiles;
+        import com.zickezacke.gameObjectStore.GameScene.Tail;
+        import com.zickezacke.gameObjectStore.GameScene.UI.nextTurnNoti;
+        import com.zickezacke.nclib.game.screens.helpers.GameWorld;
+        import com.zickezacke.nclib.gameObject.GameObject;
+
+        import java.util.ArrayList;
+        import java.util.List;
+        import java.util.Objects;
 
 public class GameScene extends GameWorld {
     private final Color[] colors = {Color.ORANGE, Color.RED, Color.GREEN, Color.YELLOW};
@@ -45,48 +49,51 @@ public class GameScene extends GameWorld {
     // list to manage EggTile
     private List<EggTiles> eggTiles = new ArrayList<>();
 
+    //list noti
+    private  List<nextTurnNoti> nextTurnNotis = new ArrayList<>();
+
     private final float eggOffset = 1.3f;
     private final float[][] eggTilePosition = {{4f*eggOffset, 0, 0f},
-                                        {3.75f*eggOffset, 0, 1f*eggOffset},
-                                        {3.5f*eggOffset, 0, 2f*eggOffset},
-                                        {3f*eggOffset, 0, 3f*eggOffset},
-                                        {2f*eggOffset, 0, 3.5f*eggOffset},
-                                        {1f*eggOffset, 0, 3.75f*eggOffset},
+                                    {3.75f*eggOffset, 0, 1f*eggOffset},
+                                    {3.5f*eggOffset, 0, 2f*eggOffset},
+                                    {3f*eggOffset, 0, 3f*eggOffset},
+                                    {2f*eggOffset, 0, 3.5f*eggOffset},
+                                    {1f*eggOffset, 0, 3.75f*eggOffset},
 
-                                        {0, 0, 4f*eggOffset},
-                                        {-1f*eggOffset, 0, 3.75f*eggOffset},
-                                        {-2f*eggOffset, 0, 3.5f*eggOffset},
-                                        {-3f*eggOffset, 0, 3f*eggOffset},
-                                        {-3.5f*eggOffset, 0, 2f*eggOffset},
-                                        {-3.75f*eggOffset, 0, 1f*eggOffset},
+                                    {0, 0, 4f*eggOffset},
+                                    {-1f*eggOffset, 0, 3.75f*eggOffset},
+                                    {-2f*eggOffset, 0, 3.5f*eggOffset},
+                                    {-3f*eggOffset, 0, 3f*eggOffset},
+                                    {-3.5f*eggOffset, 0, 2f*eggOffset},
+                                    {-3.75f*eggOffset, 0, 1f*eggOffset},
 
-                                        {-4f*eggOffset, 0, 0},
-                                        {-3.75f*eggOffset, 0, -1f*eggOffset},
-                                        {-3.5f*eggOffset, 0, -2f*eggOffset},
-                                        {-3f*eggOffset, 0, -3f*eggOffset},
-                                        {-2f*eggOffset, 0, -3.5f*eggOffset},
-                                        {-1f*eggOffset, 0, -3.75f*eggOffset},
+                                    {-4f*eggOffset, 0, 0},
+                                    {-3.75f*eggOffset, 0, -1f*eggOffset},
+                                    {-3.5f*eggOffset, 0, -2f*eggOffset},
+                                    {-3f*eggOffset, 0, -3f*eggOffset},
+                                    {-2f*eggOffset, 0, -3.5f*eggOffset},
+                                    {-1f*eggOffset, 0, -3.75f*eggOffset},
 
-                                        {0, 0, -4f*eggOffset},
-                                        {1f*eggOffset, 0, -3.75f*eggOffset},
-                                        {2f*eggOffset, 0, -3.5f*eggOffset},
-                                        {3f*eggOffset, 0, -3f*eggOffset},
-                                        {3.5f*eggOffset, 0, -2f*eggOffset},
-                                        {3.75f*eggOffset, 0, -1f*eggOffset}};
+                                    {0, 0, -4f*eggOffset},
+                                    {1f*eggOffset, 0, -3.75f*eggOffset},
+                                    {2f*eggOffset, 0, -3.5f*eggOffset},
+                                    {3f*eggOffset, 0, -3f*eggOffset},
+                                    {3.5f*eggOffset, 0, -2f*eggOffset},
+                                    {3.75f*eggOffset, 0, -1f*eggOffset}};
 
     private final float octOffset = 1.3f;
     private final float[][] octTilePosition = {{0.5f*octOffset, 0, 0.5f*octOffset},
-                                        {1.5f*octOffset, 0, 0.5f*octOffset},
-                                        {0.5f*octOffset, 0, 1.5f*octOffset},
-                                        {-0.5f*octOffset, 0, -0.5f*octOffset},
-                                        {-1.5f*octOffset, 0, -0.5f*octOffset},
-                                        {-0.5f*octOffset, 0, -1.5f*octOffset},
-                                        {0.5f*octOffset, 0, -0.5f*octOffset},
-                                        {1.5f*octOffset, 0, -0.5f*octOffset},
-                                        {0.5f*octOffset, 0, -1.5f*octOffset},
-                                        {-0.5f*octOffset, 0, 0.5f*octOffset},
-                                        {-1.5f*octOffset, 0, 0.5f*octOffset},
-                                        {-0.5f*octOffset, 0, 1.5f*octOffset}
+                                                {1.5f*octOffset, 0, 0.5f*octOffset},
+                                                {0.5f*octOffset, 0, 1.5f*octOffset},
+                                                {-0.5f*octOffset, 0, -0.5f*octOffset},
+                                                {-1.5f*octOffset, 0, -0.5f*octOffset},
+                                                {-0.5f*octOffset, 0, -1.5f*octOffset},
+                                                {0.5f*octOffset, 0, -0.5f*octOffset},
+                                                {1.5f*octOffset, 0, -0.5f*octOffset},
+                                                {0.5f*octOffset, 0, -1.5f*octOffset},
+                                                {-0.5f*octOffset, 0, 0.5f*octOffset},
+                                                {-1.5f*octOffset, 0, 0.5f*octOffset},
+                                                {-0.5f*octOffset, 0, 1.5f*octOffset}
     };
 
     public GameScene(boolean has3DCamera, boolean has2DCamera)
@@ -101,17 +108,17 @@ public class GameScene extends GameWorld {
 
         for (int i = 0; i < 24; i++) {
             EggTiles eggTile = new EggTiles(i+3000, (int)(i/2),eggTilePosition[i][0],
-                                                        eggTilePosition[i][1],
-                                                        eggTilePosition[i][2], 270f+(360f/24f)*i);
+                                                                    eggTilePosition[i][1],
+                                                                    eggTilePosition[i][2], 270f+(360f/24f)*i);
 
             gameObjects3D.add(eggTile);
             eggTiles.add(eggTile);
         }
 
         for (int i = 0; i < 12; i++) {
-             OctTiles octTile = new OctTiles(i+2000,i,octTilePosition[i][0],
-                                                          octTilePosition[i][1],
-                                                          octTilePosition[i][2]);
+            OctTiles octTile = new OctTiles(i+2000,i,octTilePosition[i][0],
+                                                        octTilePosition[i][1],
+                                                        octTilePosition[i][2]);
 
             gameObjects3D.add(octTile);
             octTiles.add(octTile);
@@ -124,18 +131,29 @@ public class GameScene extends GameWorld {
 
     public void Show() {
         createChickenTail();
+        createUI();
         updateTilesForPLayer();
     }
-
+    //getter
+    public float[] getEggPosition(int i){return eggTilePosition[i];}
     // creates Chickens and Tails based on number of player
     public void createChickenTail() {
+        //mapping playerList
+        int[] chickenList = new int[ZickeZacke.playerCount];
+        int j = 0;
+        for(int i = 0; i < 4; i++){
+            if(ZickeZacke.playerList[i]){
+                chickenList[j] = i;
+                j++;
+            }
+        }
         int distancing = (24 - ZickeZacke.playerCount) / ZickeZacke.playerCount + 1;
         for (int i = 1000; i < 1000+ ZickeZacke.playerCount; i++) {
             Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
                     eggTilePosition[(i - 1000)*distancing][1],
                     eggTilePosition[(i - 1000)*distancing][2],
                     colors[i - 1000],
-                    (i-1000)*distancing,i-1000, 1);
+                    (i-1000)*distancing,i-1000,chickenList[i-1000], 1);
 
             //add chickens
             players.add(chicken);
@@ -146,7 +164,7 @@ public class GameScene extends GameWorld {
             eggTiles.get((i-1000)*distancing).setOccupy(true);
 
             //add tails
-            Tail tmpTail = new Tail(i + 10, i-1000, i-1000);
+            Tail tmpTail = new Tail(i + 10, chickenList[i-1000], i-1000, (i-1000)*distancing);
             tails.add(tmpTail);
             gameObjects3D.add(tmpTail);
             tmpTail.Start();
@@ -189,9 +207,8 @@ public class GameScene extends GameWorld {
      * ends current player turn and starts the next player turns
      */
     public void startNextPlayer() {
-
-
         currentPlayer = (currentPlayer + 1) % ZickeZacke.playerCount;
+        nextTurnNotis.get(players.get(currentPlayer).getPlayerFile()).setActive(true);
         updateTilesForPLayer();
         System.out.println("Next player! " + currentPlayer);
     }
@@ -203,6 +220,8 @@ public class GameScene extends GameWorld {
     // start Ending sequence
     public void ending() {
         Gdx.app.log("End", "Winner " + currentPlayer);
+        ZickeZacke.winner = players.get(currentPlayer).getPlayerFile();
+        //ZickeZacke.getInstance().setScreen(4);
         isEnd = false;
     }
 
@@ -220,9 +239,16 @@ public class GameScene extends GameWorld {
 
         checkGainLoseTail();
 
+        rotateTails();
+
         updateTilesForPLayer();
     }
-
+    //rotate the tails
+    public void rotateTails(){
+        for(Tail i : tails){
+            if(currentPlayer == i.getPlayerNum()){i.setTile(nextTile);}
+        }
+    }
     // finds the next unoccupied Tile
     public int findUnOccupy() {
         for (int j = 1; j < 23; j++) {
@@ -274,6 +300,16 @@ public class GameScene extends GameWorld {
             }
 
             checkEnd();
+        }
+    }
+
+    //create UI
+    public void createUI(){
+        for(int i = 0; i < 4; i++){
+            nextTurnNoti noti = new nextTurnNoti(9000+i,i);
+            gameObjects.add(noti);
+            nextTurnNotis.add(noti);
+            noti.Start();
         }
     }
 }
