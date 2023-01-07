@@ -9,7 +9,7 @@ public class howBackGround extends GameObject {
 
     @Override
     public void objectInit() {
-        source2D = "./UI_demo/how_background.jpg";
+        source2D = "./UI/how_background.jpg";
         position2D = new Vector2(0,0);
         size2D = new Vector2(1280,720);
     }

@@ -2,15 +2,15 @@ package com.zickezacke.gameObjectStore.MenuScene;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class selectBtn extends Btn{
+public class selectButton extends Button {
     private boolean isChoose;
 
     private String type;
 
-    public selectBtn(int id, String type, double x, double y){
+    public selectButton(int id, String type, double x, double y){
         super(id, type);
         setPosition(x,y);
-        this.type = String.valueOf(type);
+        this.type = type;
     }
 
     public void setPosition(double x, double y){
@@ -19,7 +19,7 @@ public class selectBtn extends Btn{
     @Override
     public void objectInit() {
         super.objectInit();
-        source2D = "./UI_demo/select_btn_" + type + ".png";
+        source2D = "./UI/select_btn_" + type + ".png";
         size2D = new Vector2((float)0.5 * cellHeight, (float)0.5 * cellHeight);
     }
 
@@ -27,7 +27,7 @@ public class selectBtn extends Btn{
     public void MouseDown(int x, int y, int pointer, int button) {
         isChoose = !isChoose;
         if(isChoose){
-            setTexture("./UI_demo/selected_btn_" + type + ".png");
+            setTexture("./UI/selected_btn_" + type + ".png");
         }else{
             setTexture(source2D);
         }

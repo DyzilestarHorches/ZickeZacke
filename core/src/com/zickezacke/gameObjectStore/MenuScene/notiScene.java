@@ -10,7 +10,7 @@ public class notiScene extends GameObject {
 
     @Override
     public void objectInit() {
-        source2D = "./UI_demo/noti_scene.png";
+        source2D = "./UI/noti_scene.png";
         position2D = new Vector2(0,0);
         size2D = new Vector2(1280,720);
         setActive(false);

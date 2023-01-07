@@ -1,13 +1,12 @@
 package com.zickezacke.gameObjectStore.MenuScene;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 
 
-public class playBtn extends Btn{
-    public playBtn(int id, String type){super(id, type);}
+public class playButton extends Button {
+    public playButton(int id, String type){super(id, type);}
     GameWorld thisMenuScene;
     @Override
     public void objectInit() {

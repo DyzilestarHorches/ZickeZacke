@@ -16,7 +16,7 @@ public class backGround extends GameObject {
 
     @Override
     public void objectInit() {
-        source2D = "./UI_demo/main_menu_scene.jpg";
+        source2D = "./UI/main_menu_scene.jpg";
         position2D = new Vector2(0,0);
         size2D = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }

@@ -2,11 +2,9 @@ package com.zickezacke.gameObjectStore.MenuScene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.zickezacke.game.ZickeZacke;
-import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 
-public class backBtn_0 extends Btn {
-    public backBtn_0(int id, String type){
+public class BackButton extends Button {
+    public BackButton(int id, String type){
         super(id,type);
         setActive(false);
     }
