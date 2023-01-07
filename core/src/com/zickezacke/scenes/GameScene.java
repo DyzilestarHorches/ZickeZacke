@@ -19,8 +19,6 @@
         import java.util.Objects;
 
 public class GameScene extends GameWorld {
-    private final Color[] colors = {Color.ORANGE, Color.RED, Color.GREEN, Color.YELLOW};
-
     // determines if the game is in player's turn
     private boolean isRunning;
 
@@ -30,7 +28,7 @@ public class GameScene extends GameWorld {
     private int nextTile;
     private int currentTile;
 
-    private int tileChecked;
+    private static int tileChecked;
 
     public String typeClicked = "-1";
 
@@ -38,16 +36,16 @@ public class GameScene extends GameWorld {
     private boolean isEnd = false;
 
     // list to manage player
-    private List<Chicken> players = new ArrayList<>();
+    private final List<Chicken> players = new ArrayList<>();
 
     // list to manage tails
-    private  List<Tail> tails = new ArrayList<>();
+    private  final List<Tail> tails = new ArrayList<>();
 
     // list to manage OctTile
-    private List<OctTiles> octTiles = new ArrayList<>();
+    private final List<OctTiles> octTiles = new ArrayList<>();
 
     // list to manage EggTile
-    private List<EggTiles> eggTiles = new ArrayList<>();
+    private final List<EggTiles> eggTiles = new ArrayList<>();
 
     //list noti
     private  List<nextTurnNoti> nextTurnNotis = new ArrayList<>();
@@ -150,10 +148,9 @@ public class GameScene extends GameWorld {
         int distancing = (24 - ZickeZacke.playerCount) / ZickeZacke.playerCount + 1;
         for (int i = 1000; i < 1000+ ZickeZacke.playerCount; i++) {
             Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
-                    eggTilePosition[(i - 1000)*distancing][1],
-                    eggTilePosition[(i - 1000)*distancing][2],
-                    colors[i - 1000],
-                    (i-1000)*distancing,i-1000,chickenList[i-1000], 1);
+                                eggTilePosition[(i - 1000)*distancing][1],
+                                eggTilePosition[(i - 1000)*distancing][2],
+                            (i-1000)*distancing,i-1000,chickenList[i-1000], 1);
 
             //add chickens
             players.add(chicken);
@@ -175,21 +172,26 @@ public class GameScene extends GameWorld {
     public void worldUpdate() {
         if (isRunning) {
             if (eggTiles.get(nextTile).getType().equals(typeClicked)) {
+                checkGainLoseTail();
+
                 moveChicken();
+
+                updateTilesForPLayer();
+
                 resetTypeChecked();
 
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
 
             } else if (!eggTiles.get(nextTile).getType().equals(typeClicked) && !Objects.equals(typeClicked, "-1")) {
                 startNextPlayer();
+
                 resetTypeChecked();
             }
 
         } else {
-            if (isEnd) {
+            if (isEnd && ZickeZacke.waitFrame(30)) {
                 ending();
             }
-
         }
     }
 
@@ -212,6 +214,7 @@ public class GameScene extends GameWorld {
         updateTilesForPLayer();
         System.out.println("Next player! " + currentPlayer);
     }
+
 
     public void randomizeTiles() {
 
@@ -237,11 +240,8 @@ public class GameScene extends GameWorld {
 
         players.get(currentPlayer).setTile(nextTile);
 
-        checkGainLoseTail();
-
         rotateTails();
 
-        updateTilesForPLayer();
     }
     //rotate the tails
     public void rotateTails(){

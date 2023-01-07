@@ -9,8 +9,8 @@ import com.zickezacke.scenes.GameScene;
 
 public class OctTiles extends GameObject3D {
     private static final int FLIP_FRAME = 10;
-
     private static final int PAUSE_FRAME = 10;
+    private static final boolean FLIP_STATE = false;
 
     private static boolean inAnimation = false;
 
@@ -35,12 +35,18 @@ public class OctTiles extends GameObject3D {
         position3D = new Vector3(x,y,z);
     }
 
-
     @java.lang.Override
     public void objectInit() {
         source3D = "./Cards/" + type + "/oct_card.g3db";
         scale3D = new Vector3(1,1,1);
         components.add(boundingVisual);
+    }
+
+    @Override
+    public void objectStart() {
+        if (FLIP_STATE) {
+            model3D.setRotation(new Vector3(0,0,1), 180f);
+        }
     }
 
     @java.lang.Override

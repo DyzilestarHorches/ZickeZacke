@@ -50,4 +50,16 @@ public class ZickeZacke extends Game {
 	public List<GameScreen> getGameScreens(){
 		return this.gameScreens;
 	}
+
+	//region support
+	private static int waitFrameCount = 0;
+	public static boolean waitFrame(int numFrames){
+		if (waitFrameCount < numFrames) {
+			waitFrameCount++;
+			return false;
+		}
+		waitFrameCount = 0;
+		return true;
+	}
+	//endregion
 }

@@ -1,46 +1,35 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
-import com.zickezacke.game.ZickeZacke;
-import com.zickezacke.nclib.component.BoundingVisual;
-import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
-import com.zickezacke.scenes.GameScene;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Chicken extends GameObject3D {
-    private boolean isMoving;
-
     private boolean isJumping = false;
 
-    private static final  int JUMP_FRAME = 30;
+    private static final int JUMP_FRAME = 30;
 
     private static final float HEIGHT_SCALE = 0.1f;
 
     private int count = 0;
 
-    private int tail = 0;
+    private int tail;
 
     private boolean Trigger = false;
 
     private int tile;
+
     private int tileShift;
     private float[] currentPos = new float[3];
     private float[] desPos = new float[3];
     private final int playerNum;
     private final int playerFile;
-    private Color color;
-    private BoundingVisual boundingVisual = new BoundingVisual();
-    public Chicken(int id, float x, float y, float z,
-                   Color color, int tile, int playerNum, int playerFile, int tail){
+    public Chicken(int id, float x, float y, float z
+                   , int tile, int playerNum, int playerFile, int tail){
+
         super(id, true);
         setPosition(x,y,z);
-        this.color = color;
         this.tile = tile;
         this.playerNum = playerNum;
         this.playerFile = playerFile;
@@ -57,7 +46,6 @@ public class Chicken extends GameObject3D {
         Gdx.app.log("playernum", String.valueOf(playerNum));
         source3D = "./Chickens/chicken_" + String.valueOf(playerFile) + ".g3db";
         scale3D = new Vector3(1,1,1);
-        components.add(boundingVisual);
     }
 
     public void objectStart(){
@@ -112,13 +100,11 @@ public class Chicken extends GameObject3D {
     }
     @java.lang.Override
     public void objectUpdate() {
-        boundingVisual.drawBox(dimensions,bounds, color);
         animation();
 
         if (isJumping) {
             move();
         }
-
     }
     public void setTile(int tile) {
         this.tileShift = (Math.abs(this.tile - tile)<24/2) ? Math.abs(this.tile - tile) : (24-Math.abs(this.tile - tile));
