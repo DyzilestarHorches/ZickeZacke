@@ -1,41 +1,33 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
-import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Chicken extends GameObject3D {
-    private boolean isMoving;
-
     private boolean isJumping = false;
 
-    private static final  int JUMP_FRAME = 30;
+    private static final int JUMP_FRAME = 30;
 
     private static final float HEIGHT_SCALE = 0.1f;
 
     private int count = 0;
 
-    private int tail = 0;
+    private int tail;
 
     private boolean Trigger = false;
 
     private int tile;
 
-    private float[] currentPos = new float[3];
-    private float[] desPos = new float[3];
+    private final float[] currentPos = new float[3];
+    private final float[] desPos = new float[3];
     private final int playerNum;
-    private Color color;
-    private BoundingVisual boundingVisual = new BoundingVisual();
+
     public Chicken(int id, float x, float y, float z,
-                   Color color, int tile, int playerNum, int tail){
+                   int tile, int playerNum, int tail){
         super(id, true);
         setPosition(x,y,z);
-        this.color = color;
         this.tile = tile;
         this.playerNum = playerNum;
         this.tail = tail;
@@ -50,7 +42,6 @@ public class Chicken extends GameObject3D {
     public void objectInit() {
         source3D = "./Chickens/chicken_" + String.valueOf(playerNum) + ".g3db";
         scale3D = new Vector3(1,1,1);
-        components.add(boundingVisual);
     }
 
     public void objectStart(){
@@ -96,14 +87,11 @@ public class Chicken extends GameObject3D {
 
     @java.lang.Override
     public void objectUpdate() {
-        boundingVisual.drawBox(dimensions,bounds, color);
         animation();
-
 
         if (isJumping) {
             move();
         }
-
     }
 
     public int getTile() { return this.tile;}
