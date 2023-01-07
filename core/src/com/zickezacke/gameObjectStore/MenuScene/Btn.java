@@ -37,6 +37,13 @@ public class Btn extends GameObject {
     @Override
     public void objectInit() {
         source2D = type;
+        if (ZickeZacke.getInstance().getGameScreens().size() >1)
+            thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
+    }
+
+    @Override
+    public void objectStart() {
+        super.objectStart();
     }
 
     @Override
