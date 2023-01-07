@@ -3,6 +3,7 @@ package com.zickezacke.scenes;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
