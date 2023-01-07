@@ -3,7 +3,7 @@ package com.zickezacke.gameObjectStore.MenuScene;
 import com.badlogic.gdx.math.Vector2;
 
 public class selectBtn extends Btn{
-    private static boolean isChoose = false;
+    private boolean isChoose;
 
     private String type;
 
