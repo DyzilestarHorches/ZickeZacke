@@ -2,12 +2,12 @@ package com.zickezacke.gameObjectStore.MenuScene;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class selectButton extends Button {
+public class SelectButton extends Button {
     private boolean isChoose;
 
     private String type;
 
-    public selectButton(int id, String type, double x, double y){
+    public SelectButton(int id, String type, double x, double y){
         super(id, type);
         setPosition(x,y);
         this.type = type;
