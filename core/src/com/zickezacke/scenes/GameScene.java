@@ -1,22 +1,22 @@
 
-        package com.zickezacke.scenes;
+package com.zickezacke.scenes;
 
-        import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Gdx;
 
-        import com.badlogic.gdx.graphics.Color;
-        import com.zickezacke.game.ZickeZacke;
-        import com.zickezacke.gameObjectStore.GameScene.Chicken;
-        import com.zickezacke.gameObjectStore.GameScene.EggTiles;
-        import com.zickezacke.gameObjectStore.GameScene.Ground;
-        import com.zickezacke.gameObjectStore.GameScene.OctTiles;
-        import com.zickezacke.gameObjectStore.GameScene.Tail;
-        import com.zickezacke.gameObjectStore.GameScene.UI.nextTurnNoti;
-        import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-        import com.zickezacke.nclib.gameObject.GameObject;
+import com.badlogic.gdx.graphics.Color;
+import com.zickezacke.game.ZickeZacke;
+import com.zickezacke.gameObjectStore.GameScene.Chicken;
+import com.zickezacke.gameObjectStore.GameScene.EggTiles;
+import com.zickezacke.gameObjectStore.GameScene.Ground;
+import com.zickezacke.gameObjectStore.GameScene.OctTiles;
+import com.zickezacke.gameObjectStore.GameScene.Tail;
+import com.zickezacke.gameObjectStore.GameScene.UI.nextTurnNoti;
+import com.zickezacke.nclib.game.screens.helpers.GameWorld;
+import com.zickezacke.nclib.gameObject.GameObject;
 
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class GameScene extends GameWorld {
     // determines if the game is in player's turn
