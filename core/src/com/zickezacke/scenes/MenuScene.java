@@ -19,15 +19,15 @@ public class MenuScene extends GameWorld {
     public void Begin(){
         //gameObjects.add(new backGround(102));
         gameObjects.add(new backGround(101));
-        gameObjects.add(new playBtn(102,Btn.play_btn));
-        gameObjects.add(new settingBtn(103,Btn.setting_btn));
-        gameObjects.add(new howBtn(104,Btn.how_btn));
+        gameObjects.add(new playBtn(102,"play_btn"));
+        gameObjects.add(new settingBtn(103,"setting_btn"));
+        gameObjects.add(new howBtn(104,"how_btn"));
         gameObjects.add(new selectBtn(105,"0",5,3.5));
         gameObjects.add(new selectBtn(105,"1",5.5,3.5));
         gameObjects.add(new selectBtn(105,"2",6,3.5));
         gameObjects.add(new selectBtn(105,"3",6.5,3.5));
         gameObjects.add(new notiScene(109));
-        gameObjects.add(new backBtn_0(110,Btn.back_btn));
+        gameObjects.add(new backBtn_0(110,"back_btn"));
         gameObjects.add(new Btn(111));
     }
 

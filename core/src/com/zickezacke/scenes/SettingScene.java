@@ -14,7 +14,7 @@ public class SettingScene extends GameWorld {
     @Override
     public void Begin() {
         gameObjects.add(new settingBackGround(301, true));
-        gameObjects.add(new backBtn(301, Btn.back_btn));
+        gameObjects.add(new backBtn(301, "back_btn"));
 
     }
 }

@@ -10,6 +10,7 @@ public class backBtn extends Btn {
     @Override
     public void objectInit() {
         super.objectInit();
+
         position2D = new Vector2(1*cellWidth,1*cellHeight);
         size2D = new Vector2(1*cellHeight,1*cellHeight);
     }

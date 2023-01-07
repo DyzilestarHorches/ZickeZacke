@@ -15,7 +15,7 @@ public class HowScene extends GameWorld {
     @Override
     public void Begin() {
         gameObjects.add(new howBackGround(201, true));
-        gameObjects.add(new backBtn(201, Btn.back_btn));
+        gameObjects.add(new backBtn(201, "back_btn"));
         gameObjects.add(new textTest(202, true));
     }
 }
