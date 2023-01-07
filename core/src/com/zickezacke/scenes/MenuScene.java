@@ -2,16 +2,11 @@ package com.zickezacke.scenes;
 
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.MenuScene.Btn;
-import com.zickezacke.gameObjectStore.MenuScene.backBtn;
 import com.zickezacke.gameObjectStore.MenuScene.backBtn_0;
 import com.zickezacke.gameObjectStore.MenuScene.backGround;
 import com.zickezacke.gameObjectStore.MenuScene.howBtn;
 import com.zickezacke.gameObjectStore.MenuScene.notiScene;
 import com.zickezacke.gameObjectStore.MenuScene.playBtn;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn0;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn1;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn2;
-import com.zickezacke.gameObjectStore.MenuScene.selectBtn3;
 import com.zickezacke.gameObjectStore.MenuScene.selectBtn;
 import com.zickezacke.gameObjectStore.MenuScene.settingBtn;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
@@ -31,10 +26,6 @@ public class MenuScene extends GameWorld {
         gameObjects.add(new selectBtn(105,"1",5.5,3.5));
         gameObjects.add(new selectBtn(105,"2",6,3.5));
         gameObjects.add(new selectBtn(105,"3",6.5,3.5));
-        /*gameObjects.add(new selectBtn0(105,Btn.select_btn_0));
-        gameObjects.add(new selectBtn1(106,Btn.select_btn_1));
-        gameObjects.add(new selectBtn2(107,Btn.select_btn_2));
-        gameObjects.add(new selectBtn3(108,Btn.select_btn_3));*/
         gameObjects.add(new notiScene(109));
         gameObjects.add(new backBtn_0(110,Btn.back_btn));
         gameObjects.add(new Btn(111));
@@ -43,9 +34,9 @@ public class MenuScene extends GameWorld {
     @Override
     public void worldUpdate() {
         //update number of player
-        ZickeZacke.playerList = new boolean[] {Btn.thisMenuScene.getGameObjects().get(4).getState(),
-                Btn.thisMenuScene.getGameObjects().get(5).getState(),
-                Btn.thisMenuScene.getGameObjects().get(6).getState(),
-                Btn.thisMenuScene.getGameObjects().get(7).getState()};
+        ZickeZacke.playerList = new boolean[] {((selectBtn)Btn.thisMenuScene.getGameObjects().get(4)).getState(),
+                ((selectBtn)Btn.thisMenuScene.getGameObjects().get(5)).getState(),
+                ((selectBtn)Btn.thisMenuScene.getGameObjects().get(6)).getState(),
+                ((selectBtn)Btn.thisMenuScene.getGameObjects().get(7)).getState()};
     }
 }

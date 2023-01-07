@@ -37,7 +37,5 @@ public class playBtn extends Btn{
                 ZickeZacke.getInstance().setScreen(0);
             }
         }
-
     }
-
 }
