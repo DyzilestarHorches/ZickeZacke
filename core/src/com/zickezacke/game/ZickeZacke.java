@@ -51,13 +51,13 @@ public class ZickeZacke extends Game {
 	}
 
 	//region support
-	private static int count = 0;
+	private static int waitFrameCount = 0;
 	public static boolean waitFrame(int numFrames){
-		if (count < numFrames) {
-			count++;
+		if (waitFrameCount < numFrames) {
+			waitFrameCount++;
 			return false;
 		}
-		count = 0;
+		waitFrameCount = 0;
 		return true;
 	}
 	//endregion
