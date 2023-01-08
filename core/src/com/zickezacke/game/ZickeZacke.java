@@ -27,6 +27,8 @@ public class ZickeZacke extends Game {
 	public static boolean[] playerList;
 	public static int playerCount;
 	public static int winner;
+	public static int ingame = 1;
+
 
 	@Override
 	public void create () {

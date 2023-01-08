@@ -61,6 +61,7 @@ public class OctTiles extends GameObject3D {
     @java.lang.Override
     public void objectUpdate() {
         super.objectUpdate();
+
         if (thisGameScene == null) {
             thisGameScene = (GameScene) ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld();
         }

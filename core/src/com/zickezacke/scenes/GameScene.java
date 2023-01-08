@@ -10,12 +10,14 @@ import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.gameObjectStore.GameScene.Tail;
 import com.zickezacke.gameObjectStore.GameScene.UI.nextTurnNoti;
+import com.zickezacke.gameObjectStore.UI.FunctionalButton;
+import com.zickezacke.gameObjectStore.UI.NotiBackground;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
 
 public class GameScene extends GameWorld {
     private static final int WAIT_FRAME = 300;
@@ -48,6 +50,10 @@ public class GameScene extends GameWorld {
 
     //list noti
     private  List<nextTurnNoti> nextTurnNotis = new ArrayList<>();
+
+    //list to manage uiButton
+    private List<FunctionalButton> buttons = new ArrayList<>();
+    private NotiBackground menuInGame;
 
     private final float eggOffset = 1.3f;
     private final float[][] eggTilePosition = {{4f*eggOffset, 0, 0f},
@@ -144,6 +150,7 @@ public class GameScene extends GameWorld {
         //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
         //gameObjects.add(new backGround(102));
         //gameObjects.add(new backGround3D(103));
+        createUI();
     }
 
     public void Show() {
@@ -157,8 +164,8 @@ public class GameScene extends GameWorld {
         //mapping playerList
         int[] chickenList = new int[ZickeZacke.playerCount];
         int j = 0;
-        for(int i = 0; i < 4; i++){
-            if(ZickeZacke.playerList[i]){
+        for (int i = 0; i < 4; i++) {
+            if (ZickeZacke.playerList[i]) {
                 chickenList[j] = i;
                 j++;
             }
@@ -168,11 +175,11 @@ public class GameScene extends GameWorld {
         int distancing = (24 - ZickeZacke.playerCount) / ZickeZacke.playerCount + 1;
 
         //creates the chicken, tails, and UI
-        for (int i = 1000; i < 1000+ ZickeZacke.playerCount; i++) {
-            Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
-                            eggTilePosition[(i - 1000)*distancing][1],
-                            eggTilePosition[(i - 1000)*distancing][2],
-                        (i-1000)*distancing, i-1000, chickenList[i-1000], 1);
+        for (int i = 1000; i < 1000 + ZickeZacke.playerCount; i++) {
+            Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000) * distancing][0],
+                    eggTilePosition[(i - 1000) * distancing][1],
+                    eggTilePosition[(i - 1000) * distancing][2],
+                    (i - 1000) * distancing, i - 1000, chickenList[i - 1000], 1);
 
             //add chickens
             players.add(chicken);
@@ -180,23 +187,41 @@ public class GameScene extends GameWorld {
             chicken.Start();
 
             //set Tile to occupy
-            eggTiles.get((i-1000)*distancing).setOccupy(true);
+            eggTiles.get((i - 1000) * distancing).setOccupy(true);
 
             //add tails
-            Tail tmpTail = new Tail(i + 10, chickenList[i-1000], i-1000, (i-1000)*distancing);
+            Tail tmpTail = new Tail(i + 10, chickenList[i - 1000], i - 1000, (i - 1000) * distancing);
             tails.add(tmpTail);
             gameObjects3D.add(tmpTail);
             tmpTail.Start();
 
-            nextTurnNoti noti = new nextTurnNoti(8000+i, chickenList[i-1000]);
+            nextTurnNoti noti = new nextTurnNoti(8000 + i, chickenList[i - 1000]);
             gameObjects.add(noti);
             nextTurnNotis.add(noti);
             noti.Start();
         }
     }
+    public void createUI(){
+        menuInGame =new NotiBackground(9006,"menu_background");
+        Gdx.app.log("ddada",String.valueOf(menuInGame.isActive()));
+        gameObjects.add(new FunctionalButton(9005,"menu_btn",11,8,menuInGame));
+        gameObjects.add(new FunctionalButton(9005,"how_btn",11,6.5,2));
+        gameObjects.add(new FunctionalButton(9005,"default_view_btn",11,5,-1));
+
+        gameObjects.add(menuInGame);
+        buttons.add(new FunctionalButton(9006,"resume_btn",5,4.5,2,1,menuInGame));
+        buttons.add(new FunctionalButton(9006,"setting0_btn",5,3,2,1,3));
+        buttons.add(new FunctionalButton(9006,"exit_btn",5,1.5,2,1));
+        for(FunctionalButton i : buttons){
+            gameObjects.add(i);
+            i.setActive(menuInGame.isActive());
+        }
+    }
 
     @Override
     public void worldUpdate() {
+        for(FunctionalButton i : buttons){i.setActive(menuInGame.isActive());}
+
         if (isRunning) {
             if (eggTiles.get(nextTile).getType().equals(octTileFileClicked)) {
                 checkGainLoseTail();
