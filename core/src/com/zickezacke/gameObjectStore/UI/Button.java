@@ -1,4 +1,4 @@
-package com.zickezacke.gameObjectStore.MenuScene;
+package com.zickezacke.gameObjectStore.UI;
 
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
@@ -9,9 +9,6 @@ public class Button extends GameObject {
     public int cellHeight = 720/10;
 
     private String typeFile;
-
-    public static GameWorld thisMenuScene;
-
 
     public Button(int id){
         super(id, true);
@@ -26,8 +23,6 @@ public class Button extends GameObject {
         if (typeFile != null) {
             source2D = "./UI/" + typeFile + ".png";
         }
-        if (ZickeZacke.getInstance().getGameScreens().size() >1)
-            thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
     }
 
     @Override
@@ -35,8 +30,4 @@ public class Button extends GameObject {
         super.objectStart();
     }
 
-    @Override
-    public void objectUpdate() {
-        thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
-    }
 }

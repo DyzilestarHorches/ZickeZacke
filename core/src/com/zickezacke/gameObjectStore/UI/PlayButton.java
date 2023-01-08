@@ -1,4 +1,4 @@
-package com.zickezacke.gameObjectStore.MenuScene;
+package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.game.ZickeZacke;
@@ -23,7 +23,6 @@ public class PlayButton extends Button {
 
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
-
         ZickeZacke.playerCount = 0;
         for(boolean i : ZickeZacke.playerList) {if(i){ZickeZacke.playerCount++;}}
         if(button == 0){
@@ -33,6 +32,7 @@ public class PlayButton extends Button {
             }else{
                 thisMenuScene.getGameObjects().get(8).setActive(false);
                 thisMenuScene.getGameObjects().get(9).setActive(false);
+                ZickeZacke.ingame = 0;
                 ZickeZacke.getInstance().setScreen(0);
             }
         }

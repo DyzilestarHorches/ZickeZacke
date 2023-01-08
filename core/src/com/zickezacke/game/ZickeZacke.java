@@ -25,6 +25,7 @@ public class ZickeZacke extends Game {
 	public ZickeZacke(){} //prevent new object
 	public static boolean[] playerList;
 	public static int playerCount = 0;
+	public static int ingame = 1;
 
 	@Override
 	public void create () {

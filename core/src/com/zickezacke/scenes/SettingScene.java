@@ -1,8 +1,9 @@
 package com.zickezacke.scenes;
 
 
-import com.zickezacke.gameObjectStore.MenuScene.DirectButton;
-import com.zickezacke.gameObjectStore.MenuScene.settingBackGround;
+import com.zickezacke.game.ZickeZacke;
+import com.zickezacke.gameObjectStore.UI.FunctionalButton;
+import com.zickezacke.gameObjectStore.UI.BackGround;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 
 public class SettingScene extends GameWorld {
@@ -12,7 +13,13 @@ public class SettingScene extends GameWorld {
 
     @Override
     public void Begin() {
-        gameObjects.add(new settingBackGround(301, true));
-        gameObjects.add(new DirectButton(301, "back_btn",1,1,1));
+        gameObjects.add(new BackGround(301, "setting_background"));
+        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.ingame));
+    }
+
+    @Override
+    public void worldUpdate() {
+        super.worldUpdate();
+        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.ingame));
     }
 }

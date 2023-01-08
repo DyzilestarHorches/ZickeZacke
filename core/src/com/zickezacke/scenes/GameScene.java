@@ -9,12 +9,12 @@ import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.EggTiles;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
+import com.zickezacke.gameObjectStore.UI.FunctionalButton;
+import com.zickezacke.gameObjectStore.UI.NotiBackground;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-import java.io.Console;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import sun.jvm.hotspot.gc.shared.Space;
 
 
 public class GameScene extends GameWorld {
@@ -36,6 +36,10 @@ public class GameScene extends GameWorld {
 
     // list to manage OctTile
     private List<EggTiles> eggTiles = new ArrayList<>();
+
+    //list to manage uiButton
+    private List<FunctionalButton> buttons = new ArrayList<>();
+    private NotiBackground menuInGame;
 
     private  float eggOffset = 1.3f;
     private float[][] eggTilePosition = {{4f*eggOffset, 0, 0f},
@@ -114,6 +118,7 @@ public class GameScene extends GameWorld {
         //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
         //gameObjects.add(new backGround(102));
         //gameObjects.add(new backGround3D(103));
+        createUI();
     }
 
     public void Show() {
@@ -130,13 +135,29 @@ public class GameScene extends GameWorld {
 
             chicken.Start();
         }
-    }
 
+    }
+    public void createUI(){
+        menuInGame =new NotiBackground(9006,"menu_background");
+        Gdx.app.log("ddada",String.valueOf(menuInGame.isActive()));
+        gameObjects.add(new FunctionalButton(9005,"menu_btn",11,8,menuInGame));
+        gameObjects.add(new FunctionalButton(9005,"how_btn",11,6.5,2));
+        gameObjects.add(new FunctionalButton(9005,"default_view_btn",11,5,-1));
+
+        gameObjects.add(menuInGame);
+        buttons.add(new FunctionalButton(9006,"resume_btn",5,4.5,2,1,menuInGame));
+        buttons.add(new FunctionalButton(9006,"setting0_btn",5,3,2,1,3));
+        buttons.add(new FunctionalButton(9006,"exit_btn",5,1.5,2,1));
+        for(FunctionalButton i : buttons){
+            gameObjects.add(i);
+            i.setActive(menuInGame.isActive());
+        }
+    }
 
     @Override
     public void worldUpdate() {
+        for(FunctionalButton i : buttons){i.setActive(menuInGame.isActive());}
         currentFrame++;
-
         if (isEnd) {
             //System.out.println("Winner winner chicken dinner");
         } else {
