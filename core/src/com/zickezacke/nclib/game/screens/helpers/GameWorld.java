@@ -155,11 +155,10 @@ public class GameWorld {
                 screenY = Gdx.graphics.getHeight() - screenY;
                 for (int i = gameObjects.size() - 1; i >= 0; i--) {
                     if (!gameObjects.get(i).isActive()) continue;
-                        if (gameObjects.get(i).checkClick(screenX, screenY)) {
-
+                    if (gameObjects.get(i).checkClick(screenX, screenY)) {
                             gameObjects.get(i).MouseDown(screenX, screenY, pointer, button);
                             return true;
-                        }
+                    }
                 }
                 return false;
             }
@@ -168,8 +167,8 @@ public class GameWorld {
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
                 for (int i = gameObjects.size() - 1; i >= 0; i--) {
                     if (!gameObjects.get(i).isActive()) continue;
-                    if (gameObjects.get(i).checkClick(screenX, screenY)) {
-                        gameObjects.get(i).MouseDown(screenX, screenY, pointer, button);
+                    if (true){//gameObjects.get(i).checkClick(screenX, screenY)) {
+                        gameObjects.get(i).MouseUp(screenX, screenY, pointer, button);
                         return true;
                     }
                 }

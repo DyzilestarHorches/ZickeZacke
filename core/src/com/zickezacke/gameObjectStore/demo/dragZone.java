@@ -49,14 +49,14 @@ public class dragZone extends GameObject {
         OrthographicCamera camera2D = settingScene.getCamera2D();
         //camera2D.unproject(tmp.set(x, y, 0));
         if (button == 0){
-            trackMouse = !trackMouse;
+            trackMouse = true;
         }
     }
 
-    /*@Override
+    @Override
     public void MouseUp(int x, int y, int pointer, int button) {
         if (button == 0 && trackMouse){
             trackMouse = false;
         }
-    }*/
+    }
 }
