@@ -19,7 +19,7 @@ public class nextTurnNoti extends GameObject {
     }
     @Override
     public void objectInit() {
-        source2D = "./UI_demo/next_noti_" + String.valueOf(nextPlayer) + ".png";
+        source2D = "./UI/next_noti_" + String.valueOf(nextPlayer) + ".png";
         position2D = new Vector2(0*CELL_WIDTH,4*CELL_HEIGHT);
         size2D = new Vector2(12*CELL_WIDTH,2*CELL_HEIGHT);
     }
