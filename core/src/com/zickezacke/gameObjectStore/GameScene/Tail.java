@@ -11,7 +11,7 @@ public class Tail extends GameObject3D {
     private GameWorld thisGameScene;
 
     // The player has the Tail
-    private int playerFile;
+    private int playerNum;
 
     // get File to render the Tail
     private final int tailFile;
@@ -23,15 +23,15 @@ public class Tail extends GameObject3D {
     private boolean trigger = false;
     private Chicken myChicken;
     //private BoundingVisual boundingVisual = new BoundingVisual();
-    public Tail(int id,int tailFile, int playerFile, int tile){
+    public Tail(int id,int tailFile, int playerNum, int tile){
         super(id, false);
         this.tailFile = tailFile;
-        this.playerFile = playerFile;
+        this.playerNum = playerNum;
         this.tile = tile;
     }
 
-    public void setPlayerFile(int playerFile) {this.playerFile = playerFile;}
-    public int getPlayerFile() {return this.playerFile;}
+    public void setPlayerNum(int playerNum) {this.playerNum = playerNum;}
+    public int getPlayerNum () {return this.playerNum;}
 
     @Override
     public void objectStart() {
@@ -45,7 +45,7 @@ public class Tail extends GameObject3D {
         // chicken 0 -> get(37)
         //tail 0 added
         // chicken 1 -> get(39)
-        myChicken = (Chicken)(thisGameScene.getGameObjects3D().get(37+playerFile*2));
+        myChicken = (Chicken)(thisGameScene.getGameObjects3D().get(37+playerNum*2));
         if (myChicken != null){
             position3D = myChicken.getPosition3D();
         }
@@ -54,7 +54,7 @@ public class Tail extends GameObject3D {
 
     @Override
     public void objectUpdate() {
-        myChicken = (Chicken) (thisGameScene.getGameObjects3D().get(37+playerFile*2));
+        myChicken = (Chicken) (thisGameScene.getGameObjects3D().get(37+playerNum*2));
         if (myChicken != null){
             position3D = myChicken.getPosition3D();
         }

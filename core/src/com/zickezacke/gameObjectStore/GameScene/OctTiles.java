@@ -21,14 +21,14 @@ public class OctTiles extends GameObject3D {
     private int count = 0;
     private BoundingVisual boundingVisual = new BoundingVisual();
 
-    private String type;
+    private String octTileFile;
 
     private GameScene thisGameScene;
 
-    public OctTiles(int id, int type,float x, float y, float z){
+    public OctTiles(int id, int octTileFile,float x, float y, float z){
         super(id,true);
         setPosition(x,y,z);
-        this.type = String.valueOf(type);
+        this.octTileFile = String.valueOf(octTileFile);
     }
 
     public void setPosition(float x, float y, float z){
@@ -37,7 +37,7 @@ public class OctTiles extends GameObject3D {
 
     @java.lang.Override
     public void objectInit() {
-        source3D = "./Cards/" + type + "/oct_card.g3db";
+        source3D = "./Cards/" + octTileFile + "/oct_card.g3db";
         scale3D = new Vector3(1,1,1);
         components.add(boundingVisual);
     }
@@ -54,7 +54,7 @@ public class OctTiles extends GameObject3D {
         if (!inAnimation) {
             Trigger = !Trigger;
             inAnimation = true;
-            thisGameScene.typeClicked = this.type;
+            thisGameScene.octTileFileClicked = this.octTileFile;
         }
     }
 

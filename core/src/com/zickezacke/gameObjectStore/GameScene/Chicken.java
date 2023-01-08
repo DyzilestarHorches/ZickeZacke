@@ -21,20 +21,26 @@ public class Chicken extends GameObject3D {
     private int tile;
 
     private int tileShift;
-    private float[] currentPos = new float[3];
-    private float[] desPos = new float[3];
 
-    //
+    private final float[] currentPos = new float[3];
+    private final float[] desPos = new float[3];
+
+    //the Chicken player number
+    private final int playerNum;
+
+    //file to render the chicken
     private final int playerFile;
+
+    //Chicken constructor
     public Chicken(int id, float x, float y, float z
-                   , int tile, int playerFile, int tail){
+                   , int tile, int playerNum, int playerFile, int tail){
 
         super(id, true);
         setPosition(x,y,z);
         this.tile = tile;
+        this.playerNum = playerNum;
         this.playerFile = playerFile;
         this.tail = tail;
-
     }
 
     public void setPosition(float x, float y, float z){
@@ -52,17 +58,20 @@ public class Chicken extends GameObject3D {
         //rotate object
         model3D.setRotation(new Vector3(0,1,0), 170f-(360f/24f)*tile);
     }
+
     public void animation(){
         String Default = model3D.animations.get(0).id;
         animation3D.setAnimation(Default, 10);
     }
 
+    //gets the current Position
     public void setCurrentPos() {
         currentPos[0] = position3D.x;
         currentPos[1] = position3D.y;
         currentPos[2] = position3D.z;
     }
 
+    //sets the destination Position to move
     public void setDesPosition(float x, float y, float z){
         setCurrentPos();
 
@@ -74,6 +83,7 @@ public class Chicken extends GameObject3D {
         isJumping = true;
     }
 
+    //moves the Chicken to the destination Position
     public void move() {
         if (Trigger) {
             count++;
@@ -92,11 +102,13 @@ public class Chicken extends GameObject3D {
             }
         }
     }
+
     public void rotateChicken(){
         for(int i = 0; i < this.tileShift; i++){
             model3D.setRotation(new Vector3(0,1,0), -(360f/24f)/JUMP_FRAME);
         }
     }
+
     @java.lang.Override
     public void objectUpdate() {
         animation();
@@ -109,6 +121,7 @@ public class Chicken extends GameObject3D {
         this.tileShift = (Math.abs(this.tile - tile)<24/2) ? Math.abs(this.tile - tile) : (24-Math.abs(this.tile - tile));
         this.tile = tile;
     }
+
     public int getTile() { return this.tile;}
 
     private float getNewY() {
@@ -124,6 +137,8 @@ public class Chicken extends GameObject3D {
     public void loseTail() {this.tail = 0;}
 
     public void gainTail(int tailNumber) {this.tail += tailNumber;}
+
+    public int getPlayerNum() {return this.playerNum;}
 
     public int getPlayerFile() {return this.playerFile;}
 }

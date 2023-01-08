@@ -5,23 +5,23 @@ import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
 public class EggTiles extends GameObject3D {
-    private BoundingVisual boundingVisual = new BoundingVisual();
+    private final BoundingVisual boundingVisual = new BoundingVisual();
     private boolean occupy = false;
     private float angle;
-    private String type;
+    private final String eggTileFile;
 
-    public EggTiles(int id, int type,float x, float y, float z, float angle){
+    public EggTiles(int id, int eggTileFile,float x, float y, float z, float angle){
         super(id,true);
         setPosition(x,y,z);
         this.angle = angle;
-        this.type = String.valueOf(type);
+        this.eggTileFile = String.valueOf(eggTileFile);
     }
 
     public void setPosition(float x, float y, float z){position3D = new Vector3(x,y,z);}
 
     @java.lang.Override
     public void objectInit() {
-        source3D = "./Cards/" + type + "/egg_card.g3db";
+        source3D = "./Cards/" + eggTileFile + "/egg_card.g3db";
         scale3D = new Vector3(1,1,1);
         components.add(boundingVisual);
     }
@@ -35,7 +35,7 @@ public class EggTiles extends GameObject3D {
     public void setOccupy(boolean state) {this.occupy = state;}
 
     public String getType() {
-        return this.type;
+        return this.eggTileFile;
     }
 
     public boolean getOccupy() {return  this.occupy;}

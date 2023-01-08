@@ -3,7 +3,6 @@ package com.zickezacke.scenes;
 
 import com.badlogic.gdx.Gdx;
 
-import com.badlogic.gdx.graphics.Color;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.EggTiles;
@@ -12,13 +11,15 @@ import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.gameObjectStore.GameScene.Tail;
 import com.zickezacke.gameObjectStore.GameScene.UI.nextTurnNoti;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-import com.zickezacke.nclib.gameObject.GameObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class GameScene extends GameWorld {
+    private static final int WAIT_FRAME = 300;
+
     // determines if the game is in player's turn
     private boolean isRunning;
 
@@ -28,9 +29,7 @@ public class GameScene extends GameWorld {
     private int nextTile;
     private int currentTile;
 
-    private static int tileChecked;
-
-    public String typeClicked = "-1";
+    public String octTileFileClicked = "-1";
 
     // signals ending
     private boolean isEnd = false;
@@ -104,8 +103,18 @@ public class GameScene extends GameWorld {
     public void Begin() {
         gameObjects3D.add(new Ground(101));
 
+        //randomize the position of the eggTiles
+        List<Integer> randomEggTileFile = new ArrayList<>();
+
+        for(int i = 0; i < 24; i++) {
+            randomEggTileFile.add(i);
+        }
+
+        Collections.shuffle(randomEggTileFile);
+
+        //creates 24 eggTiles
         for (int i = 0; i < 24; i++) {
-            EggTiles eggTile = new EggTiles(i+3000, (int)(i/2),eggTilePosition[i][0],
+            EggTiles eggTile = new EggTiles(i+3000, randomEggTileFile.get(i)/2, eggTilePosition[i][0],
                                                                     eggTilePosition[i][1],
                                                                     eggTilePosition[i][2], 270f+(360f/24f)*i);
 
@@ -113,10 +122,20 @@ public class GameScene extends GameWorld {
             eggTiles.add(eggTile);
         }
 
+        //randomize the position of the eggTiles
+        List<Integer> randomOctTilePosition = new ArrayList<>();
+
+        for(int i = 0; i < 12; i++) {
+            randomOctTilePosition.add(i);
+        }
+
+        Collections.shuffle(randomOctTilePosition);
+
+        //creates 12 octTiles
         for (int i = 0; i < 12; i++) {
-            OctTiles octTile = new OctTiles(i+2000,i,octTilePosition[i][0],
-                                                        octTilePosition[i][1],
-                                                        octTilePosition[i][2]);
+            OctTiles octTile = new OctTiles(i+2000, i, octTilePosition[randomOctTilePosition.get(i)][0],
+                                                        octTilePosition[randomOctTilePosition.get(i)][1],
+                                                        octTilePosition[randomOctTilePosition.get(i)][2]);
 
             gameObjects3D.add(octTile);
             octTiles.add(octTile);
@@ -132,8 +151,6 @@ public class GameScene extends GameWorld {
 
         updateTilesForPLayer();
     }
-    //getter
-    public float[] getEggPosition(int i){return eggTilePosition[i];}
 
     // creates Chickens and Tails based on number of player
     public void createChickenTailUI() {
@@ -146,12 +163,16 @@ public class GameScene extends GameWorld {
                 j++;
             }
         }
+
+        //calculates the spacing between chickens
         int distancing = (24 - ZickeZacke.playerCount) / ZickeZacke.playerCount + 1;
+
+        //creates the chicken, tails, and UI
         for (int i = 1000; i < 1000+ ZickeZacke.playerCount; i++) {
             Chicken chicken = new Chicken(i, eggTilePosition[(i - 1000)*distancing][0],
                             eggTilePosition[(i - 1000)*distancing][1],
                             eggTilePosition[(i - 1000)*distancing][2],
-                        (i-1000)*distancing, chickenList[i-1000], 1);
+                        (i-1000)*distancing, i-1000, chickenList[i-1000], 1);
 
             //add chickens
             players.add(chicken);
@@ -177,7 +198,7 @@ public class GameScene extends GameWorld {
     @Override
     public void worldUpdate() {
         if (isRunning) {
-            if (eggTiles.get(nextTile).getType().equals(typeClicked)) {
+            if (eggTiles.get(nextTile).getType().equals(octTileFileClicked)) {
                 checkGainLoseTail();
                 moveChicken();
                 updateTilesForPLayer();
@@ -186,14 +207,14 @@ public class GameScene extends GameWorld {
 
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
 
-            } else if (!eggTiles.get(nextTile).getType().equals(typeClicked) && !Objects.equals(typeClicked, "-1")) {
+            } else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1")) {
                 startNextPlayer();
 
                 resetTypeChecked();
             }
 
         } else {
-            if (isEnd && ZickeZacke.waitFrame(30)) {
+            if (isEnd && ZickeZacke.waitFrame(WAIT_FRAME)) {
                 ending();
             }
         }
@@ -206,7 +227,7 @@ public class GameScene extends GameWorld {
 
     // resets typeChecked variable
     public void resetTypeChecked() {
-        typeClicked = "-1";
+        octTileFileClicked = "-1";
     }
 
     /**
@@ -217,10 +238,6 @@ public class GameScene extends GameWorld {
         nextTurnNotis.get(currentPlayer).setActive(true);
         updateTilesForPLayer();
         System.out.println("Next player! " + currentPlayer);
-    }
-
-    public void randomizeTiles() {
-
     }
 
     // start Ending sequence
@@ -244,14 +261,15 @@ public class GameScene extends GameWorld {
         players.get(currentPlayer).setTile(nextTile);
 
         rotateTails();
-
     }
+
     //rotate the tails
     public void rotateTails(){
         for(Tail t : tails){
-            if(currentPlayer == t.getPlayerFile()){t.setTile(nextTile);}
+            if(currentPlayer == t.getPlayerNum()){t.setTile(nextTile);}
         }
     }
+
     // finds the next unoccupied Tile
     public int findUnOccupy() {
         for (int j = 1; j < 23; j++) {
@@ -265,7 +283,7 @@ public class GameScene extends GameWorld {
     // checks if ends
     public void checkEnd() {
         for (Chicken c: players) {
-            Gdx.app.log("Tail" + c.getPlayerFile(), Integer.toString(c.getTail()));
+            Gdx.app.log("Tail" + c.getPlayerNum(), Integer.toString(c.getTail()));
             if (c.getTail() == ZickeZacke.playerCount) {
                 isRunning = false;
                 isEnd = true;
@@ -278,7 +296,7 @@ public class GameScene extends GameWorld {
     public void checkGainLoseTail() {
         if ((currentTile+1)%24 != nextTile) {
             // start checking from the next Tile
-            tileChecked = (currentTile + 1)%24;
+            int tileChecked = (currentTile + 1) % 24;
 
             // till the destination Tile
             while (tileChecked != nextTile) {
@@ -293,8 +311,8 @@ public class GameScene extends GameWorld {
 
                         // set Tail to the new Chicken
                         for (Tail t : tails) {
-                            if (t.getPlayerFile() == c.getPlayerFile()) {
-                                t.setPlayerFile(currentPlayer);
+                            if (t.getPlayerNum() == c.getPlayerNum()) {
+                                t.setPlayerNum(currentPlayer);
                             }
                         }
                     }
