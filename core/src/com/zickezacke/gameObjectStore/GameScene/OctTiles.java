@@ -21,7 +21,7 @@ public class OctTiles extends GameObject3D {
     private int count = 0;
     private BoundingVisual boundingVisual = new BoundingVisual();
 
-    private String octTileFile;
+    private final String octTileFile;
 
     private GameScene thisGameScene;
 

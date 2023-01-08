@@ -103,7 +103,15 @@ public class GameScene extends GameWorld {
     public void Begin() {
         gameObjects3D.add(new Ground(101));
 
-        //randomize the position of the eggTiles
+        createRandomTiles();
+
+        //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
+        //gameObjects.add(new backGround(102));
+        //gameObjects.add(new backGround3D(103));
+    }
+
+    public void createRandomTiles() {
+        //randomize the file of the eggTiles
         List<Integer> randomEggTileFile = new ArrayList<>();
 
         for(int i = 0; i < 24; i++) {
@@ -115,14 +123,14 @@ public class GameScene extends GameWorld {
         //creates 24 eggTiles
         for (int i = 0; i < 24; i++) {
             EggTiles eggTile = new EggTiles(i+3000, randomEggTileFile.get(i)/2, eggTilePosition[i][0],
-                                                                    eggTilePosition[i][1],
-                                                                    eggTilePosition[i][2], 270f+(360f/24f)*i);
+                    eggTilePosition[i][1],
+                    eggTilePosition[i][2], 270f+(360f/24f)*i);
 
             gameObjects3D.add(eggTile);
             eggTiles.add(eggTile);
         }
 
-        //randomize the position of the eggTiles
+        //randomize the position for octTiles
         List<Integer> randomOctTilePosition = new ArrayList<>();
 
         for(int i = 0; i < 12; i++) {
@@ -134,19 +142,16 @@ public class GameScene extends GameWorld {
         //creates 12 octTiles
         for (int i = 0; i < 12; i++) {
             OctTiles octTile = new OctTiles(i+2000, i, octTilePosition[randomOctTilePosition.get(i)][0],
-                                                        octTilePosition[randomOctTilePosition.get(i)][1],
-                                                        octTilePosition[randomOctTilePosition.get(i)][2]);
+                    octTilePosition[randomOctTilePosition.get(i)][1],
+                    octTilePosition[randomOctTilePosition.get(i)][2]);
 
             gameObjects3D.add(octTile);
             octTiles.add(octTile);
         }
-
-        //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
-        //gameObjects.add(new backGround(102));
-        //gameObjects.add(new backGround3D(103));
     }
 
     public void Show() {
+
         createChickenTailUI();
 
         updateTilesForPLayer();

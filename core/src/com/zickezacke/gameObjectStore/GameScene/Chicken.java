@@ -49,7 +49,7 @@ public class Chicken extends GameObject3D {
 
     @java.lang.Override
     public void objectInit() {
-        source3D = "./Chickens/chicken_" + String.valueOf(playerFile) + ".g3db";
+        source3D = "./Chickens/chicken_" + playerFile + ".g3db";
         scale3D = new Vector3(1,1,1);
     }
 

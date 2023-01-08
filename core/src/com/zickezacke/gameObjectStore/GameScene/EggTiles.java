@@ -7,7 +7,7 @@ import com.zickezacke.nclib.gameObject.GameObject3D;
 public class EggTiles extends GameObject3D {
     private final BoundingVisual boundingVisual = new BoundingVisual();
     private boolean occupy = false;
-    private float angle;
+    private final float angle;
     private final String eggTileFile;
 
     public EggTiles(int id, int eggTileFile,float x, float y, float z, float angle){
