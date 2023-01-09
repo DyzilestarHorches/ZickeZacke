@@ -99,6 +99,9 @@ public class GameScene extends GameWorld {
                                                 {-0.5f*octOffset, 0, 1.5f*octOffset}
     };
 
+    //check if the scene is built or not
+    public static boolean isBuilt = true;
+
     public GameScene(boolean has3DCamera, boolean has2DCamera)
     {
         super(has3DCamera, has2DCamera);
@@ -154,9 +157,11 @@ public class GameScene extends GameWorld {
     }
 
     public void Show() {
+        if (isBuilt) return;
         createChickenTailUI();
 
         updateTilesForPLayer();
+        isBuilt = true;
     }
 
     // creates Chickens and Tails based on number of player

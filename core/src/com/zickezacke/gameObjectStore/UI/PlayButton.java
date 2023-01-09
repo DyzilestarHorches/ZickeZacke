@@ -3,6 +3,7 @@ package com.zickezacke.gameObjectStore.UI;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
+import com.zickezacke.scenes.GameScene;
 
 
 public class PlayButton extends Button {
@@ -33,6 +34,7 @@ public class PlayButton extends Button {
                 thisMenuScene.getGameObjects().get(8).setActive(false);
                 thisMenuScene.getGameObjects().get(9).setActive(false);
                 ZickeZacke.ingame = 0;
+                GameScene.isBuilt = false;
                 ZickeZacke.getInstance().setScreen(0);
             }
         }
