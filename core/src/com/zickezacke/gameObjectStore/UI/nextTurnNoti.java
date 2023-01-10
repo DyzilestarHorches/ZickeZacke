@@ -1,4 +1,4 @@
-package com.zickezacke.gameObjectStore.GameScene.UI;
+package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;

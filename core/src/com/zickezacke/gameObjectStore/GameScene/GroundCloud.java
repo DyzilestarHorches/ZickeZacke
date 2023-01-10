@@ -5,14 +5,14 @@ import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
-public class Ground extends GameObject3D {
-    public Ground(int id){
+public class GroundCloud extends GameObject3D {
+    public GroundCloud(int id){
         super(id, false);
     }
 
     @Override
     public void objectInit() {
-        source3D = "./Environment/ground.g3db";
+        source3D = "./Environment/ground_cloud.g3db";
         position3D = new Vector3(0, 0, 0);
         scale3D = new Vector3(1, 1, 1);
     }
