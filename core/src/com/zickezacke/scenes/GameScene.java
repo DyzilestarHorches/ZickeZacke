@@ -7,12 +7,16 @@ import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.EggTiles;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
+import com.zickezacke.gameObjectStore.GameScene.GroundCloud;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.gameObjectStore.GameScene.Tail;
-import com.zickezacke.gameObjectStore.GameScene.UI.nextTurnNoti;
+import com.zickezacke.gameObjectStore.UI.nextTurnNoti;
 import com.zickezacke.gameObjectStore.UI.FunctionalButton;
 import com.zickezacke.gameObjectStore.UI.NotiBackground;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
+import com.zickezacke.nclib.gameObject.GameObject;
+import com.zickezacke.nclib.gameObject.GameObject3D;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -110,6 +114,8 @@ public class GameScene extends GameWorld {
     }
 
     public void Begin() {
+//        ZickeZacke.getSoundSystem().playBackgroundMusicOnLoop();
+
         gameObjects3D.add(new Ground(101));
 
         //randomize the position of the eggTiles

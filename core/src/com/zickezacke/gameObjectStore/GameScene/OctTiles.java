@@ -10,7 +10,7 @@ import com.zickezacke.scenes.GameScene;
 public class OctTiles extends GameObject3D {
     private static final int FLIP_FRAME = 10;
     private static final int PAUSE_FRAME = 10;
-    private static final boolean FLIP_STATE = false;
+    private static final boolean FLIP_STATE = true;
 
     private static boolean inAnimation = false;
 
@@ -44,7 +44,7 @@ public class OctTiles extends GameObject3D {
 
     @Override
     public void objectStart() {
-        if (FLIP_STATE) {
+        if (!FLIP_STATE) {
             model3D.setRotation(new Vector3(0,0,1), 180f);
         }
     }
