@@ -111,6 +111,8 @@ public class GameScene extends GameWorld {
     }
 
     public void Begin() {
+//        ZickeZacke.getSoundSystem().playBackgroundMusicOnLoop();
+
         gameObjects3D.add(new Ground(101));
 
         //randomize the position of the eggTiles

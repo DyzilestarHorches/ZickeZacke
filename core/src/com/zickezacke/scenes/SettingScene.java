@@ -24,7 +24,7 @@ public class SettingScene extends GameWorld {
         gameObjects.add(new BackGround(301, "setting_background"));
         gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.ingame));
         dragButtonList.add(new DragButton(303,ZickeZacke.brightnessVol,6));
-        dragButtonList.add(new DragButton(304,ZickeZacke.soundVol,5));
+        dragButtonList.add(new DragButton(304,ZickeZacke.getSoundSystem().getVolume(),5));
         dragCloudButton = new DragCloudButton(305);
 
         gameObjects.add(new DragBar(302,4,dragCloudButton));
@@ -39,7 +39,7 @@ public class SettingScene extends GameWorld {
     public void worldUpdate() {
         super.worldUpdate();
         ZickeZacke.brightnessVol = dragButtonList.get(0).getValue();
-        ZickeZacke.soundVol = dragButtonList.get(1).getValue();
+        ZickeZacke.getSoundSystem().setVolume(dragButtonList.get(1).getValue());
         ZickeZacke.isCloud = dragCloudButton.isCloud;
         //Gdx.app.log("bright==========================",String.valueOf(ZickeZacke.brightnessVol));
         gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.ingame));
