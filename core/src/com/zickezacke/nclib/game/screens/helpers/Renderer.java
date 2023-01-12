@@ -35,6 +35,7 @@ public class Renderer {
     private OrthographicCamera camera2D;
     private SpriteBatch spriteBatch;
     private CameraInputController camera2DController;
+    private ShapeRenderer shapeRenderer;
 
     //ViewPort
     private Viewport viewport2D;
@@ -131,7 +132,7 @@ public class Renderer {
             spriteBatch.end();
         }
         if (gameWorld.hasCamera3D()){
-            ShapeRenderer shapeRenderer = new ShapeRenderer();
+            if (shapeRenderer == null) shapeRenderer = new ShapeRenderer();
             shapeRenderer.setProjectionMatrix(camera3D.combined);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setColor(Color.RED);
@@ -146,17 +147,17 @@ public class Renderer {
     public void resize(int width, int height){
         if (gameWorld.hasCamera2D()) viewport2D.update(width, height);
         if (gameWorld.hasCamera3D()) viewport3D.update(width, height);
-        List<GameObject> gameObjects = new ArrayList<>();
+        List<GameObject> gameObjects;
         gameObjects = gameWorld.getGameObjects();
         for (GameObject gameObject: gameObjects) {
             gameObject.resize(width, height);
         }
 
-        List<GameObject3D> gameObjects3D = new ArrayList<>();
+        /*List<GameObject3D> gameObjects3D = new ArrayList<>();
         gameObjects = gameWorld.getGameObjects();
         for (GameObject3D gameObject3D: gameObjects3D) {
             gameObject3D.resize(width, height);
-        }
+        }*/
     }
 
     //release memory when change screen
@@ -171,6 +172,12 @@ public class Renderer {
         if (spriteBatch != null) {
             spriteBatch.dispose();
             spriteBatch = null;
+        }
+
+        if (shapeRenderer != null)
+        {
+            shapeRenderer.dispose();
+            shapeRenderer = null;
         }
         //Gdx.app.log("Renderer dispose", "yes");
     }
