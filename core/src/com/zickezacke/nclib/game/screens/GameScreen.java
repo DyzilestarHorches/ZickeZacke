@@ -29,6 +29,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         if (gameWorld != null){
+            gameWorld.Show();
             renderer = new Renderer(gameWorld);
             renderer.Start();
             //Gdx.app.log(Integer.toString(Gdx.graphics.getWidth()),Integer.toString(Gdx.graphics.getHeight()));
@@ -77,7 +78,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
-
+        gameWorld.Hide();
         renderer.dispose();
         renderer = null;
         //gameWorld.dispose();

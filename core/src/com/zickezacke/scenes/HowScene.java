@@ -1,9 +1,10 @@
 package com.zickezacke.scenes;
 
 
-import com.zickezacke.gameObjectStore.MenuScene.Btn;
-import com.zickezacke.gameObjectStore.MenuScene.backBtn;
-import com.zickezacke.gameObjectStore.MenuScene.howBackGround;
+import com.zickezacke.game.ZickeZacke;
+import com.zickezacke.gameObjectStore.UI.FunctionalButton;
+import com.zickezacke.gameObjectStore.UI.BackGround;
+import com.zickezacke.gameObjectStore.demo.textTest;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 
 public class HowScene extends GameWorld {
@@ -13,8 +14,14 @@ public class HowScene extends GameWorld {
 
     @Override
     public void Begin() {
-        gameObjects.add(new howBackGround(201, true));
-        gameObjects.add(new backBtn(201, Btn.back_btn));
+        gameObjects.add(new BackGround(201, "how_background"));
+        gameObjects.add(new FunctionalButton(201, "back_btn",1,1, ZickeZacke.ingame));
+        gameObjects.add(new textTest(202, true));
+    }
 
+    @Override
+    public void worldUpdate() {
+        super.worldUpdate();
+        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.ingame));
     }
 }

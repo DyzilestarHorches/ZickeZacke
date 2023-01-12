@@ -18,6 +18,7 @@ public class GameObject {
 
     protected boolean isUI;
     protected boolean isActive;
+    protected boolean isText;
 
     protected List<Component> components = new ArrayList<>();
 
@@ -51,6 +52,10 @@ public class GameObject {
 
         objectLateUpdate();
     }
+
+    // set active of object
+    public void setActive(boolean isActive){this.isActive = isActive;}
+    
     // change texture after render
     public void setTexture(String newTexture){texture = new Texture(Gdx.files.internal(newTexture));}
     public boolean checkClick(int x, int y){
@@ -91,6 +96,7 @@ public class GameObject {
 
 
     //getters
+    public boolean isActive(){return this.isActive;}
     public Texture getTexture() {return this.texture;}
     public int getId(){
         return this.id;
@@ -99,6 +105,7 @@ public class GameObject {
     public boolean isUI(){
         return this.isUI;
     }
+    public boolean isText(){return this.isText;}
 
     public Vector2 getPosition2D(){
         return this.position2D;
