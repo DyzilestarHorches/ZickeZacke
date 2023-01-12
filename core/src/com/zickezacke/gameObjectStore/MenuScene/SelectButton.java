@@ -9,13 +9,10 @@ public class SelectButton extends Button {
 
     public SelectButton(int id, String type, double x, double y){
         super(id, type);
-        setPosition(x,y);
+        position2D = new Vector2((float) x*cellWidth,(float) y*cellHeight);
         this.type = type;
     }
 
-    public void setPosition(double x, double y){
-        position2D = new Vector2((float) x*cellWidth,(float) y*cellHeight);
-    }
     @Override
     public void objectInit() {
         super.objectInit();

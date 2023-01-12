@@ -9,12 +9,8 @@ public class DirectButton extends Button{
 
     public DirectButton(int id, String typeFile, double xPos, double yPos, int sceneId){
         super(id, typeFile);
-        setPosition(xPos,yPos);
+        position2D = new Vector2((float) xPos*cellWidth,(float) yPos*cellHeight);
         this.sceneId = sceneId;
-    }
-
-    public void setPosition(double x, double y){
-        position2D = new Vector2((float) x*cellWidth,(float) y*cellHeight);
     }
 
     @java.lang.Override
