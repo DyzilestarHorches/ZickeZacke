@@ -23,6 +23,14 @@ public class PlayButton extends Button {
 
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
+        ZickeZacke.getSoundSystem().click();
+
+        ZickeZacke.getSoundSystem().playBackgroundMusicOnLoop();
+
+        ZickeZacke.getSoundSystem().setIsCucTaCucTac(false);
+
+
+
         ZickeZacke.playerCount = 0;
         for(boolean i : ZickeZacke.playerList) {if(i){ZickeZacke.playerCount++;}}
         if(button == 0){

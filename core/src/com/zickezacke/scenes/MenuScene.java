@@ -24,6 +24,9 @@ public class MenuScene extends GameWorld {
     public void Begin(){
         //gameObjects.add(new backGround(102));
         gameObjects.add(new BackGround(101,"main_menu_background"));
+
+        ZickeZacke.getSoundSystem().cucTaCucTac();
+
         gameObjects.add(new PlayButton(102,"play_btn"));
         gameObjects.add(new FunctionalButton(103,"setting_btn",10,1,3));
         gameObjects.add(new FunctionalButton(104,"how_btn",11,1,2));
