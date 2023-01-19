@@ -19,7 +19,7 @@ public class SoundSystem{
     public void SoundInIt() {
         listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/playingSound.wav")));
         listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/chicken-single-alarm-call-6056.wav")));
-        listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/Mouse Click - Sound Effect (HD).wav")));
+        listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/Mouse Click.wav")));
         listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/Taco Bell Bong - Sound Effect (HD).wav")));
         listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/Applause  Sound Effect.wav")));
     }

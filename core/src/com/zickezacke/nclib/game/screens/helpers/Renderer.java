@@ -75,11 +75,11 @@ public class Renderer {
         if (camera3DController != null) camera3DController.update();
 
         //load game objects
-        List<GameObject> gameObjects = new ArrayList<>();
+        List<GameObject> gameObjects;
         gameObjects = gameWorld.getGameObjects();
 
         //load 3D game objects
-        List<GameObject3D> gameObjects3D = new ArrayList<>();
+        List<GameObject3D> gameObjects3D;
         gameObjects3D = gameWorld.getGameObjects3D();
 
         //2D render background
