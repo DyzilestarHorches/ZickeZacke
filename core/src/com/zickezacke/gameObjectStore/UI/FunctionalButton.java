@@ -60,7 +60,7 @@ public class FunctionalButton extends Button{
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
         if(this.sceneId == -1 && gameObj == null) {
-            return;
+            Gdx.app.exit();
         }
         if(this.sceneId != -1){
             if(button == 0){
