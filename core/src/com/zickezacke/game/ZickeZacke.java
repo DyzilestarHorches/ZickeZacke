@@ -36,7 +36,6 @@ public class ZickeZacke extends Game {
 	public static int playerCount;
 	public static int winner;
 	public static float brightnessVol = 1f;
-	public static boolean isCloud;
 	public static int ingame = 1;
 
 

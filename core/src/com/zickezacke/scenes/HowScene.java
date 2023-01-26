@@ -16,7 +16,7 @@ public class HowScene extends GameWorld {
     public void Begin() {
         gameObjects.add(new BackGround(201, "how_background"));
         gameObjects.add(new FunctionalButton(201, "back_btn",1,1, ZickeZacke.ingame));
-        gameObjects.add(new textTest(202, true));
+        //gameObjects.add(new textTest(202, true));
     }
 
     @Override

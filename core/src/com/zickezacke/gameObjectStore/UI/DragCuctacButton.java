@@ -3,14 +3,10 @@ package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.zickezacke.game.ZickeZacke;
-import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-
-public class DragCloudButton extends DragButton {
-    public boolean isCloud;
+public class DragCuctacButton extends DragButton {
     private float x;
-    public DragCloudButton(int id){
+    public DragCuctacButton(int id){
         super(id,0f,4);
-        this.isCloud = false;
     }
 
     @Override
@@ -23,10 +19,10 @@ public class DragCloudButton extends DragButton {
         }
         if(ZickeZacke.waitFrame(10) && !trackMouse){
             if( x > (-START_PIVOT+END_PIVOT_0)/2 + START_PIVOT){
-                this.isCloud = true;
+                ZickeZacke.getSoundSystem().setIsCucTaCucTac(true);
                 position2D.set(START_PIVOT + 0.5f*cellWidth - 12f, 4*cellHeight + 1f);
             }else{
-                this.isCloud = false;
+                ZickeZacke.getSoundSystem().setIsCucTaCucTac(false);
                 position2D.set(START_PIVOT + 4f, 4*cellHeight + 1f);
             }
         }
