@@ -156,22 +156,20 @@ public class GameScene extends GameWorld {
             octTiles.add(octTile);
         }
 
-        //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
-        //gameObjects.add(new backGround(102));
-        //gameObjects.add(new backGround3D(103));
+        //create buttons for UI
         createUI();
     }
 
     public void Show() {
         if (isBuilt) return;
-        createChickenTailUI();
+        createChickenTailNoti();
 
         updateTilesForPLayer();
         isBuilt = true;
     }
 
     // creates Chickens and Tails based on number of player
-    public void createChickenTailUI() {
+    public void createChickenTailNoti() {
         //mapping playerList
         int[] chickenList = new int[ZickeZacke.playerCount];
         int j = 0;
@@ -212,6 +210,7 @@ public class GameScene extends GameWorld {
             noti.Start();
         }
     }
+
     public void createUI(){
         menuInGame =new NotiBackground(9006,"menu_background");
         Gdx.app.log("ddada",String.valueOf(menuInGame.isActive()));
@@ -236,6 +235,7 @@ public class GameScene extends GameWorld {
         if (isRunning) {
             if (eggTiles.get(nextTile).getType().equals(octTileFileClicked)) {
                 checkGainLoseTail();
+                ZickeZacke.getSoundSystem().cucTaCucTac();
                 moveChicken();
                 updateTilesForPLayer();
 
@@ -244,6 +244,7 @@ public class GameScene extends GameWorld {
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
 
             } else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1")) {
+                ZickeZacke.getSoundSystem().nextTurn();
                 startNextPlayer();
 
                 resetTypeChecked();
@@ -251,6 +252,7 @@ public class GameScene extends GameWorld {
 
         } else {
             if (isEnd && ZickeZacke.waitFrame(WAIT_FRAME)) {
+                ZickeZacke.getSoundSystem().applause();
                 ending();
             }
         }
@@ -359,6 +361,4 @@ public class GameScene extends GameWorld {
             checkEnd();
         }
     }
-
-
 }

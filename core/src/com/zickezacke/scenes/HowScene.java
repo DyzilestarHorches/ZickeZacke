@@ -15,13 +15,13 @@ public class HowScene extends GameWorld {
     @Override
     public void Begin() {
         gameObjects.add(new BackGround(201, "how_background"));
-        gameObjects.add(new FunctionalButton(201, "back_btn",1,1, ZickeZacke.ingame));
+        gameObjects.add(new FunctionalButton(201, "back_btn",1,1, ZickeZacke.inGame));
         //gameObjects.add(new textTest(202, true));
     }
 
     @Override
     public void worldUpdate() {
         super.worldUpdate();
-        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.ingame));
+        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.inGame));
     }
 }

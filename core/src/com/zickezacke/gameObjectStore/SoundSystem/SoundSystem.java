@@ -48,11 +48,11 @@ public class SoundSystem{
             listofMusics.get(3).play();
         }
     }
-    public void setTheNextOne(boolean next){
+    public void setTheNextOne(boolean next) {
         theNextOne = next;
     }
 
-    public void applause(){
+    public void applause() {
         listofMusics.get(4).play();
     }
 

@@ -7,7 +7,7 @@ import com.zickezacke.nclib.gameObject.GameObject;
 
 public class FunctionalButton extends Button{
 
-    private int sceneId;
+    private final int sceneId;
     private GameObject gameObj;
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, int sceneId){
         super(id, typeFile);
@@ -59,6 +59,7 @@ public class FunctionalButton extends Button{
 
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
+
         if(this.sceneId == -1 && gameObj == null) {
             Gdx.app.exit();
         }

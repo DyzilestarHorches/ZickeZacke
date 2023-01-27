@@ -2,6 +2,7 @@ package com.zickezacke.gameObjectStore.GameScene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
+import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 
