@@ -56,7 +56,7 @@ public class SoundSystem{
         theNextOne = next;
     }
 
-    public void applause(){
+    public void applause() {
         listofMusics.get(4).play();
     }
 

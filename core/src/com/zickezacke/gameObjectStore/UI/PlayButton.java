@@ -24,13 +24,7 @@ public class PlayButton extends Button {
 
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
-        ZickeZacke.getSoundSystem().click();
-
-        ZickeZacke.getSoundSystem().playBackgroundMusicOnLoop();
-
-        ZickeZacke.getSoundSystem().setIsCucTaCucTac(false);
-
-
+        ZickeZacke.getSoundSystem().cucTaCucTac();
 
         ZickeZacke.playerCount = 0;
         for(boolean i : ZickeZacke.playerList) {if(i){ZickeZacke.playerCount++;}}
@@ -41,7 +35,7 @@ public class PlayButton extends Button {
             }else{
                 thisMenuScene.getGameObjects().get(8).setActive(false);
                 thisMenuScene.getGameObjects().get(9).setActive(false);
-                ZickeZacke.ingame = 0;
+                ZickeZacke.inGame = 0;
                 GameScene.isBuilt = false;
                 ZickeZacke.getInstance().setScreen(0);
             }

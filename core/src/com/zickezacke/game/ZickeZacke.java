@@ -35,13 +35,13 @@ public class ZickeZacke extends Game {
 	public static boolean[] playerList;
 	public static int playerCount;
 	public static int winner;
-	public static float brightnessVol = 0.2f;
-	public static int ingame = 1;
-
+	public static float brightnessVol = 1f;
+	public static int inGame = 1;
 
 	@Override
 	public void create () {
 		soundSystem.SoundInIt();
+		soundSystem.playBackgroundMusicOnLoop();
 
 		instance.gameScreens.add(new GameScreen(0, new GameScene(true, true)));	//default game screen is 0
 		instance.gameScreens.add(new GameScreen(1, new MenuScene(false, true)));

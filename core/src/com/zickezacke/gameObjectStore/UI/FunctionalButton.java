@@ -8,7 +8,7 @@ import com.zickezacke.nclib.gameObject.GameObject;
 
 public class FunctionalButton extends Button{
 
-    private int sceneId;
+    private final int sceneId;
     private int  i = 0;
     private Vector3 vector3;
     private GameObject gameObj;
@@ -71,6 +71,7 @@ public class FunctionalButton extends Button{
 
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
+
         if(this.sceneId == -1 && gameObj == null) {
             if(isCameraAdj){
                 i++;
