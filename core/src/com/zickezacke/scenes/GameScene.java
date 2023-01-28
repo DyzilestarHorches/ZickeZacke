@@ -57,9 +57,10 @@ public class GameScene extends GameWorld {
 
     //list to manage uiButton
     private List<FunctionalButton> buttons = new ArrayList<>();
+    private FunctionalButton cameraButton;
     private NotiBackground menuInGame;
 
-    private final float eggOffset = 2.0f;
+    private final float eggOffset = 3f;
     private final float[][] eggTilePosition = {{4f*eggOffset, 0, 0f},
                                     {3.75f*eggOffset, 0, 1f*eggOffset},
                                     {3.5f*eggOffset, 0, 2f*eggOffset},
@@ -88,7 +89,7 @@ public class GameScene extends GameWorld {
                                     {3.5f*eggOffset, 0, -2f*eggOffset},
                                     {3.75f*eggOffset, 0, -1f*eggOffset}};
 
-    private final float octOffset = 2.0f;
+    private final float octOffset = 2.6f;
     private final float[][] octTilePosition = {{0.5f*octOffset, 0, 0.5f*octOffset},
                                                 {1.5f*octOffset, 0, 0.5f*octOffset},
                                                 {0.5f*octOffset, 0, 1.5f*octOffset},
@@ -217,7 +218,8 @@ public class GameScene extends GameWorld {
         Gdx.app.log("ddada",String.valueOf(menuInGame.isActive()));
         gameObjects.add(new FunctionalButton(9005,"menu_btn",11,8,menuInGame));
         gameObjects.add(new FunctionalButton(9005,"how_btn",11,6.5,2));
-        gameObjects.add(new FunctionalButton(9005,"default_view_btn",11,5,-1));
+        cameraButton = new FunctionalButton(9005,"default_view_btn",11,5,-1,true);
+        gameObjects.add(cameraButton);
 
         gameObjects.add(menuInGame);
         buttons.add(new FunctionalButton(9006,"resume_btn",5,4.5,2,1,menuInGame));
@@ -232,7 +234,7 @@ public class GameScene extends GameWorld {
     @Override
     public void worldUpdate() {
         for(FunctionalButton i : buttons){i.setActive(menuInGame.isActive());}
-
+        cameraButton.setVector3(eggTilePosition[nextTile]);
         if (isRunning) {
             if (eggTiles.get(nextTile).getType().equals(octTileFileClicked)) {
                 checkGainLoseTail();

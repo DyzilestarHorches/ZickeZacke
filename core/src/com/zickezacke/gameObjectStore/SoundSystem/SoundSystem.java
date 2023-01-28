@@ -35,6 +35,7 @@ public class SoundSystem{
             listofMusics.get(1).play();
         }
     }
+    public boolean getIsCucTaCucTac(){return isCucTaCucTac;}
     public void setIsCucTaCucTac(boolean conga){
         isCucTaCucTac = conga;
     }
@@ -47,6 +48,9 @@ public class SoundSystem{
         if (theNextOne) {
             listofMusics.get(3).play();
         }
+    }
+    public boolean getTheNextOne(){
+        return theNextOne;
     }
     public void setTheNextOne(boolean next){
         theNextOne = next;

@@ -29,7 +29,7 @@ public class EggTiles extends GameObject3D {
     @Override
     public void objectStart() {
         model3D.setRotation(new Vector3(0, 0, 1), 180f);
-        model3D.setRotation(new Vector3(0, 1, 0), angle);
+        //model3D.setRotation(new Vector3(0, 1, 0), angle);
     }
 
     public void setOccupy(boolean state) {this.occupy = state;}
