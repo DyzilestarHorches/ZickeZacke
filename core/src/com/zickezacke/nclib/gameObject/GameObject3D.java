@@ -138,4 +138,5 @@ public class GameObject3D{
     public Vector3 getPosition3D(){
         return  this.position3D;
     }
+    public List<Component> getComponents(){return this.components;}
 }

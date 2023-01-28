@@ -8,6 +8,11 @@ public class Component {
     public void Update(){
 
     }
+
+    public void Render(){
+
+    }
+
     public void resize(int width, int height){
 
     }

@@ -15,6 +15,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.zickezacke.game.ZickeZacke;
+import com.zickezacke.nclib.component.Component;
 import com.zickezacke.nclib.gameObject.GameObject;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.TextObject;
@@ -54,7 +56,7 @@ public class Renderer {
             modelBatch = new ModelBatch();
             camera3DController = new CameraInputController(camera3D);
 
-            multiplexer.addProcessor(camera3DController);
+            if (ZickeZacke.DEVELOPER_MODE) multiplexer.addProcessor(camera3DController);
 
             viewport3D = new ScreenViewport(camera3D);
         }
@@ -82,6 +84,9 @@ public class Renderer {
         List<GameObject3D> gameObjects3D = new ArrayList<>();
         gameObjects3D = gameWorld.getGameObjects3D();
 
+        //place for components
+        List<Component> components = new ArrayList<>();
+
         //2D render background
         if (spriteBatch != null){
             spriteBatch.begin();
@@ -105,8 +110,26 @@ public class Renderer {
                 Instance3D tmpInstance = gameObjects3D.get(i).getModel();
                 //Gdx.app.log("Screen id", Integer.toString(gameObjects3D.get(i).getId()));
                 if (tmpInstance != null) modelBatch.render(tmpInstance, environment);
+
+                //components render
+                components = gameObjects3D.get(i).getComponents();
+                for (Component component: components){
+                    component.Render();
+                }
             }
             modelBatch.end();
+        }
+
+        if (modelBatch != null){
+
+            for (int i = 0; i < gameObjects3D.size(); i++) {
+                if (!gameObjects3D.get(i).isActive()) continue;
+                //components render
+                components = gameObjects3D.get(i).getComponents();
+                for (Component component : components) {
+                    component.Render();
+                }
+            }
         }
 
         //2D render UI
