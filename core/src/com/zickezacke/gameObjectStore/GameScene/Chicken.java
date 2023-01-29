@@ -81,6 +81,7 @@ public class Chicken extends GameObject3D {
         scale3D = new Vector3(1,1,1);
     }
 
+    @java.lang.Override
     /**
      * overrides the objectStart method in parent class GameObject3D, for changes after object creation
      */
