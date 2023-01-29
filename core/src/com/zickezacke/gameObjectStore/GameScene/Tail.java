@@ -6,6 +6,10 @@ import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
+/**
+ * The Tail class is a Tail for the Chicken
+ *  is used to represent points in the main GameScene
+ */
 public class Tail extends GameObject3D {
     // manages the GameScene associated to the Tails
     private GameWorld thisGameScene;
@@ -25,7 +29,7 @@ public class Tail extends GameObject3D {
 
     // manages the number of Frames needed for a movement
     private int count = 0;
-    
+
     // manages the state the Tail is on
     private boolean trigger = false;
 

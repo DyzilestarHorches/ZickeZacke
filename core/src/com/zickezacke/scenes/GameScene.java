@@ -22,7 +22,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * The GameScene class is the main game scene for the game, where all core logic and game mechanics are implemented
+ */
 public class GameScene extends GameWorld {
     private static final int WAIT_FRAME = 300;
 
@@ -115,8 +117,7 @@ public class GameScene extends GameWorld {
      * @param has3DCamera - boolean - if the GameScene has a 3D camera or not
      * @param has2DCamera - boolean - if the GameScene has a 2D camera or not
      */
-    public GameScene(boolean has3DCamera, boolean has2DCamera)
-    {
+    public GameScene(boolean has3DCamera, boolean has2DCamera) {
         super(has3DCamera, has2DCamera);
         isRunning = true;
         currentPlayer = 0;

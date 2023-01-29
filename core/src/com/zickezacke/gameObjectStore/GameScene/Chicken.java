@@ -5,6 +5,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 
+/**
+ * The Chicken class is a Chicken for players
+ *  is used in the main GameScene
+ */
 public class Chicken extends GameObject3D {
     // determines if the Chicken is jumping
     private boolean isJumping = false;
