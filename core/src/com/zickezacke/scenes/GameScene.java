@@ -22,19 +22,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * The GameScene class is the main game scene for the game, where all core logic and game mechanics are implemented
+ */
 public class GameScene extends GameWorld {
     private static final int WAIT_FRAME = 300;
 
     // determines if the game is in player's turn
     private boolean isRunning;
 
+    // saves the current Player
     private int currentPlayer;
 
     // manages current Tile and the next Tile to jump to
     private int nextTile;
     private int currentTile;
 
+    // manages the Oct Tile just clicked, reset upon clicking thus no looping
     public String octTileFileClicked = "-1";
 
     // signals ending
@@ -57,9 +61,10 @@ public class GameScene extends GameWorld {
 
     //list to manage uiButton
     private List<FunctionalButton> buttons = new ArrayList<>();
+    private FunctionalButton cameraButton;
     private NotiBackground menuInGame;
 
-    private final float eggOffset = 1.3f;
+    private final float eggOffset = 3f;
     private final float[][] eggTilePosition = {{4f*eggOffset, 0, 0f},
                                     {3.75f*eggOffset, 0, 1f*eggOffset},
                                     {3.5f*eggOffset, 0, 2f*eggOffset},
@@ -88,7 +93,7 @@ public class GameScene extends GameWorld {
                                     {3.5f*eggOffset, 0, -2f*eggOffset},
                                     {3.75f*eggOffset, 0, -1f*eggOffset}};
 
-    private final float octOffset = 1.3f;
+    private final float octOffset = 2.6f;
     private final float[][] octTilePosition = {{0.5f*octOffset, 0, 0.5f*octOffset},
                                                 {1.5f*octOffset, 0, 0.5f*octOffset},
                                                 {0.5f*octOffset, 0, 1.5f*octOffset},
@@ -106,19 +111,26 @@ public class GameScene extends GameWorld {
     //check if the scene is built or not
     public static boolean isBuilt = true;
 
-    public GameScene(boolean has3DCamera, boolean has2DCamera)
-    {
+    /**
+     * Constructor for the GameScene class
+     *
+     * @param has3DCamera - boolean - if the GameScene has a 3D camera or not
+     * @param has2DCamera - boolean - if the GameScene has a 2D camera or not
+     */
+    public GameScene(boolean has3DCamera, boolean has2DCamera) {
         super(has3DCamera, has2DCamera);
         isRunning = true;
         currentPlayer = 0;
     }
 
+    /**
+     * overrides the Begin method in parent class GameWorld, to add objects
+     */
     public void Begin() {
-//        ZickeZacke.getSoundSystem().playBackgroundMusicOnLoop();
-
+        // add the Ground to GameScene
         gameObjects3D.add(new Ground(101));
 
-        //randomize the position of the eggTiles
+        //randomize the files of the eggTiles
         List<Integer> randomEggTileFile = new ArrayList<>();
 
         for(int i = 0; i < 24; i++) {
@@ -137,7 +149,7 @@ public class GameScene extends GameWorld {
             eggTiles.add(eggTile);
         }
 
-        //randomize the position of the eggTiles
+        //randomize the position of the octTiles
         List<Integer> randomOctTilePosition = new ArrayList<>();
 
         for(int i = 0; i < 12; i++) {
@@ -151,27 +163,30 @@ public class GameScene extends GameWorld {
             OctTiles octTile = new OctTiles(i+2000, i, octTilePosition[randomOctTilePosition.get(i)][0],
                                                         octTilePosition[randomOctTilePosition.get(i)][1],
                                                         octTilePosition[randomOctTilePosition.get(i)][2]);
-
             gameObjects3D.add(octTile);
             octTiles.add(octTile);
         }
 
-        //Gdx.app.log("Number of GO3D", Integer.toString(gameObjects3D.size()));
-        //gameObjects.add(new backGround(102));
-        //gameObjects.add(new backGround3D(103));
+        //create buttons for UI
         createUI();
     }
 
+    /**
+     * overrides the Show method in parent class GameScreen, to render the class before any scene
+     *  to create more objects (when first start the game)
+     */
     public void Show() {
         if (isBuilt) return;
-        createChickenTailUI();
+        createChickenTailNoti();
 
         updateTilesForPLayer();
         isBuilt = true;
     }
 
-    // creates Chickens and Tails based on number of player
-    public void createChickenTailUI() {
+    /**
+     * creates Chickens and Tails based on number of player
+     */
+    public void createChickenTailNoti() {
         //mapping playerList
         int[] chickenList = new int[ZickeZacke.playerCount];
         int j = 0;
@@ -212,12 +227,17 @@ public class GameScene extends GameWorld {
             noti.Start();
         }
     }
+
+    /**
+     * creates UI for the GameScene
+     */
     public void createUI(){
         menuInGame =new NotiBackground(9006,"menu_background");
         Gdx.app.log("ddada",String.valueOf(menuInGame.isActive()));
         gameObjects.add(new FunctionalButton(9005,"menu_btn",11,8,menuInGame));
         gameObjects.add(new FunctionalButton(9005,"how_btn",11,6.5,2));
-        gameObjects.add(new FunctionalButton(9005,"default_view_btn",11,5,-1));
+        cameraButton = new FunctionalButton(9005,"default_view_btn",11,5,-1,true);
+        gameObjects.add(cameraButton);
 
         gameObjects.add(menuInGame);
         buttons.add(new FunctionalButton(9006,"resume_btn",5,4.5,2,1,menuInGame));
@@ -230,12 +250,16 @@ public class GameScene extends GameWorld {
     }
 
     @Override
+    /**
+     * overrides the worldUpdate method in parent class GameWorld, to implement the core logic of the game
+     */
     public void worldUpdate() {
         for(FunctionalButton i : buttons){i.setActive(menuInGame.isActive());}
-
+        cameraButton.setVector3(eggTilePosition[nextTile]);
         if (isRunning) {
             if (eggTiles.get(nextTile).getType().equals(octTileFileClicked)) {
                 checkGainLoseTail();
+                ZickeZacke.getSoundSystem().cucTaCucTac();
                 moveChicken();
                 updateTilesForPLayer();
 
@@ -244,6 +268,7 @@ public class GameScene extends GameWorld {
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
 
             } else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1")) {
+                ZickeZacke.getSoundSystem().nextTurn();
                 startNextPlayer();
 
                 resetTypeChecked();
@@ -251,17 +276,23 @@ public class GameScene extends GameWorld {
 
         } else {
             if (isEnd && ZickeZacke.waitFrame(WAIT_FRAME)) {
+                ZickeZacke.getSoundSystem().applause();
                 ending();
             }
         }
     }
 
+    /**
+     * updates the current Tile and next Tile for PLayer, to use in core logic
+     */
     public void updateTilesForPLayer() {
         currentTile = players.get(currentPlayer).getTile();
         nextTile = findUnOccupy();
     }
 
-    // resets typeChecked variable
+    /**
+     * resets typeChecked variable of the oct Tile clicked, prevent looping in Core Logic
+     */
     public void resetTypeChecked() {
         octTileFileClicked = "-1";
     }
@@ -276,7 +307,9 @@ public class GameScene extends GameWorld {
         System.out.println("Next player! " + currentPlayer);
     }
 
-    // start Ending sequence
+    /**
+     * ends the game
+     */
     public void ending() {
         Gdx.app.log("End", "Winner " + currentPlayer);
         ZickeZacke.winner = players.get(currentPlayer).getPlayerFile();
@@ -284,7 +317,9 @@ public class GameScene extends GameWorld {
         isEnd = false;
     }
 
-    // move the Chicken
+    /**
+     * moves the Chicken
+     */
     public void moveChicken() {
         players.get(currentPlayer).setDesPosition(eggTilePosition[nextTile][0],
                 eggTilePosition[nextTile][1],
@@ -299,14 +334,20 @@ public class GameScene extends GameWorld {
         rotateTails();
     }
 
-    //rotate the tails
+    /**
+     * rotates the tails
+     */
     public void rotateTails(){
         for(Tail t : tails){
             if(currentPlayer == t.getPlayerNum()){t.setTile(nextTile);}
         }
     }
 
-    // finds the next unoccupied Tile
+    /**
+     * finds the next unoccupied Tile
+     *
+     * @return - int - the next unoccupied Tile
+     */
     public int findUnOccupy() {
         for (int j = 1; j < 23; j++) {
             if (!eggTiles.get((currentTile+j)%24).getOccupy()) {
@@ -316,7 +357,9 @@ public class GameScene extends GameWorld {
         return -1;
     }
 
-    // checks if ends
+    /**
+     * checks if the game ends
+     */
     public void checkEnd() {
         for (Chicken c: players) {
             Gdx.app.log("Tail" + c.getPlayerNum(), Integer.toString(c.getTail()));
@@ -328,7 +371,9 @@ public class GameScene extends GameWorld {
         }
     }
 
-    // check if gains or loses Tail
+    /**
+     * checks if the current PLayer gains or loses Tail
+     */
     public void checkGainLoseTail() {
         if ((currentTile+1)%24 != nextTile) {
             // start checking from the next Tile
@@ -359,6 +404,4 @@ public class GameScene extends GameWorld {
             checkEnd();
         }
     }
-
-
 }

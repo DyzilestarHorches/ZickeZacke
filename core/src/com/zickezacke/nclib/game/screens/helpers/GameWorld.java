@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector3;
@@ -58,15 +59,16 @@ public class GameWorld {
             camera2D.setToOrtho(true,1024f, 712f);
         }
         else if (camera3D != null) {
-            camera3D.position.set(0f, 0f, 0f);
+            camera3D.position.set(0f, 0, 0f);
             camera3D.lookAt(0, 0, -1);
             camera3D.update();
         }
 
         //temporary set environment
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
-        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.2f, 0.2f, 0.2f, 1f));
+        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, 0f, -1f, 1.5f));
+        environment.add(new DirectionalLight().set(0.2f, 0.2f, 0.2f, 0f, -2f, 0f));
+        environment.add(new DirectionalLight().set(0.4f, 0.3f, 0.2f, 10f, -10f, 10f));
         //Begin is to override and add GameObjects!
         Begin();
 
@@ -78,6 +80,12 @@ public class GameWorld {
         for (int i = 0; i < gameObjects3D.size(); i++){
             gameObjects3D.get(i).Start();
         }
+        if (camera3D != null) {
+            camera3D.lookAt(0,-1f,0.25f);
+            camera3D.position.set(0f, 22f, 7f);
+            camera3D.rotate(new Vector3(0,1,0),180);
+        }
+
     }
 
     //called in render, call every gameObject update
@@ -313,6 +321,26 @@ public class GameWorld {
             }
         };
         return inputAdapter3D;
+    }
+    public void setEnvironment(float value){
+        this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, value, value, value, 1f));
+    }
+    public void setDefaultCamera(){
+        if (camera3D != null) {
+            camera3D.position.set(0f, 22f, 7f);
+            camera3D.lookAt(0,-1f,0.25f);
+        }
+    }
+    public void setTopDownCamera(){
+        if (camera3D != null) {
+            camera3D.position.set(0f, 22f, 0f);
+            camera3D.lookAt(0,-1f,0f);
+        }
+    }
+    public void setTileCamera(Vector3 tmp){
+        if (camera3D != null) {
+            camera3D.position.set(tmp);
+        }
     }
     //endregion
 }

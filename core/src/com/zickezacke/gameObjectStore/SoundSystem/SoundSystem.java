@@ -19,7 +19,7 @@ public class SoundSystem{
     public void SoundInIt() {
         listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/playingSound.wav")));
         listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/chicken-single-alarm-call-6056.wav")));
-        listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/Mouse Click - Sound Effect (HD).wav")));
+        listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/Mouse Click.wav")));
         listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/Taco Bell Bong - Sound Effect (HD).wav")));
         listofMusics.add(Gdx.audio.newMusic(Gdx.files.internal("./Sounds/Applause  Sound Effect.wav")));
     }
@@ -35,6 +35,7 @@ public class SoundSystem{
             listofMusics.get(1).play();
         }
     }
+    public boolean getIsCucTaCucTac(){return isCucTaCucTac;}
     public void setIsCucTaCucTac(boolean conga){
         isCucTaCucTac = conga;
     }
@@ -48,11 +49,14 @@ public class SoundSystem{
             listofMusics.get(3).play();
         }
     }
+    public boolean getTheNextOne(){
+        return theNextOne;
+    }
     public void setTheNextOne(boolean next){
         theNextOne = next;
     }
 
-    public void applause(){
+    public void applause() {
         listofMusics.get(4).play();
     }
 
