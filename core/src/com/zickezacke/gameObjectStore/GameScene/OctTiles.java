@@ -40,6 +40,7 @@ public class OctTiles extends GameObject3D {
     // file to render the Egg Tile
     private String octTileFile;
 
+    // stores value to check in GameScene
     private GameScene thisGameScene;
 
     /**
