@@ -190,7 +190,7 @@ public class Chicken extends GameObject3D {
     }
 
     /**
-     * get the Tile the Chicken is currently on
+     * gets the Tile the Chicken is currently on
      *
      * @return - int - the current Tile
      */

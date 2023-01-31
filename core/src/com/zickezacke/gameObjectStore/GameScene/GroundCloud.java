@@ -22,9 +22,4 @@ public class GroundCloud extends GameObject3D {
         position3D.set(-offset3D.x, -0.2f, -offset3D.z);
     }
 
-
-    @Override
-    public void MouseDown(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.log("really","yes");
-    }
 }
