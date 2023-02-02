@@ -1,3 +1,6 @@
+/**
+ * DragButton is used to implement drag bar to modify DragBar value in setting menu.
+ */
 package com.zickezacke.gameObjectStore.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -13,7 +16,15 @@ public class DragButton extends GameObject {
     protected boolean trackMouse = false;
     private float y;
     private float value;
-
+    /**
+     * constructor for DragButton class
+     *
+     * @param id - int - unique identifier for object
+     * @param value - float - value of ToggleButton
+     * @param y - float - y position
+     *
+     * @return - DragButton - a button which can drag to modify value
+     */
     public DragButton(int id,float value, float y){
         super(id, true);
         this.value = value;
@@ -21,6 +32,9 @@ public class DragButton extends GameObject {
     }
 
     @Override
+    /**
+     * initiates a drag button object
+     */
     public void objectInit() {
         source2D = "./UI/drag_button.png";
         position2D = new Vector2(START_PIVOT + value*(END_PIVOT-START_PIVOT), y*cellHeight + 1f);
@@ -28,6 +42,9 @@ public class DragButton extends GameObject {
     }
 
     @Override
+    /**
+     * set drag button position corresponding mouse position from START_PIVOT to END_PIVOT
+     */
     public void objectUpdate() {
         if (trackMouse){
             if( Gdx.input.getX() > START_PIVOT && Gdx.input.getX()< END_PIVOT) {
@@ -38,12 +55,18 @@ public class DragButton extends GameObject {
     }
 
     @Override
+    /**
+     * starts mouse tracking
+     */
     public void MouseDown(int x, int y, int pointer, int button) {
             if (button == 0){
                 trackMouse = true;
             }
     }
 
+    /**
+     *stops mouse tracking
+     */
     @Override
     public void MouseUp(int x, int y, int pointer, int button) {
             if (button == 0 && trackMouse){
@@ -51,6 +74,10 @@ public class DragButton extends GameObject {
             }
     }
 
+    /**
+     * gets value of drag button
+     * @return value - float - value of brightness volume or sound
+     */
     public float getValue() {
         return this.value;
     }

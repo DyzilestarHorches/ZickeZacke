@@ -1,5 +1,7 @@
 package com.zickezacke.scenes;
-
+/**
+ * setting scene class is used to implement setting menu
+ */
 
 import com.badlogic.gdx.Gdx;
 import com.zickezacke.game.ZickeZacke;
@@ -18,19 +20,37 @@ public class SettingScene extends GameWorld {
     private ToggleButton toggleNextPlayerButton;
     private float cuctacVal = (ZickeZacke.getSoundSystem().getIsCucTaCucTac()) ? 0.8f : 0;
     private float nextPlayerVal = (ZickeZacke.getSoundSystem().getTheNextOne()) ? 0.8f : 0;
+    /**
+     * Constructor for SettingScene class
+     *
+     * @param has3DCamera - boolean - the scene has 3d camera
+     * @param has2DCamera - boolean - the scene has 2d camera
+     *
+     * @return SettingScene - a scene for game setting environment
+     */
     public SettingScene(boolean has3DCamera, boolean has2DCamera){
         super(has3DCamera,has2DCamera);
     }
 
     @Override
+    /**
+     * adds objects into scene
+     */
     public void Begin() {
+        //adds background
         gameObjects.add(new BackGround(301, "setting_background"));
+        //adds back button
         gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.inGame));
+        //adds drag button for brightness modification
         dragButtonList.add(new DragButton(303,ZickeZacke.brightnessVol,6));
+        //adds drag button for sound modification
         dragButtonList.add(new DragButton(304,ZickeZacke.getSoundSystem().getVolume(),5));
+        //adds toggle button for chicken sound modification
         toggleCuctacButton = new ToggleButton(305,cuctacVal,4);
+        //adds toggle button for next player notification sound modification
         toggleNextPlayerButton = new ToggleButton(306,nextPlayerVal,3);
 
+        //adds UI elements for drag button's value
         gameObjects.add(new DragBar(306,3,toggleNextPlayerButton));
         gameObjects.add(new DragBar(305,4,toggleCuctacButton));
         gameObjects.add(new DragBar(304,5,dragButtonList.get(1)));
@@ -42,6 +62,10 @@ public class SettingScene extends GameWorld {
     }
 
     @Override
+    /**
+     * updates value that are modified.
+     * updates scene that back button should return.
+     */
     public void worldUpdate() {
         super.worldUpdate();
         ZickeZacke.brightnessVol = dragButtonList.get(0).getValue();
@@ -49,6 +73,6 @@ public class SettingScene extends GameWorld {
         ZickeZacke.getSoundSystem().setVolume(dragButtonList.get(1).getValue());
         nextPlayerVal = (ZickeZacke.getSoundSystem().getTheNextOne()) ? 0.8f : 0;
         cuctacVal = (ZickeZacke.getSoundSystem().getIsCucTaCucTac()) ? 0.8f : 0;
-        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.ingame));
+        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.inGame));
     }
 }

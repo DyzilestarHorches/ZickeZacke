@@ -1,3 +1,6 @@
+/**
+ * PlayButton is used to direct user to game scene.
+ */
 package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.math.Vector2;
@@ -7,9 +10,20 @@ import com.zickezacke.scenes.GameScene;
 
 
 public class PlayButton extends Button {
+    private GameWorld thisMenuScene;
+
+    /**
+     * constructor for play button
+     *
+     * @param id - int - unique identifier for object
+     * @param type - String -  image file of button
+     */
     public PlayButton(int id, String type){super(id, type);}
-    GameWorld thisMenuScene;
+
     @Override
+    /**
+     * initiates play button
+     */
     public void objectInit() {
         super.objectInit();
         isActive = true;
@@ -18,11 +32,17 @@ public class PlayButton extends Button {
     }
 
     @Override
+    /**
+     * updates play button
+     */
     public void objectUpdate() {
         thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
     }
 
     @Override
+    /**
+     * checks for number of player and sends notification to meet play requirement.
+     */
     public void MouseDown(int x, int y, int pointer, int button) {
         ZickeZacke.getSoundSystem().cucTaCucTac();
 

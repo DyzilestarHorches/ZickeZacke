@@ -1,3 +1,6 @@
+/**
+ * nextTurnNoti is a banner to display when the user finished turn.
+ */
 package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.Gdx;
@@ -12,12 +15,23 @@ public class nextTurnNoti extends GameObject {
     private int nextPlayer;
     private int count = 0;
 
+    /**
+     * constructor for nextTurnNoti
+     *
+     * @param id - int - unique identifier for object
+     * @param nextPlayer - int - index of next player
+     *
+     * @return nextTurnNoti - a temporary banner
+     */
     public nextTurnNoti (int id, int nextPlayer){
         super(id,true);
         this.nextPlayer = nextPlayer;
         setActive(false);
     }
     @Override
+    /**
+     * initiates a notification for next player
+     */
     public void objectInit() {
         source2D = "./UI/next_noti_" + String.valueOf(nextPlayer) + ".png";
         position2D = new Vector2(0*CELL_WIDTH,4*CELL_HEIGHT);
@@ -25,6 +39,9 @@ public class nextTurnNoti extends GameObject {
     }
 
     @Override
+    /**
+     * updates a notification for next player
+     */
     public void objectUpdate() {
         showNoti();
     }
