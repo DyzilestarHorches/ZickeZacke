@@ -154,7 +154,7 @@ public class Renderer {
             }
             spriteBatch.end();
         }
-        if (gameWorld.hasCamera3D()){
+        if (gameWorld.hasCamera3D() && ZickeZacke.DEVELOPER_MODE){
             if (shapeRenderer == null) shapeRenderer = new ShapeRenderer();
             shapeRenderer.setProjectionMatrix(camera3D.combined);
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);

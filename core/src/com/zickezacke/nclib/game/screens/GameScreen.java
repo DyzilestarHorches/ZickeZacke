@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
 import com.zickezacke.nclib.game.screens.helpers.Renderer;
 
-//class to create scenes (e.g GameScene, MainMenu,...)
+/**
+ * class to create scenes (e.g GameScene, MainMenu,...)
+ */
 public class GameScreen implements Screen {
     private GameWorld gameWorld;
     private Renderer renderer;
