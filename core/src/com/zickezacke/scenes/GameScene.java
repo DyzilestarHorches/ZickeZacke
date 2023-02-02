@@ -26,7 +26,9 @@ import java.util.Objects;
  * The GameScene class is the main game scene for the game, where all core logic and game mechanics are implemented
  */
 public class GameScene extends GameWorld {
+    // static final variables in the GameScene to control some animations
     private static final int WAIT_FRAME = 300;
+    private static final int WAIT_NEXT_PLAYER_FRAME = 150;
 
     // determines if the game is in player's turn
     private boolean isRunning;
@@ -265,16 +267,18 @@ public class GameScene extends GameWorld {
                 updateTilesForPLayer();
 
                 resetTypeChecked();
+                OctTiles.setIsClickable(true);
 
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
 
             }
             // State 1.2: Handing the turn to the next Player
-            else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1"))
+            else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1") && ZickeZacke.waitFrame(WAIT_NEXT_PLAYER_FRAME))
             {
                 ZickeZacke.getSoundSystem().nextTurn();
                 startNextPlayer();
 
+                OctTiles.setIsClickable(true);
                 resetTypeChecked();
             }
 

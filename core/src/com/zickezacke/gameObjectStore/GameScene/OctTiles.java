@@ -14,10 +14,10 @@ import com.zickezacke.scenes.GameScene;
  */
 public class OctTiles extends GameObject3D {
     // frame that the OctTile flips per second
-    private static final int FLIP_FRAME = 10;
+    private static final int FLIP_FRAME = 50;
 
     // frame the the OctTile pause per second
-    private static final int PAUSE_FRAME = 10;
+    private static final int PAUSE_FRAME = 50;
 
     // prevents player from flipping another tile while there is a tile is being flipped
     private static boolean inAnimation = false;
@@ -89,10 +89,11 @@ public class OctTiles extends GameObject3D {
 
     @java.lang.Override
     public void MouseDown(int screenX, int screenY, int pointer, int button) {
-        if (!inAnimation) {
+        if (!inAnimation && isClickable) {
             Trigger = !Trigger;
             inAnimation = true;
             thisGameScene.octTileFileClicked = this.octTileFile;
+            isClickable = false;
         }
     }
 
@@ -144,5 +145,14 @@ public class OctTiles extends GameObject3D {
                 inAnimation = false;
             }
         }
+    }
+
+    /**
+     * sets the static variable isClickable
+     *
+     * @param value - boolean - the new value
+     */
+    public static void setIsClickable (boolean value) {
+        isClickable = value;
     }
 }

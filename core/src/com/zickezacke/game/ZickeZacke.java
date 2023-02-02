@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ZickeZacke extends Game {
-	public static final boolean DEVELOPER_MODE = true;
+	public static final boolean DEVELOPER_MODE = false;
 	private List<GameScreen> gameScreens = new ArrayList<>();	//store all screens
 
 	//singleton
