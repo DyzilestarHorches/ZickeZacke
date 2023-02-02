@@ -19,11 +19,11 @@ public class OctTiles extends GameObject3D {
     // frame the the OctTile pause per second
     private static final int PAUSE_FRAME = 10;
 
-    // determines if the tile is face up or down
-    private static final boolean FLIP_STATE = true;
-
     // prevents player from flipping another tile while there is a tile is being flipped
     private static boolean inAnimation = false;
+
+    // prevents player from clicking the tile before doing the Core Logic
+    private static boolean isClickable = true;
 
     // determines to flip the tile
     private boolean Trigger = false;
@@ -75,7 +75,6 @@ public class OctTiles extends GameObject3D {
     public void objectInit() {
         source3D = "./Cards/" + octTileFile + "/oct_card.g3db";
         scale3D = new Vector3(1,1,1);
-        components.add(boundingVisual);
     }
 
     /**
@@ -83,7 +82,7 @@ public class OctTiles extends GameObject3D {
      */
     @Override
     public void objectStart() {
-        if (!FLIP_STATE) {
+        if (!ZickeZacke.DEVELOPER_MODE) {
             model3D.setRotation(new Vector3(0,0,1), 180f);
         }
     }

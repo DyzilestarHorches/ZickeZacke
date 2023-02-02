@@ -54,7 +54,6 @@ public class EggTiles extends GameObject3D {
     public void objectInit() {
         source3D = "./Cards/" + eggTileFile + "/egg_card.g3db";
         scale3D = new Vector3(1,1,1);
-        components.add(boundingVisual);
     }
 
     /**
@@ -65,18 +64,13 @@ public class EggTiles extends GameObject3D {
     public void objectStart() {
         model3D.setRotation(new Vector3(0, 0, 1), 180f);
         model3D.setRotation(new Vector3(0, 1, 0), angle);
-        boundingVisual.set(dimensions, bounds, new Color(0.7f, 0.7f, 0.7f, 0.2f));
     }
 
     /**
      * overrides the objectUpdate method in parent class GameObject3D, to make changes before render
      */
     @Override
-    public void objectUpdate() {
-        if (occupy){
-            boundingVisual.setActive(true);
-        }
-    }
+    public void objectUpdate() {}
 
     /**
      * sets the state for the Egg Tile if it has chicken standing on it
