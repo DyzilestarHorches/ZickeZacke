@@ -22,19 +22,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * The GameScene class is the main game scene for the game, where all core logic and game mechanics are implemented
+ */
 public class GameScene extends GameWorld {
     private static final int WAIT_FRAME = 300;
 
     // determines if the game is in player's turn
     private boolean isRunning;
 
+    // saves the current Player
     private int currentPlayer;
 
     // manages current Tile and the next Tile to jump to
     private int nextTile;
     private int currentTile;
 
+    // manages the Oct Tile just clicked, reset upon clicking thus no looping
     public String octTileFileClicked = "-1";
 
     // signals ending
@@ -107,25 +111,30 @@ public class GameScene extends GameWorld {
     //check if the scene is built or not
     public static boolean isBuilt = true;
 
-    public GameScene(boolean has3DCamera, boolean has2DCamera)
-    {
+    /**
+     * Constructor for the GameScene class
+     *
+     * @param has3DCamera - boolean - if the GameScene has a 3D camera or not
+     * @param has2DCamera - boolean - if the GameScene has a 2D camera or not
+     */
+    public GameScene(boolean has3DCamera, boolean has2DCamera) {
         super(has3DCamera, has2DCamera);
         isRunning = true;
         currentPlayer = 0;
     }
 
+    /**
+     * overrides the Begin method in parent class GameWorld, to add objects
+     */
     public void Begin() {
-//        ZickeZacke.getSoundSystem().playBackgroundMusicOnLoop();
-
+        // add the Ground to GameScene
         gameObjects3D.add(new Ground(101));
 
-        //randomize the position of the eggTiles
+        //randomize the files of the eggTiles
         List<Integer> randomEggTileFile = new ArrayList<>();
-
         for(int i = 0; i < 24; i++) {
             randomEggTileFile.add(i);
         }
-
         Collections.shuffle(randomEggTileFile);
 
         //creates 24 eggTiles
@@ -138,13 +147,11 @@ public class GameScene extends GameWorld {
             eggTiles.add(eggTile);
         }
 
-        //randomize the position of the eggTiles
+        //randomize the position of the octTiles
         List<Integer> randomOctTilePosition = new ArrayList<>();
-
         for(int i = 0; i < 12; i++) {
             randomOctTilePosition.add(i);
         }
-
         Collections.shuffle(randomOctTilePosition);
 
         //creates 12 octTiles
@@ -152,7 +159,6 @@ public class GameScene extends GameWorld {
             OctTiles octTile = new OctTiles(i+2000, i, octTilePosition[randomOctTilePosition.get(i)][0],
                                                         octTilePosition[randomOctTilePosition.get(i)][1],
                                                         octTilePosition[randomOctTilePosition.get(i)][2]);
-
             gameObjects3D.add(octTile);
             octTiles.add(octTile);
         }
@@ -161,6 +167,10 @@ public class GameScene extends GameWorld {
         createUI();
     }
 
+    /**
+     * overrides the Show method in parent class GameScreen, to render the class before any scene
+     *  to create more objects (when first start the game)
+     */
     public void Show() {
         if (isBuilt) return;
         createChickenTailNoti();
@@ -169,7 +179,9 @@ public class GameScene extends GameWorld {
         isBuilt = true;
     }
 
-    // creates Chickens and Tails based on number of player
+    /**
+     * creates Chickens and Tails based on number of player
+     */
     public void createChickenTailNoti() {
         //mapping playerList
         int[] chickenList = new int[ZickeZacke.playerCount];
@@ -212,6 +224,9 @@ public class GameScene extends GameWorld {
         }
     }
 
+    /**
+     * creates UI for the GameScene
+     */
     public void createUI(){
         menuInGame =new NotiBackground(9006,"menu_background");
         Gdx.app.log("ddada",String.valueOf(menuInGame.isActive()));
@@ -231,11 +246,19 @@ public class GameScene extends GameWorld {
     }
 
     @Override
+    /**
+     * overrides the worldUpdate method in parent class GameWorld, to implement the core logic of the game
+     */
     public void worldUpdate() {
+        // the UI buttons
         for(FunctionalButton i : buttons){i.setActive(menuInGame.isActive());}
         cameraButton.setVector3(eggTilePosition[nextTile]);
+        // the core Game Mechanic
+        // State 1: The Game is still running
         if (isRunning) {
+            // State 1.1: The Player's turn
             if (eggTiles.get(nextTile).getType().equals(octTileFileClicked)) {
+                // Checks to see if the Player gains new Tail, then check if the game ends
                 checkGainLoseTail();
                 ZickeZacke.getSoundSystem().cucTaCucTac();
                 moveChicken();
@@ -245,14 +268,19 @@ public class GameScene extends GameWorld {
 
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
 
-            } else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1")) {
+            }
+            // State 1.2: Handing the turn to the next Player
+            else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1"))
+            {
                 ZickeZacke.getSoundSystem().nextTurn();
                 startNextPlayer();
 
                 resetTypeChecked();
             }
 
-        } else {
+        }
+        // State 2: The game is ending
+        else {
             if (isEnd && ZickeZacke.waitFrame(WAIT_FRAME)) {
                 ZickeZacke.getSoundSystem().applause();
                 ending();
@@ -260,12 +288,17 @@ public class GameScene extends GameWorld {
         }
     }
 
+    /**
+     * updates the current Tile and next Tile for PLayer, to use in core logic
+     */
     public void updateTilesForPLayer() {
         currentTile = players.get(currentPlayer).getTile();
         nextTile = findUnOccupy();
     }
 
-    // resets typeChecked variable
+    /**
+     * resets typeChecked variable of the oct Tile clicked, prevent looping in Core Logic
+     */
     public void resetTypeChecked() {
         octTileFileClicked = "-1";
     }
@@ -280,7 +313,9 @@ public class GameScene extends GameWorld {
         System.out.println("Next player! " + currentPlayer);
     }
 
-    // start Ending sequence
+    /**
+     * ends the game
+     */
     public void ending() {
         Gdx.app.log("End", "Winner " + currentPlayer);
         ZickeZacke.winner = players.get(currentPlayer).getPlayerFile();
@@ -288,7 +323,9 @@ public class GameScene extends GameWorld {
         isEnd = false;
     }
 
-    // move the Chicken
+    /**
+     * moves the Chicken
+     */
     public void moveChicken() {
         players.get(currentPlayer).setDesPosition(eggTilePosition[nextTile][0],
                 eggTilePosition[nextTile][1],
@@ -303,14 +340,20 @@ public class GameScene extends GameWorld {
         rotateTails();
     }
 
-    //rotate the tails
+    /**
+     * rotates the tails
+     */
     public void rotateTails(){
         for(Tail t : tails){
             if(currentPlayer == t.getPlayerNum()){t.setTile(nextTile);}
         }
     }
 
-    // finds the next unoccupied Tile
+    /**
+     * finds the next unoccupied Tile
+     *
+     * @return - int - the next unoccupied Tile
+     */
     public int findUnOccupy() {
         for (int j = 1; j < 23; j++) {
             if (!eggTiles.get((currentTile+j)%24).getOccupy()) {
@@ -320,7 +363,9 @@ public class GameScene extends GameWorld {
         return -1;
     }
 
-    // checks if ends
+    /**
+     * checks if the game ends
+     */
     public void checkEnd() {
         for (Chicken c: players) {
             Gdx.app.log("Tail" + c.getPlayerNum(), Integer.toString(c.getTail()));
@@ -332,7 +377,9 @@ public class GameScene extends GameWorld {
         }
     }
 
-    // check if gains or loses Tail
+    /**
+     * checks if the current PLayer gains or loses Tail
+     */
     public void checkGainLoseTail() {
         if ((currentTile+1)%24 != nextTile) {
             // start checking from the next Tile
