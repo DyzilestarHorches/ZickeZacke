@@ -49,6 +49,6 @@ public class SettingScene extends GameWorld {
         ZickeZacke.getSoundSystem().setVolume(dragButtonList.get(1).getValue());
         nextPlayerVal = (ZickeZacke.getSoundSystem().getTheNextOne()) ? 0.8f : 0;
         cuctacVal = (ZickeZacke.getSoundSystem().getIsCucTaCucTac()) ? 0.8f : 0;
-        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.ingame));
+        gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.inGame));
     }
 }

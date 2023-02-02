@@ -132,11 +132,9 @@ public class GameScene extends GameWorld {
 
         //randomize the files of the eggTiles
         List<Integer> randomEggTileFile = new ArrayList<>();
-
         for(int i = 0; i < 24; i++) {
             randomEggTileFile.add(i);
         }
-
         Collections.shuffle(randomEggTileFile);
 
         //creates 24 eggTiles
@@ -151,11 +149,9 @@ public class GameScene extends GameWorld {
 
         //randomize the position of the octTiles
         List<Integer> randomOctTilePosition = new ArrayList<>();
-
         for(int i = 0; i < 12; i++) {
             randomOctTilePosition.add(i);
         }
-
         Collections.shuffle(randomOctTilePosition);
 
         //creates 12 octTiles
@@ -254,10 +250,15 @@ public class GameScene extends GameWorld {
      * overrides the worldUpdate method in parent class GameWorld, to implement the core logic of the game
      */
     public void worldUpdate() {
+        // the UI buttons
         for(FunctionalButton i : buttons){i.setActive(menuInGame.isActive());}
         cameraButton.setVector3(eggTilePosition[nextTile]);
+        // the core Game Mechanic
+        // State 1: The Game is still running
         if (isRunning) {
+            // State 1.1: The Player's turn
             if (eggTiles.get(nextTile).getType().equals(octTileFileClicked)) {
+                // Checks to see if the Player gains new Tail, then check if the game ends
                 checkGainLoseTail();
                 ZickeZacke.getSoundSystem().cucTaCucTac();
                 moveChicken();
@@ -267,14 +268,19 @@ public class GameScene extends GameWorld {
 
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
 
-            } else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1")) {
+            }
+            // State 1.2: Handing the turn to the next Player
+            else if (!eggTiles.get(nextTile).getType().equals(octTileFileClicked) && !Objects.equals(octTileFileClicked, "-1"))
+            {
                 ZickeZacke.getSoundSystem().nextTurn();
                 startNextPlayer();
 
                 resetTypeChecked();
             }
 
-        } else {
+        }
+        // State 2: The game is ending
+        else {
             if (isEnd && ZickeZacke.waitFrame(WAIT_FRAME)) {
                 ZickeZacke.getSoundSystem().applause();
                 ending();
