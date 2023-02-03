@@ -27,8 +27,9 @@ public class MenuScene extends GameWorld {
     public MenuScene(boolean has3DCamera, boolean has2DCamera){
         super(has3DCamera,has2DCamera);
     }
-
+    //creates a notification background.
     private NotiBackground notiPlayer = new NotiBackground(109,"noti_scene");
+    //create back button the notification background.
     private FunctionalButton backBtn = new FunctionalButton(110,"back_btn",5.76,2.5,notiPlayer);
     private List<SelectButton> selectButtonList = new ArrayList<>();
     /**
@@ -49,10 +50,11 @@ public class MenuScene extends GameWorld {
         selectButtonList.add(new SelectButton(105,"2",6,3.5));
         selectButtonList.add(new SelectButton(105,"3",6.5,3.5));
         for(SelectButton i : selectButtonList){gameObjects.add(i);}
-        //adds notification for number of players
+        //adds notification for number of players.
         gameObjects.add(notiPlayer);
+        //adds back button for the notification.
         gameObjects.add(backBtn);
-        gameObjects.add(new Button(111));
+        //gameObjects.add(new Button(111));
     }
 
     @Override
@@ -60,8 +62,9 @@ public class MenuScene extends GameWorld {
      * updates list of select buttons
      */
     public void worldUpdate() {
+        //inactivates notification when hits back button in the notification.
         backBtn.setActive(notiPlayer.isActive());
-        //update number of player
+        //updates number of players.
         ZickeZacke.playerList = new boolean[] {selectButtonList.get(0).getState(),
                                                 selectButtonList.get(1).getState(),
                                                 selectButtonList.get(2).getState(),

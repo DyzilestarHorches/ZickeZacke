@@ -158,34 +158,47 @@ public class FunctionalButton extends Button{
      * @param tmp - float[3] - 3d position of camera
      */
     public void setVector3(float[] tmp){vector3 = new Vector3(tmp[0],tmp[1]+10,tmp[2]);}
-    @java.lang.Override
+
+    /**
+     * initiates button object
+     */
+    @Override
     public void objectInit() {
         super.objectInit();
     }
+
     /**
-     * starts mouse action corresponding fictional button
+     * starts mouse action corresponding functional button
      */
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
-
+        //cases where functional button has no object as reference or screen id
         if(this.sceneId == -1 && gameObj == null) {
+            //camera button is true
             if(isCameraAdj){
                 i++;
                 if(i%3==0){
+                    //mode 1
                     ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld().setDefaultCamera();
                 }else if(i%3==1){
+                    //mode 2
                     ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld().setTileCamera(vector3);
                 }else if(i%3==2){
+                    //mode 3
                     ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld().setTopDownCamera();
                 }
             } else {
+                //exit button
                 Gdx.app.exit();
             }
         }else{
+            //functional button has screen id.
             if(this.sceneId != -1){
                 if(button == 0){
+                    //direct to specific screen.
                     ZickeZacke.getInstance().setScreen(sceneId);
                 }
+            //functional button has an object as reference.
             }else {
                 this.gameObj.setActive(!gameObj.isActive());
             }

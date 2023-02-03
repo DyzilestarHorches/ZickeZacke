@@ -1,13 +1,12 @@
 package com.zickezacke.scenes;
-/**
- * winner scene class is used to display when a player win and finish game scene
- */
-import com.badlogic.gdx.Gdx;
+
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.UI.BackGround;
 import com.zickezacke.gameObjectStore.UI.FunctionalButton;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-
+/**
+ * winner scene class is used to display when a player win and finish game scene
+ */
 public class WinnerScene extends GameWorld {
     /**
      * Constructor for SettingScene class
@@ -26,20 +25,23 @@ public class WinnerScene extends GameWorld {
      * adds objects into scene
      */
     public void Begin() {
-        //adds background
+        //adds background.
         gameObjects.add(new BackGround(901,"winner_background"));
-        //adds winner portrait
+        //adds  exit button.
         gameObjects.add(new FunctionalButton(902,"exit_btn",5,2,2,1));
     }
 
     @Override
     /**
-     * displays updated winner portrait.
+     * displays the updated winner portrait.
      */
     public void Show() {
+        //updates the portrait of the winner.
         String winner = "winner_" + String.valueOf(ZickeZacke.winner);
         FunctionalButton winnerPortrait = new FunctionalButton(903,winner,5,6,2,3);
+        //adds the portrait to the scene.
         gameObjects.add(winnerPortrait);
+        //starts the portrait.
         winnerPortrait.Start();
     }
 
