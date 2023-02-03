@@ -126,7 +126,7 @@ public class GameScene extends GameWorld {
     }
 
     /**
-     * overrides the Begin method in parent class GameWorld, to add objects
+     * overrides the Begin method in parent class GameWorld, to add objects into the GameScene
      */
     public void Begin() {
         // add the Ground to GameScene
