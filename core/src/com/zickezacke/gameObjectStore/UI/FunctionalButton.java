@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject;
+import com.zickezacke.scenes.GameScene;
 
 public class FunctionalButton extends Button{
 
@@ -179,13 +180,13 @@ public class FunctionalButton extends Button{
                 i++;
                 if(i%3==0){
                     //mode 1
-                    ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld().setDefaultCamera();
+                    ((GameScene)ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld()).setDefaultCamera();
                 }else if(i%3==1){
                     //mode 2
-                    ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld().setTileCamera(vector3);
+                    ((GameScene)ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld()).setTileCamera(vector3);
                 }else if(i%3==2){
                     //mode 3
-                    ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld().setTopDownCamera();
+                    ((GameScene)ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld()).setTopDownCamera();
                 }
             } else {
                 //exit button

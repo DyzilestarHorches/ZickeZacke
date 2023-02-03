@@ -3,6 +3,7 @@ package com.zickezacke.scenes;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.EggTiles;
@@ -126,7 +127,7 @@ public class GameScene extends GameWorld {
     }
 
     /**
-     * overrides the Begin method in parent class GameWorld, to add objects
+     * overrides the Begin method in parent class GameWorld, to add objects into the GameScene
      */
     public void Begin() {
         // add the Ground to GameScene
@@ -326,7 +327,7 @@ public class GameScene extends GameWorld {
         currentPlayer = (currentPlayer + 1) % ZickeZacke.playerCount;
         nextTurnNotis.get(currentPlayer).setActive(true);
         updateTilesForPLayer();
-        System.out.println("Next player! " + currentPlayer);
+        //System.out.println("Next player! " + currentPlayer);
     }
 
     /**
@@ -424,6 +425,27 @@ public class GameScene extends GameWorld {
             }
 
             checkEnd();
+        }
+    }
+
+    /**
+     * sets position of camera
+     */
+    public void setDefaultCamera(){
+        if (camera3D != null) {
+            camera3D.position.set(0f, 22f, 7f);
+            camera3D.lookAt(0,-1f,0.25f);
+        }
+    }
+    public void setTopDownCamera(){
+        if (camera3D != null) {
+            camera3D.position.set(0f, 22f, 0f);
+            camera3D.lookAt(0,-1f,0f);
+        }
+    }
+    public void setTileCamera(Vector3 tmp){
+        if (camera3D != null) {
+            camera3D.position.set(tmp);
         }
     }
 }

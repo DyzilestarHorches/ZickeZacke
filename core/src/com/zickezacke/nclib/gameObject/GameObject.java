@@ -8,6 +8,9 @@ import com.zickezacke.nclib.component.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Game object 2D and UI
+ */
 public class GameObject {
     protected int id;
     protected String source2D;
@@ -22,16 +25,34 @@ public class GameObject {
 
     protected List<Component> components = new ArrayList<>();
 
-
+    /**
+     * constructors with no option
+     */
     public GameObject(){}
+
+    /**
+     * construct a non UI 2D gameObject with ID
+     * @param id unique identifier
+     */
     public GameObject(int id){
         this(id, false);
     }
+
+    /**
+     * constructs a 2D gameObject with UI option
+     * @param id unique identifier
+     * @param isUI true if it is a UI
+     */
     public GameObject(int id, boolean isUI){
         this.id = id;
         this.isUI = isUI;
         this.isActive = true;
     }
+
+    /**
+     * runs at start of scene, gets information of object, then builds it, then runs
+     * logical initialization
+     */
     public void Start(){
         objectInit();
         // update position of model
@@ -43,13 +64,12 @@ public class GameObject {
         objectStart();
     }
 
+    /**
+     * runs every frame if the object is active
+     */
     public void Update(){
         if (!isActive) return;
         objectUpdate();
-        // update position of model
-        //if (checkClick(Gdx.input))
-
-
         objectLateUpdate();
     }
 
@@ -58,6 +78,13 @@ public class GameObject {
     
     // change texture after render
     public void setTexture(String newTexture){texture = new Texture(Gdx.files.internal(newTexture));}
+
+    /**
+     * checks clicks on 2D objects, interact with input handlers in GameWorld
+     * @param x world position x of the click
+     * @param y world position y of the click
+     * @return true if this object is clicked, false otherwise
+     */
     public boolean checkClick(int x, int y){
         if (x < this.position2D.x || x > this.position2D.x + this.size2D.x)
             return false;
@@ -66,33 +93,65 @@ public class GameObject {
         return true;
     }
 
-    public void MouseDown(int x, int y, int pointer, int button){
-
-    }
-
-    public void MouseUp(int x, int y, int pointer, int button){}
-
+    /**
+     * dispose this object
+     */
     public void dispose(){
         texture.dispose();
     }
+
     //region support methods
+
+    /**
+     * reacts window resizes
+     * @param width width of window
+     * @param height height of window
+     */
     public void resize(int width, int height){
         for (Component component: components) {
             component.resize(width, height);
         }
-
-        /*if (isUI){
-            size2D.x *= width/oldScreenSize.x;
-            size2D.y *= height/oldScreenSize.y;
-        }*/
     }
-    //overrides
-    public void objectInit(){} //before creation
-    public void objectStart(){} //after creation
 
-    public void objectUpdate(){}    //before render
-    public void objectLateUpdate(){}    //after render
+    //region overrides
+    /**
+     * overrides this method to define behavior of this game object when clicked mouse down
+     * @param x world position x of the click
+     * @param y world position y of the click
+     * @param pointer type of pointer (shape)
+     * @param button left click(0), right click(1) or middle click(2)
+     */
+    public void MouseDown(int x, int y, int pointer, int button){}
 
+    /**
+     * overrides this method to define behavior of this game object when clicked mouse up (release)
+     * @param x world position x of the click
+     * @param y world position y of the click
+     * @param pointer type of pointer (shape)
+     * @param button left click(0), right click(1) or middle click(2)
+     */
+    public void MouseUp(int x, int y, int pointer, int button){}
+
+    /**
+     * overrides to specify information about object
+     */
+    public void objectInit(){} //before creation of texture
+
+    /**
+     * overrides to initialize logic variable
+     */
+    public void objectStart(){} //after creation of texture
+
+    /**
+     * overrides to define behaviors of object every frame
+     */
+    public void objectUpdate(){}    //Update stage 1
+
+    /**
+     * overrides to define behaviors after update stage 1
+     */
+    public void objectLateUpdate(){}    //Update stage 2
+    //endregion
 
 
     //getters
