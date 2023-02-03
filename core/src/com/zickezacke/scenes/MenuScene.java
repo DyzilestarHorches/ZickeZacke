@@ -32,6 +32,7 @@ public class MenuScene extends GameWorld {
     //create back button the notification background.
     private FunctionalButton backBtn = new FunctionalButton(110,"back_btn",5.76,2.5,notiPlayer);
     private List<SelectButton> selectButtonList = new ArrayList<>();
+
     /**
      * adds objects into scene
      */

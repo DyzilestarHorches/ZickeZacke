@@ -22,6 +22,7 @@ public class SettingScene extends GameWorld {
     //float values that the sound variable should be mapped.
     private float cuctacVal = (ZickeZacke.getSoundSystem().getIsCucTaCucTac()) ? 0.8f : 0;
     private float nextPlayerVal = (ZickeZacke.getSoundSystem().getTheNextOne()) ? 0.8f : 0;
+
     /**
      * Constructor for SettingScene class
      *

@@ -19,9 +19,6 @@ public class OctTiles extends GameObject3D {
     // frame the the OctTile pause per second
     private static final int PAUSE_FRAME = 50;
 
-    // prevents player from flipping another tile while there is a tile is being flipped
-    private static boolean inAnimation = false;
-
     // prevents player from clicking the tile before doing the Core Logic
     private static boolean isClickable = true;
 
@@ -38,7 +35,7 @@ public class OctTiles extends GameObject3D {
     private int count = 0;
 
     // file to render the Egg Tile
-    private String octTileFile;
+    private final String octTileFile;
 
     // stores value to check in GameScene
     private GameScene thisGameScene;
@@ -89,9 +86,8 @@ public class OctTiles extends GameObject3D {
 
     @java.lang.Override
     public void MouseDown(int screenX, int screenY, int pointer, int button) {
-        if (!inAnimation && isClickable) {
+        if (isClickable) {
             Trigger = !Trigger;
-            inAnimation = true;
             thisGameScene.octTileFileClicked = this.octTileFile;
             isClickable = false;
         }
@@ -142,7 +138,6 @@ public class OctTiles extends GameObject3D {
             if (count == FLIP_FRAME) {
                 Back = !Back;
                 count = 0;
-                inAnimation = false;
             }
         }
     }
