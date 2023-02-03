@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ZickeZacke extends Game {
-	public static final boolean DEVELOPER_MODE = false;
+	public static final boolean DEVELOPER_MODE = false;	//true for developer mode, use to enable debug tools
 	private List<GameScreen> gameScreens = new ArrayList<>();	//store all screens
 
 	//singleton
 	private static ZickeZacke instance = new ZickeZacke();
 
+	//sound system
 	private static final SoundSystem soundSystem = new SoundSystem();
 
 	public static SoundSystem getSoundSystem() {
@@ -33,10 +34,10 @@ public class ZickeZacke extends Game {
 
 	public ZickeZacke(){} //prevent new object
 
-	public static boolean[] playerList;
-	public static int playerCount;
-	public static int winner;
-	public static float brightnessVol = 0.2f;
+	public static boolean[] playerList;	//true if player is active
+	public static int playerCount;	//number of players
+	public static int winner;	//index of winner
+	public static float brightnessVol = 0.2f;	//Volume of brightness
 	public static int inGame = 1;
 
 	/**
