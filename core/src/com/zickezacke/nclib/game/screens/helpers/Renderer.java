@@ -27,6 +27,9 @@ import com.zickezacke.nclib.gameObject.import3D.Instance3D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this class renders every gameObjects, components in a GameWorld
+ */
 public class Renderer {
     private GameWorld gameWorld;
     private PerspectiveCamera camera3D;
@@ -43,10 +46,17 @@ public class Renderer {
     private Viewport viewport2D;
     private Viewport viewport3D;
 
+    /**
+     * constructors with gameWorld
+     * @param gameWorld the gameWorld that is rendered by this Renderer object
+     */
     public Renderer(GameWorld gameWorld){
         this.gameWorld = gameWorld;
     }
 
+    /**
+     * initializes by getting data from gameWorld, initializes rendering batches
+     */
     public void Start(){
         //input handler
         InputMultiplexer multiplexer = gameWorld.getInputMultiplexer();
@@ -73,6 +83,9 @@ public class Renderer {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
+    /**
+     * renders every game objects, UI, supporting components
+     */
     public void render(){
         if (camera3DController != null) camera3DController.update();
 
@@ -120,8 +133,8 @@ public class Renderer {
             modelBatch.end();
         }
 
+        //render supporting components for 3D objects
         if (modelBatch != null){
-
             for (int i = 0; i < gameObjects3D.size(); i++) {
                 if (!gameObjects3D.get(i).isActive()) continue;
                 //components render
@@ -154,6 +167,8 @@ public class Renderer {
             }
             spriteBatch.end();
         }
+
+        //render 3D axis for developing
         if (gameWorld.hasCamera3D() && ZickeZacke.DEVELOPER_MODE){
             if (shapeRenderer == null) shapeRenderer = new ShapeRenderer();
             shapeRenderer.setProjectionMatrix(camera3D.combined);
@@ -167,6 +182,12 @@ public class Renderer {
             shapeRenderer.end();
         }
     }
+
+    /**
+     * reacts to window resizes
+     * @param width width of window
+     * @param height height of window
+     */
     public void resize(int width, int height){
         if (gameWorld.hasCamera2D()) viewport2D.update(width, height);
         if (gameWorld.hasCamera3D()) viewport3D.update(width, height);
@@ -175,17 +196,12 @@ public class Renderer {
         for (GameObject gameObject: gameObjects) {
             gameObject.resize(width, height);
         }
-
-        /*List<GameObject3D> gameObjects3D = new ArrayList<>();
-        gameObjects = gameWorld.getGameObjects();
-        for (GameObject3D gameObject3D: gameObjects3D) {
-            gameObject3D.resize(width, height);
-        }*/
     }
 
-    //release memory when change screen
+    /**
+     * release memory when scene is changed
+     */
     public void dispose(){
-        //gameWorld.dispose();
         if (modelBatch != null)
         {
             modelBatch.dispose();
@@ -202,6 +218,5 @@ public class Renderer {
             shapeRenderer.dispose();
             shapeRenderer = null;
         }
-        //Gdx.app.log("Renderer dispose", "yes");
     }
 }

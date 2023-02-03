@@ -24,7 +24,10 @@ import java.util.Collection;
 import java.util.List;
 
 //not perfect to the ideology, would be improved when needed!
-//helper class of GameScreen, used to store GameObjects
+
+/**
+ * helper class of GameScreen, used to store GameObjects and run Updates
+ */
 public class GameWorld {
     protected Environment environment;
     protected PerspectiveCamera camera3D;
@@ -34,11 +37,13 @@ public class GameWorld {
 
     protected InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
+    public GameWorld(){}
 
-    public GameWorld(){
-
-    }
-    //initialize camera, environment and objects for the god to see the world!
+    /**
+     * initializes cameras and environment for rendering and controlling
+     * @param has3DCamera whether not the GameWorld has 3D Camera
+     * @param has2DCamera whether not the GameWorld has 2D Camera
+     */
     public GameWorld(boolean has3DCamera, boolean has2DCamera){
         if (has3DCamera){
             camera3D = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -49,11 +54,14 @@ public class GameWorld {
         }
         environment = new Environment();
 
+        //processor for 2D and 3D input
         if (camera2D != null)inputMultiplexer.addProcessor(create2DInputHandler());
         if (camera3D != null)inputMultiplexer.addProcessor(create3DInputHandler());
     }
 
-    //camera and environment default set up
+    /**
+     * camera and environment default set up
+     */
     public void Start(){
         if (camera2D != null) {
             camera2D.setToOrtho(true,1024f, 712f);
@@ -80,6 +88,8 @@ public class GameWorld {
         for (int i = 0; i < gameObjects3D.size(); i++){
             gameObjects3D.get(i).Start();
         }
+
+        //camera 3D stating position
         if (camera3D != null) {
             camera3D.lookAt(0,-1f,0.25f);
             camera3D.position.set(0f, 22f, 7f);
@@ -88,10 +98,11 @@ public class GameWorld {
 
     }
 
-    //called in render, call every gameObject update
+    /**
+     * called in GameScreen render, call every gameObject update every frame
+     */
     public void Update(){
         worldUpdate();
-
 
         for (int i = 0; i < gameObjects.size(); i++){
             gameObjects.get(i).Update();
@@ -101,22 +112,18 @@ public class GameWorld {
         }
     }
 
-    //release memory when changeScreen
+    /**
+     * release memory when changeScreen
+     */
     public void dispose(){
         for (GameObject gameObject : gameObjects) {
             gameObject.dispose();
-            //gameObjects.remove(gameObject);
         }
-
 
         for (GameObject3D gameObject3D : gameObjects3D) {
             gameObject3D.dispose();
-            //gameObjects3D.remove(gameObject3D);
         }
     }
-
-    //region override methods
-    public void worldUpdate(){}
 
     //region getters
     public Environment getEnvironment(){
@@ -151,11 +158,33 @@ public class GameWorld {
     }
 
     //endregion
-    //override methods
+    //region override methods
+    /**
+     * runs every frame, overrides with GameWorld logic
+     */
+    public void worldUpdate(){}
+
+    /**
+     * overrides to add game objects
+     */
     public void Begin(){}
+
+    /**
+     * runs when this Screen is set to run
+     */
     public void Show(){}
+    /**
+     * runs when another Screen is set to run, from this scene
+     */
     public void Hide(){}
+    //endregion
+
     //region support method
+
+    /**
+     * detects touches onto 2D game objects
+     * @return an InputAdapter specify behaviours when 2D game objects are clicked
+     */
     public InputAdapter create2DInputHandler(){
         InputAdapter inputAdapter2D = new InputAdapter(){
             @Override
@@ -186,6 +215,13 @@ public class GameWorld {
         return inputAdapter2D;
     }
 
+    /**
+     * detects intersection between a Ray and a BoundingBox (Box)
+     * @param ray input a Ray
+     * @param box input a BoundingBox
+     * @param intersection input a Vector3, use to store the point of intersection
+     * @return a boolean, true if there is an intersection, else no
+     */
     public static boolean isIntersect (Ray ray, BoundingBox box, Vector3 intersection) {
         Vector3 v1 = new Vector3();
         Vector3 v2 = new Vector3();
@@ -283,6 +319,13 @@ public class GameWorld {
         return hit;
     }
 
+    /**
+     * gets a 3D game object with click on screen, this uses isIntersect
+     * @param screenX horizontal point on screen
+     * @param screenY vertical point on screen
+     * @return the first game object that intersects with the Ray from screenX, screenY. null if
+     * nothing found
+     */
     public GameObject3D getObject (int screenX, int screenY) {
         camera3D.update();
         Ray ray = camera3D.getPickRay(screenX, screenY);
@@ -325,22 +368,6 @@ public class GameWorld {
     public void setEnvironment(float value){
         this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, value, value, value, 1f));
     }
-    public void setDefaultCamera(){
-        if (camera3D != null) {
-            camera3D.position.set(0f, 22f, 7f);
-            camera3D.lookAt(0,-1f,0.25f);
-        }
-    }
-    public void setTopDownCamera(){
-        if (camera3D != null) {
-            camera3D.position.set(0f, 22f, 0f);
-            camera3D.lookAt(0,-1f,0f);
-        }
-    }
-    public void setTileCamera(Vector3 tmp){
-        if (camera3D != null) {
-            camera3D.position.set(tmp);
-        }
-    }
+
     //endregion
 }

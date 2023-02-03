@@ -1,5 +1,8 @@
 package com.zickezacke.nclib.component;
 
+/**
+ * components supporting the developing process, usually not used in product releases
+ */
 public class Component {
     public void Component(){}
     public void Start(){

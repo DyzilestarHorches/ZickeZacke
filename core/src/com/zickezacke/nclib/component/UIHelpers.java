@@ -8,11 +8,17 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.nclib.component.Component;
 
+/**
+ * this class helps UI arrangement in developing stage. is not used in releases
+ */
 public class UIHelpers extends Component {
     private float screenWidth;
     private float screenHeight;
     private Vector2 screenCenter = new Vector2();
 
+    /**
+     * constructs the object
+     */
     public UIHelpers() {
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
@@ -20,12 +26,23 @@ public class UIHelpers extends Component {
         screenCenter.y = screenHeight/2;
     }
 
+    /**
+     * reacts to window resize
+     * @param width window width
+     * @param height window height
+     */
     public void resize(int width, int height){
         screenWidth = Gdx.graphics.getWidth();
         screenHeight = Gdx.graphics.getHeight();
         screenCenter.x = screenWidth/2;
         screenCenter.y = screenHeight/2;
     }
+
+    /**
+     * call in update or renderer to draw a grid
+     * @param divideWidth number of horizontal segments
+     * @param divideHeight number of vertical segments
+     */
     public void drawGrid(int divideWidth, int divideHeight){
         float partWidth = screenWidth/divideWidth;
         float partHeight = screenHeight/divideHeight;

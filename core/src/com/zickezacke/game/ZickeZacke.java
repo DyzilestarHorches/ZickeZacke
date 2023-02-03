@@ -40,6 +40,9 @@ public class ZickeZacke extends Game {
 	public static float brightnessVol = 0.2f;
 	public static int inGame = 1;
 
+	/**
+	 * initializes sound, defines and adds GameScreens
+	 */
 	@Override
 	public void create () {
 		soundSystem.SoundInIt();
@@ -54,6 +57,10 @@ public class ZickeZacke extends Game {
 		instance.setScreen(gameScreens.get(1));
 	}
 
+	/**
+	 * change to GameScreen with id
+	 * @param id the unique identifier that is defined in initialization
+	 */
 	public void setScreen(int id) {
 		for (GameScreen gameScreen: gameScreens) {
 			if (gameScreen.getId() == id){
@@ -62,12 +69,19 @@ public class ZickeZacke extends Game {
 		}
 	}
 
+	//getter
 	public List<GameScreen> getGameScreens(){
 		return this.gameScreens;
 	}
 
 	//region support
+
 	private static int waitFrameCount = 0;
+	/**
+	 * must be called in Updates, returns false for a number of frames then return true
+	 * @param numFrames number of frames that the method returns false
+	 * @return false until waitFrameCount = numFrames then true
+	 */
 	public static boolean waitFrame(int numFrames){
 		if (waitFrameCount < numFrames) {
 			waitFrameCount++;

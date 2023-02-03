@@ -3,6 +3,7 @@ package com.zickezacke.scenes;
 
 import com.badlogic.gdx.Gdx;
 
+import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.EggTiles;
@@ -412,6 +413,27 @@ public class GameScene extends GameWorld {
             }
 
             checkEnd();
+        }
+    }
+
+    /**
+     * sets position of camera
+     */
+    public void setDefaultCamera(){
+        if (camera3D != null) {
+            camera3D.position.set(0f, 22f, 7f);
+            camera3D.lookAt(0,-1f,0.25f);
+        }
+    }
+    public void setTopDownCamera(){
+        if (camera3D != null) {
+            camera3D.position.set(0f, 22f, 0f);
+            camera3D.lookAt(0,-1f,0f);
+        }
+    }
+    public void setTileCamera(Vector3 tmp){
+        if (camera3D != null) {
+            camera3D.position.set(tmp);
         }
     }
 }

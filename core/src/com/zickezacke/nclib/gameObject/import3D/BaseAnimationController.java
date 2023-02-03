@@ -32,6 +32,10 @@ import com.badlogic.gdx.utils.ObjectMap.Entry;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pool.Poolable;
 
+/**
+ * this is a class borrow from BaseAnimationController with some modifications
+ */
+
 /** Base class for applying one or more {@link Animation}s to a {@link Instance3D}. This class only applies the actual
  * {@link Node} transformations, it does not manage animations or keep track of animation states. See {@link AnimationController}
  * for an implementation of this class which does manage animations.
