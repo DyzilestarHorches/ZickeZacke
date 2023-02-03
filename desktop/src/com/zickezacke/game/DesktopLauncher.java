@@ -10,8 +10,13 @@ public class DesktopLauncher {
 		//ZickeZacke game = new ZickeZacke();
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("zickezacke");
-		config.setWindowedMode(1280, 720);
+		config.setTitle("Zicke Zacke");
+		config.setWindowIcon("./UI/logo.png");
+		config.setResizable(false);
+		//config.setWindowedMode(1920, 1080);
+		//config.setWindowedMode(1280, 720);
+		config.setWindowedMode(1600, 900);
+
 		new Lwjgl3Application(ZickeZacke.getInstance(), config);
 	}
 }

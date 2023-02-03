@@ -1,15 +1,13 @@
 package com.zickezacke.scenes;
 
-/**
- *HowScene class is used to implement game instruction menu
- */
-
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.UI.FunctionalButton;
 import com.zickezacke.gameObjectStore.UI.BackGround;
 import com.zickezacke.gameObjectStore.demo.textTest;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-
+/**
+ *HowScene class is used to implement game instruction menu
+ */
 public class HowScene extends GameWorld {
     /**
      * Constructor for HowScene class

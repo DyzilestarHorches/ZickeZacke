@@ -39,16 +39,20 @@ public class SelectButton extends Button {
      */
     public void objectInit() {
         super.objectInit();
+        //initiates texture for button based on type path.
         source2D = "./UI/select_btn_" + type + ".png";
+        //initiates size for button.
         size2D = new Vector2((float)0.5 * CELL_HEIGHT, (float)0.5 * CELL_HEIGHT);
     }
 
     @Override
     /**
-     * changes texture for clicked button
+     * clicks for choosing number and color of players.
      */
     public void MouseDown(int x, int y, int pointer, int button) {
+        //switches isChoose status
         isChoose = !isChoose;
+        //changes texture based on isChoose status.
         if(isChoose){
             setTexture("./UI/selected_btn_" + type + ".png");
         }else{

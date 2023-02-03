@@ -44,6 +44,9 @@ public class GameScene extends GameWorld {
     // signals ending
     private boolean isEnd = false;
 
+    //check if the scene is built or not
+    public static boolean isBuilt = true;
+
     // list to manage player
     private final List<Chicken> players = new ArrayList<>();
 
@@ -110,9 +113,6 @@ public class GameScene extends GameWorld {
                                                 {-1.5f*octOffset, 0, 0.5f*octOffset},
                                                 {-0.5f*octOffset, 0, 1.5f*octOffset}
     };
-
-    //check if the scene is built or not
-    public static boolean isBuilt = true;
 
     /**
      * Constructor for the GameScene class
