@@ -31,7 +31,7 @@ public class FunctionalButton extends Button{
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, int sceneId){
         super(id, typeFile);
         setPosition(xPos,yPos);
-        size2D = new Vector2(cellHeight,cellHeight);
+        size2D = new Vector2(CELL_HEIGHT, CELL_HEIGHT);
         this.sceneId = sceneId;
     }
 
@@ -50,7 +50,7 @@ public class FunctionalButton extends Button{
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, int sceneId,boolean isCameraAdj){
         super(id, typeFile);
         setPosition(xPos,yPos);
-        size2D = new Vector2(cellHeight,cellHeight);
+        size2D = new Vector2(CELL_HEIGHT, CELL_HEIGHT);
         this.isCameraAdj = isCameraAdj;
         this.sceneId = sceneId;
     }
@@ -90,7 +90,7 @@ public class FunctionalButton extends Button{
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, GameObject gameObject){
         super(id, typeFile);
         setPosition(xPos,yPos);
-        size2D = new Vector2(cellHeight,cellHeight);
+        size2D = new Vector2(CELL_HEIGHT, CELL_HEIGHT);
         this.gameObj = gameObject;
         this.sceneId = -1;
     }
@@ -142,7 +142,7 @@ public class FunctionalButton extends Button{
      * @param y  - double - y position
      */
     public void setPosition(double x, double y){
-        position2D = new Vector2((float) x*cellWidth,(float) y*cellHeight);
+        position2D = new Vector2((float) x* CELL_WIDTH,(float) y* CELL_HEIGHT);
     }
     /**
      *sets size for button in scene
@@ -150,7 +150,7 @@ public class FunctionalButton extends Button{
      * @param y  - double - y position
      */
     public void setSize(double x, double y){
-            size2D = new Vector2((float)x*cellWidth,(float) y*cellHeight);
+            size2D = new Vector2((float)x* CELL_WIDTH,(float) y* CELL_HEIGHT);
     }
 
     /**

@@ -8,11 +8,12 @@ import com.zickezacke.nclib.gameObject.GameObject;
 
 
 public class DragButton extends GameObject {
-    protected final int cellWidth =  1280/12;
-    protected final int cellHeight = 720/10;
-    protected final float START_PIVOT = 5*cellWidth;
-    protected final float END_PIVOT = 9*cellWidth - 0.25f*cellWidth - 7f;
-    protected final float END_PIVOT_0 = 6*cellWidth - 0.5f*cellWidth - 1f;
+    //value of grid layout 12 columns and 10 rows
+    protected final int CELL_WIDTH =  1280/12;
+    protected final int CELL_HEIGHT = 720/10;
+    protected final float START_PIVOT = 5* CELL_WIDTH;
+    protected final float END_PIVOT = 9* CELL_WIDTH - 0.25f* CELL_WIDTH - 7f;
+    protected final float END_PIVOT_0 = 6* CELL_WIDTH - 0.5f* CELL_WIDTH - 1f;
     protected boolean trackMouse = false;
     private float y;
     private float value;
@@ -37,8 +38,8 @@ public class DragButton extends GameObject {
      */
     public void objectInit() {
         source2D = "./UI/drag_button.png";
-        position2D = new Vector2(START_PIVOT + value*(END_PIVOT-START_PIVOT), y*cellHeight + 1f);
-        size2D = new Vector2(0.5f*cellHeight,0.5f*cellHeight);
+        position2D = new Vector2(START_PIVOT + value*(END_PIVOT-START_PIVOT), y* CELL_HEIGHT + 1f);
+        size2D = new Vector2(0.5f* CELL_HEIGHT,0.5f* CELL_HEIGHT);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class DragButton extends GameObject {
         if (trackMouse){
             if( Gdx.input.getX() > START_PIVOT && Gdx.input.getX()< END_PIVOT) {
                 value = ((Gdx.input.getX()-START_PIVOT)/(END_PIVOT-START_PIVOT));
-                position2D.set(Gdx.input.getX(), y*cellHeight + 1f);
+                position2D.set(Gdx.input.getX(), y* CELL_HEIGHT + 1f);
             }
         }
     }

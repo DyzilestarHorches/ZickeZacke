@@ -27,8 +27,8 @@ public class PlayButton extends Button {
     public void objectInit() {
         super.objectInit();
         isActive = true;
-        position2D = new Vector2(5*cellWidth, 2*cellHeight);
-        size2D = new Vector2(2*cellWidth,1*cellHeight);
+        position2D = new Vector2(5* CELL_WIDTH, 2* CELL_HEIGHT);
+        size2D = new Vector2(2* CELL_WIDTH,1* CELL_HEIGHT);
     }
 
     @Override

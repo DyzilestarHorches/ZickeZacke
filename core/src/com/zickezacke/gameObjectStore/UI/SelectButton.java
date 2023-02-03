@@ -31,7 +31,7 @@ public class SelectButton extends Button {
      * @param y - double - y position
      */
     public void setPosition(double x, double y){
-        position2D = new Vector2((float) x*cellWidth,(float) y*cellHeight);
+        position2D = new Vector2((float) x* CELL_WIDTH,(float) y* CELL_HEIGHT);
     }
     @Override
     /**
@@ -40,7 +40,7 @@ public class SelectButton extends Button {
     public void objectInit() {
         super.objectInit();
         source2D = "./UI/select_btn_" + type + ".png";
-        size2D = new Vector2((float)0.5 * cellHeight, (float)0.5 * cellHeight);
+        size2D = new Vector2((float)0.5 * CELL_HEIGHT, (float)0.5 * CELL_HEIGHT);
     }
 
     @Override
