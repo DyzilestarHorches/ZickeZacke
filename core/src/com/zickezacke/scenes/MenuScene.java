@@ -54,7 +54,6 @@ public class MenuScene extends GameWorld {
         gameObjects.add(notiPlayer);
         //adds back button for the notification.
         gameObjects.add(backBtn);
-        //gameObjects.add(new Button(111));
     }
 
     @Override
