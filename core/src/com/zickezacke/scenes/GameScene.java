@@ -326,7 +326,7 @@ public class GameScene extends GameWorld {
         currentPlayer = (currentPlayer + 1) % ZickeZacke.playerCount;
         nextTurnNotis.get(currentPlayer).setActive(true);
         updateTilesForPLayer();
-        System.out.println("Next player! " + currentPlayer);
+        //System.out.println("Next player! " + currentPlayer);
     }
 
     /**
