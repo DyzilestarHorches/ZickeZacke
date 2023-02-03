@@ -23,7 +23,6 @@ public class ZickeZacke extends Game {
 
 	private static final SoundSystem soundSystem = new SoundSystem();
 
-
 	public static SoundSystem getSoundSystem() {
 		return soundSystem;
 	}
