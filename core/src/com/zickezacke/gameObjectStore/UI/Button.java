@@ -1,15 +1,14 @@
+package com.zickezacke.gameObjectStore.UI;
+
+import com.badlogic.gdx.Gdx;
+import com.zickezacke.nclib.gameObject.GameObject;
 /**
  * Button is a component to implement ui
  */
-package com.zickezacke.gameObjectStore.UI;
-
-import com.zickezacke.game.ZickeZacke;
-import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-import com.zickezacke.nclib.gameObject.GameObject;
-
 public class Button extends GameObject {
-    public int cellWidth =  1280/12;
-    public int cellHeight = 720/10;
+    //value of grid layout 12 columns and 10 rows
+    protected final int CELL_WIDTH =  Gdx.graphics.getWidth()/12;
+    protected final int CELL_HEIGHT = Gdx.graphics.getHeight()/10;
     private String typeFile;
 
     /**

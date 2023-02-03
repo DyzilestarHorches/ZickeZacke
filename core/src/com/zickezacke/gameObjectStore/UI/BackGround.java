@@ -27,8 +27,11 @@ public class BackGround extends GameObject {
      */
     @Override
     public void objectInit() {
+        //initiates image base on file path
         source2D = "./UI/" + typeFile + ".jpg";
+        //pivot of image object is fixed to bottom-left of the screen.
         position2D = new Vector2(0,0);
+        //fits size of image responsive to window size.
         size2D = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 }

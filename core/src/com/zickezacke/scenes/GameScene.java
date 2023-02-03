@@ -8,15 +8,12 @@ import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.gameObjectStore.GameScene.Chicken;
 import com.zickezacke.gameObjectStore.GameScene.EggTiles;
 import com.zickezacke.gameObjectStore.GameScene.Ground;
-import com.zickezacke.gameObjectStore.GameScene.GroundCloud;
 import com.zickezacke.gameObjectStore.GameScene.OctTiles;
 import com.zickezacke.gameObjectStore.GameScene.Tail;
 import com.zickezacke.gameObjectStore.UI.nextTurnNoti;
 import com.zickezacke.gameObjectStore.UI.FunctionalButton;
 import com.zickezacke.gameObjectStore.UI.NotiBackground;
 import com.zickezacke.nclib.game.screens.helpers.GameWorld;
-import com.zickezacke.nclib.gameObject.GameObject;
-import com.zickezacke.nclib.gameObject.GameObject3D;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,9 +59,12 @@ public class GameScene extends GameWorld {
     //list noti
     private  List<nextTurnNoti> nextTurnNotis = new ArrayList<>();
 
-    //list to manage uiButton
+    //list to manage uiButton.
+    //list of buttons in submenu.
     private List<FunctionalButton> buttons = new ArrayList<>();
+    //camera button for switching camera modes.
     private FunctionalButton cameraButton;
+    //background of submenu.
     private NotiBackground menuInGame;
 
     private final float eggOffset = 3f;
@@ -127,7 +127,7 @@ public class GameScene extends GameWorld {
     }
 
     /**
-     * overrides the Begin method in parent class GameWorld, to add objects
+     * overrides the Begin method in parent class GameWorld, to add objects into the GameScene
      */
     public void Begin() {
         // add the Ground to GameScene
@@ -231,18 +231,29 @@ public class GameScene extends GameWorld {
      * creates UI for the GameScene
      */
     public void createUI(){
+        //creates a submenu in game is inactive as default.
         menuInGame =new NotiBackground(9006,"menu_background");
-        Gdx.app.log("ddada",String.valueOf(menuInGame.isActive()));
+        //adds menu button that activates submenu.
         gameObjects.add(new FunctionalButton(9005,"menu_btn",11,8,menuInGame));
+        //adds how button that directs to game instruction scene.
         gameObjects.add(new FunctionalButton(9005,"how_btn",11,6.5,2));
+        //creates camera button that allows user to switch different camera modes.
         cameraButton = new FunctionalButton(9005,"default_view_btn",11,5,-1,true);
+        //adds camera.
         gameObjects.add(cameraButton);
-
+        //adds submenu.
         gameObjects.add(menuInGame);
+
+        //adds functional buttons into submenu button list.
+        //adds resume button that inactivates submenu, back to game scene.
         buttons.add(new FunctionalButton(9006,"resume_btn",5,4.5,2,1,menuInGame));
+        //adds setting button that directs to setting scene.
         buttons.add(new FunctionalButton(9006,"setting0_btn",5,3,2,1,3));
+        //adds exit button that allows user to exit game.
         buttons.add(new FunctionalButton(9006,"exit_btn",5,1.5,2,1));
+        //set active status of buttons in submenu base on submenu status.
         for(FunctionalButton i : buttons){
+            //adds list of button into scene.
             gameObjects.add(i);
             i.setActive(menuInGame.isActive());
         }
@@ -253,8 +264,9 @@ public class GameScene extends GameWorld {
      * overrides the worldUpdate method in parent class GameWorld, to implement the core logic of the game
      */
     public void worldUpdate() {
-        // the UI buttons
+        //updates active status of buttons in submenu base on submenu status.
         for(FunctionalButton i : buttons){i.setActive(menuInGame.isActive());}
+        //updates camera view for 'tile' mode in camera button.
         cameraButton.setVector3(eggTilePosition[nextTile]);
         // the core Game Mechanic
         // State 1: The Game is still running
@@ -315,7 +327,7 @@ public class GameScene extends GameWorld {
         currentPlayer = (currentPlayer + 1) % ZickeZacke.playerCount;
         nextTurnNotis.get(currentPlayer).setActive(true);
         updateTilesForPLayer();
-        System.out.println("Next player! " + currentPlayer);
+        //System.out.println("Next player! " + currentPlayer);
     }
 
     /**
