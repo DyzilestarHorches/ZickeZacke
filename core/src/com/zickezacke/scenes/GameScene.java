@@ -70,6 +70,7 @@ public class GameScene extends GameWorld {
     //background of submenu.
     private NotiBackground menuInGame;
 
+    //
     private final float eggOffset = 3f;
     private final float[][] eggTilePosition = {{4f*eggOffset, 0, 0f},
                                     {3.75f*eggOffset, 0, 1f*eggOffset},
@@ -99,6 +100,7 @@ public class GameScene extends GameWorld {
                                     {3.5f*eggOffset, 0, -2f*eggOffset},
                                     {3.75f*eggOffset, 0, -1f*eggOffset}};
 
+    // 
     private final float octOffset = 2.6f;
     private final float[][] octTilePosition = {{0.5f*octOffset, 0, 0.5f*octOffset},
                                                 {1.5f*octOffset, 0, 0.5f*octOffset},

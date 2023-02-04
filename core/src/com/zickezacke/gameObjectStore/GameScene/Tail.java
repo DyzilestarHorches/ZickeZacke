@@ -106,7 +106,6 @@ public class Tail extends GameObject3D {
 
         // rotates the Tail according to the new Chicken
         rotateTail();
-
     }
 
     /**
