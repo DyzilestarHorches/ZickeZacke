@@ -14,17 +14,15 @@ public class HowScene extends GameWorld {
      *
      * @param has3DCamera - boolean - the scene has 3d camera
      * @param has2DCamera - boolean - the scene has 2d camera
-     *
-     * @return HowScene - a scene for game instruction
      */
     public HowScene(boolean has3DCamera, boolean has2DCamera){
         super(has3DCamera,has2DCamera);
     }
 
-    @Override
     /**
      * adds objects into HowScene
      */
+    @Override
     public void Begin() {
         // adds background
         gameObjects.add(new BackGround(201, "how_background"));
@@ -32,10 +30,10 @@ public class HowScene extends GameWorld {
         gameObjects.add(new FunctionalButton(201, "back_btn",1,1, ZickeZacke.inGame));
     }
 
-    @Override
     /**
      * updates scene that back button should return.
      */
+    @Override
     public void worldUpdate() {
         super.worldUpdate();
         gameObjects.add(new FunctionalButton(301, "back_btn",1,1, ZickeZacke.inGame));

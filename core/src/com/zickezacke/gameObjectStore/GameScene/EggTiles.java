@@ -1,14 +1,11 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
-import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
 /**
  * The EggTiles class is a Tile that the Chicken stands on
  *  is used in the Main Scene
- *
  */
 public class EggTiles extends GameObject3D {
     // determines if the tile has the chicken standing on it

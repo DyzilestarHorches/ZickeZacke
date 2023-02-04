@@ -16,9 +16,11 @@ import java.util.List;
 public class SettingScene extends GameWorld {
     //list of button to drag.
     private List<DragButton> dragButtonList = new ArrayList<>();
+
     //buttons to toggle.
     private ToggleButton toggleCuctacButton;
     private ToggleButton toggleNextPlayerButton;
+
     //float values that the sound variable should be mapped.
     private float cuctacVal = (ZickeZacke.getSoundSystem().getIsCucTaCucTac()) ? 0.8f : 0;
     private float nextPlayerVal = (ZickeZacke.getSoundSystem().getTheNextOne()) ? 0.8f : 0;
@@ -28,17 +30,15 @@ public class SettingScene extends GameWorld {
      *
      * @param has3DCamera - boolean - the scene has 3d camera
      * @param has2DCamera - boolean - the scene has 2d camera
-     *
-     * @return SettingScene - a scene for game setting environment
      */
     public SettingScene(boolean has3DCamera, boolean has2DCamera){
         super(has3DCamera,has2DCamera);
     }
 
-    @Override
     /**
      * adds objects into scene
      */
+    @Override
     public void Begin() {
         //adds background
         gameObjects.add(new BackGround(301, "setting_background"));
@@ -67,10 +67,10 @@ public class SettingScene extends GameWorld {
         gameObjects.add(toggleNextPlayerButton);
     }
 
-    @Override
     /**
      * updates value that are modified.
      */
+    @Override
     public void worldUpdate() {
         super.worldUpdate();
         //updates brightness after each modification.
