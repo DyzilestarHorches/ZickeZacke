@@ -15,8 +15,13 @@ public class SoundSystem{
     //create a list of music to store the game's sound and game's music
     private List <Music> listofMusics = new ArrayList<>();
 
+    //  controls whether the chicken is able to make a sound or not
     private static boolean isCucTaCucTac = true;
+
+    //  controls whether the next turn of another player is able to make a sound or not
     private static boolean theNextOne = true;
+
+    //  set the pitch of sound volume to 0.4
     private static float soundVol = 0.4f;
 
     /**
@@ -52,7 +57,17 @@ public class SoundSystem{
             listofMusics.get(1).play();
         }
     }
+
+    /**
+     *  gets the static variable isCucTaCucTac
+     *  @return
+     */
     public boolean getIsCucTaCucTac(){return isCucTaCucTac;}
+
+    /**
+     * if the static variable is true, play this sound
+     * @param conga
+     */
     public void setIsCucTaCucTac(boolean conga){
         isCucTaCucTac = conga;
     }
@@ -72,9 +87,21 @@ public class SoundSystem{
             listofMusics.get(3).play();
         }
     }
+
+    /**
+     * gets static boolean variable to play sound theNextOne
+     * @return
+     */
     public boolean getTheNextOne(){
         return theNextOne;
     }
+
+    /**
+     * if the static variable is true, play this sound
+     * @param next
+     */
+
+    
     public void setTheNextOne(boolean next){
         theNextOne = next;
     }
@@ -94,6 +121,11 @@ public class SoundSystem{
     public float getVolume (){
         return soundVol;
     };
+
+    /**
+     * return the sound's volume of the system
+     * @param value2
+     */
     public void setVolume (float value2){
         soundVol = value2;
         for (Music m : listofMusics) {
