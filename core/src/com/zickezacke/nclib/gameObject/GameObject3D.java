@@ -26,7 +26,7 @@ public class GameObject3D{
     protected Vector3 distance3D;   //distance from last frame
     protected Vector3 scale3D = new Vector3();  //scale size of model
     protected Vector3 center3D = new Vector3(); //center of model
-    protected Vector3 offset3D = new Vector3(); //offset between center and position
+    protected Vector3 offset3D = new Vector3(); //offset between center3D and position3D
     protected String source3D; //link of 3D model
 
     protected Instance3D model3D;   //store the model for rendering

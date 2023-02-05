@@ -14,6 +14,10 @@ import com.zickezacke.scenes.WinnerScene;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Main class extends Game which implements ApplicationListener, this class applies Singleton to
+ * control the structure of the game
+ */
 public class ZickeZacke extends Game {
 	public static final boolean DEVELOPER_MODE = false;	//true for developer mode, use to enable debug tools
 	private List<GameScreen> gameScreens = new ArrayList<>();	//store all screens
@@ -24,21 +28,27 @@ public class ZickeZacke extends Game {
 	//sound system
 	private static final SoundSystem soundSystem = new SoundSystem();
 
-
-	public static SoundSystem getSoundSystem() {
-		return soundSystem;
-	}
-
+	//singleton instance
 	public static ZickeZacke getInstance(){
 		return instance;
 	}
 
-	public ZickeZacke(){} //prevent new object
+	//prevent new object
+	public ZickeZacke(){}
 
-	public static boolean[] playerList;	//true if player is active
-	public static int playerCount;	//number of players
-	public static int winner;	//index of winner
-	public static float brightnessVol = 0.2f;	//Volume of brightness
+	//true if player is active
+	public static boolean[] playerList;
+
+	//number of players
+	public static int playerCount;
+
+	//index of winner
+	public static int winner;
+
+	//Volume of brightness
+	public static float brightnessVol = 0.2f;
+
+	//?
 	public static int inGame = 1;
 
 	/**
@@ -70,13 +80,18 @@ public class ZickeZacke extends Game {
 		}
 	}
 
-	//getter
+	//getters
 	public List<GameScreen> getGameScreens(){
 		return this.gameScreens;
+	}
+	public static SoundSystem getSoundSystem() {
+		return soundSystem;
 	}
 
 	//region support
 
+
+	//use to count frame in waitFrame
 	private static int waitFrameCount = 0;
 
 	/**
