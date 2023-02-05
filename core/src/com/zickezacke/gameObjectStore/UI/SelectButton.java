@@ -33,6 +33,7 @@ public class SelectButton extends Button {
     public void setPosition(double x, double y){
         position2D = new Vector2((float) x* CELL_WIDTH,(float) y* CELL_HEIGHT);
     }
+
     @Override
     /**
      * initiates selected button
@@ -65,4 +66,5 @@ public class SelectButton extends Button {
      * @return isChoose - boolean - value specifies that button is selected or not
      */
     public boolean getState(){return isChoose;}
+
 }

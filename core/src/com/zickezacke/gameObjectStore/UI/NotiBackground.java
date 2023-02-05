@@ -4,6 +4,7 @@ package com.zickezacke.gameObjectStore.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.nclib.gameObject.GameObject;
+
 /**
  * NotiBackground is used to implement background in menu scene with can active or inactive
  */
@@ -24,6 +25,7 @@ public class NotiBackground extends GameObject {
         //set inactive as default
         setActive(false);
     }
+
     @Override
     /**
      * initiates a notification background which is fit screen size
