@@ -8,7 +8,6 @@ import com.zickezacke.nclib.gameObject.GameObject;
  * NotiBackground is used to implement background in menu scene with can active or inactive
  */
 public class NotiBackground extends GameObject {
-
     // the file used to render the NotiBackGround
     private String fileType;
 
