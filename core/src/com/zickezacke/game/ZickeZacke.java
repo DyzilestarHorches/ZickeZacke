@@ -72,7 +72,8 @@ public class ZickeZacke extends Game {
 	}
 
 	/**
-	 * change to GameScreen with id
+	 * changes to GameScreen with id
+	 *
 	 * @param id - int - the unique identifier that is defined in initialization
 	 */
 	public void setScreen(int id) {
