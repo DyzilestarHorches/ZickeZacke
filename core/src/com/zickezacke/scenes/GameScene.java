@@ -282,7 +282,6 @@ public class GameScene extends GameWorld {
                 updateTilesForPLayer();
 
                 resetTypeChecked();
-                OctTiles.setIsClickable(true);
 
                 Gdx.app.log("Player tile" + currentPlayer, Integer.toString(players.get(currentPlayer).getTile()));
 
