@@ -65,20 +65,20 @@ public class Tail extends GameObject3D {
      */
     public int getPlayerNum () {return this.playerNum;}
 
-    @Override
     /**
      * overrides the objectStart method in parent class GameObject3D, for changes after object creation
      *  to rotate the Tail accordingly
      */
+    @Override
     public void objectStart() {
         model3D.setRotation(new Vector3(0,1,0),170f-(360f/24f)*tile);
     }
 
-    @java.lang.Override
     /**
      * overrides the objectInit method in parent class GameObject3D, to make changes before create
      *  to change the file used to render and get some additional value
      */
+    @java.lang.Override
     public void objectInit() {
         thisGameScene = ZickeZacke.getInstance().getGameScreens().get(0).getGameWorld();
         source3D = "./Chickens/tail_" + String.valueOf(tailFile) + ".g3db";
@@ -92,11 +92,11 @@ public class Tail extends GameObject3D {
         scale3D = new Vector3(1,1,1);
     }
 
-    @Override
     /**
      * overrides the objectUpdate of the parent class GameObject3D, to make changes to the Tail before rendering
      *  to update the Chicken and Rotation
      */
+    @Override
     public void objectUpdate() {
         // updates the current Chicken
         myChicken = (Chicken) (thisGameScene.getGameObjects3D().get(37+playerNum*2));
@@ -106,7 +106,6 @@ public class Tail extends GameObject3D {
 
         // rotates the Tail according to the new Chicken
         rotateTail();
-
     }
 
     /**

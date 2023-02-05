@@ -13,17 +13,15 @@ public class Ground extends GameObject3D {
      * constructor for BackGround class
      *
      * @param id - int - unique identifier for object
-     *
-     * @return Ground - a 3d object lies at 3d coordination (0,0,0).
      */
     public Ground(int id){
         super(id, false);
     }
 
-    @Override
     /**
      * initiates a main 3d ground.
      */
+    @Override
     public void objectInit() {
         //initiates 3d ground base on file path.
         source3D = "./Environment/ground.g3db";
@@ -33,10 +31,10 @@ public class Ground extends GameObject3D {
         scale3D = new Vector3(1, 1, 1);
     }
 
-    @Override
     /**
      * adjusts the ground position.
      */
+    @Override
     public void objectStart() {
         position3D.set(-offset3D.x, -0.2f, -offset3D.z);
     }

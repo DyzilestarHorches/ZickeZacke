@@ -1,12 +1,14 @@
-/**
- * SelectButton is used for implement button which can be selected or deselected
- */
 package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.math.Vector2;
-
+/**
+ * SelectButton is used for implement button which can be selected or deselected
+ */
 public class SelectButton extends Button {
+    //variable is used for check or uncheck status.
     private boolean isChoose;
+
+    //type of color for each select button's texture path.
     private String type;
 
     /**
@@ -33,10 +35,11 @@ public class SelectButton extends Button {
     public void setPosition(double x, double y){
         position2D = new Vector2((float) x* CELL_WIDTH,(float) y* CELL_HEIGHT);
     }
-    @Override
+
     /**
      * initiates selected button
      */
+    @Override
     public void objectInit() {
         super.objectInit();
         //initiates texture for button based on type path.
@@ -45,10 +48,10 @@ public class SelectButton extends Button {
         size2D = new Vector2((float)0.5 * CELL_HEIGHT, (float)0.5 * CELL_HEIGHT);
     }
 
-    @Override
     /**
      * clicks for choosing number and color of players.
      */
+    @Override
     public void MouseDown(int x, int y, int pointer, int button) {
         //switches isChoose status
         isChoose = !isChoose;

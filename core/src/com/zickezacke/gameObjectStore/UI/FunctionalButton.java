@@ -1,6 +1,3 @@
-/**
- * Functional button is used to implement various UI button such as exit, back, play, pause,...
- */
 package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.Gdx;
@@ -9,25 +6,33 @@ import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject;
 import com.zickezacke.scenes.GameScene;
-
+/**
+ * Functional button is used to implement various UI button such as exit, back, play, pause,...
+ */
 public class FunctionalButton extends Button{
-
+    // screen it for button to direct
     private final int sceneId;
+
+    // index for switching camera modes.
     private int  i = 0;
+
+    // 3d position of camera in mode 2.
     private Vector3 vector3;
+
+    // object which allows button to modify.
     private GameObject gameObj;
+
+    // camera tag for camera button.
     private boolean isCameraAdj = false;
 
     /**
-     *constructor for FunctionalButton class
+     * constructor for FunctionalButton class - button can direct user to another screen
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
      * @param xPos - double - x position
      * @param yPos - double - y position
      * @param sceneId - int - screen for button to direct
-     *
-     * @return FunctionalButton - button can direct user to another screen
      */
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, int sceneId){
         super(id, typeFile);
@@ -37,7 +42,7 @@ public class FunctionalButton extends Button{
     }
 
     /**
-     * constructor for FunctionalButton class
+     * constructor for FunctionalButton class - button can modify camera in different modes.
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
@@ -45,8 +50,6 @@ public class FunctionalButton extends Button{
      * @param yPos - double - y position
      * @param sceneId - int - screen for button to direct
      * @param isCameraAdj - boolean - true if this button modifies camera view
-     *
-     * @return FunctionalButton - button can modify camera in different modes.
      */
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, int sceneId,boolean isCameraAdj){
         super(id, typeFile);
@@ -57,7 +60,7 @@ public class FunctionalButton extends Button{
     }
 
     /**
-     * constructor for FunctionalButton class
+     * constructor for FunctionalButton class - button can direct user to another screen
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
@@ -66,8 +69,6 @@ public class FunctionalButton extends Button{
      * @param xSize - double - height
      * @param ySize - double - width
      * @param sceneId - int - screen for button to direct
-     *
-     * @return FunctionalButton - button can direct user to another screen
      */
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, double xSize, double ySize,int sceneId){
         super(id, typeFile);
@@ -78,15 +79,13 @@ public class FunctionalButton extends Button{
     }
 
     /**
-     * constructor for FunctionalButton class
+     * constructor for FunctionalButton class - button can modify another gameObject
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
      * @param xPos - double - x position
      * @param yPos - double - y position
      * @param gameObject - GameObject - object which this button can modify
-     *
-     *@return FunctionalButton - button can modify another gameObject
      */
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, GameObject gameObject){
         super(id, typeFile);
@@ -97,7 +96,7 @@ public class FunctionalButton extends Button{
     }
 
     /**
-     * constructor for FunctionalButton class
+     * constructor for FunctionalButton class - button to exit program
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
@@ -105,8 +104,6 @@ public class FunctionalButton extends Button{
      * @param yPos - double - y position
      * @param xSize - double - height
      * @param ySize - double - width
-     *
-     * @return FunctionalButton - button to exit program
      */
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, double xSize, double ySize){
         super(id, typeFile);
@@ -117,7 +114,7 @@ public class FunctionalButton extends Button{
     }
 
     /**
-     * constructor for FunctionalButton class
+     * constructor for FunctionalButton class - button can modify another gameObject
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
@@ -126,8 +123,6 @@ public class FunctionalButton extends Button{
      * @param xSize - double - height
      * @param ySize - double - width
      * @param gameObject - GameObject - object which this button can modify
-     *
-     *@return FunctionalButton - button can modify another gameObject
      */
     public FunctionalButton(int id, String typeFile, double xPos, double yPos, double xSize, double ySize,GameObject gameObject){
         super(id, typeFile);
@@ -145,6 +140,7 @@ public class FunctionalButton extends Button{
     public void setPosition(double x, double y){
         position2D = new Vector2((float) x* CELL_WIDTH,(float) y* CELL_HEIGHT);
     }
+
     /**
      *sets size for button in scene
      * @param x  - double - x position

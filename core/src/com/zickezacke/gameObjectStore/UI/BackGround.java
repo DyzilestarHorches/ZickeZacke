@@ -1,11 +1,11 @@
-/**
- * Background is used to implement background in menu scene
- */
 package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.nclib.gameObject.GameObject;
+/**
+ * Background is used to implement background in menu scene
+ */
 public class BackGround extends GameObject {
     private String typeFile;
 
@@ -14,8 +14,6 @@ public class BackGround extends GameObject {
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
-     *
-     * @return BackGround - a background
      */
     public BackGround(int id, String typeFile){
         super(id);
@@ -27,7 +25,7 @@ public class BackGround extends GameObject {
      */
     @Override
     public void objectInit() {
-        //initiates image base on file path
+        //initiates image based on file path
         source2D = "./UI/" + typeFile + ".jpg";
         //pivot of image object is fixed to bottom-left of the screen.
         position2D = new Vector2(0,0);

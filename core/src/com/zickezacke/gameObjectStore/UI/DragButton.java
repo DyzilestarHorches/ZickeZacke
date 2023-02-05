@@ -10,16 +10,25 @@ public class DragButton extends GameObject {
     //value of grid layout 12 columns and 10 rows
     protected final int CELL_WIDTH =  Gdx.graphics.getWidth()/12;
     protected final int CELL_HEIGHT = Gdx.graphics.getHeight()/10;
+
     //begin point of drag range and toggle range.
     protected final float START_PIVOT = 5* CELL_WIDTH;
+
     //end point of drag range.
     protected final float END_PIVOT = 9* CELL_WIDTH - 0.25f* CELL_WIDTH - 7f;
+
     //end point of toggle range.
     protected final float END_PIVOT_0 = 6* CELL_WIDTH - 0.5f* CELL_WIDTH - 1f;
+
+    //mouse is not tracked as default.
     protected boolean trackMouse = false;
+
+    //row of element in grid layout.
     private float y;
+
     //value for UI to present.
     private float value;
+
     /**
      * constructor for DragButton class
      *
@@ -35,10 +44,10 @@ public class DragButton extends GameObject {
         this.y = y;
     }
 
-    @Override
     /**
      * initiates a drag button object
      */
+    @Override
     public void objectInit() {
         //initiates texture for button.
         source2D = "./UI/drag_button.png";
@@ -47,10 +56,10 @@ public class DragButton extends GameObject {
         size2D = new Vector2(0.5f* CELL_HEIGHT,0.5f* CELL_HEIGHT);
     }
 
-    @Override
     /**
      * set drag button position corresponding mouse position from START_PIVOT to END_PIVOT
      */
+    @Override
     public void objectUpdate() {
         if (trackMouse){
             if( Gdx.input.getX() > START_PIVOT && Gdx.input.getX()< END_PIVOT) {
@@ -61,10 +70,10 @@ public class DragButton extends GameObject {
         }
     }
 
-    @Override
     /**
      * starts mouse tracking
      */
+    @Override
     public void MouseDown(int x, int y, int pointer, int button) {
             if (button == 0){
                 trackMouse = true;

@@ -1,9 +1,7 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.nclib.gameObject.GameObject3D;
-import com.zickezacke.nclib.gameObject.import3D.Animation3D;
 
 /**
  * The Chicken class is a Chicken for players
@@ -76,19 +74,19 @@ public class Chicken extends GameObject3D {
         position3D = new Vector3(x,y,z);
     }
 
-    @java.lang.Override
     /**
      * overrides the objectInit method in parent class GameObject3D, to make changes before create
      */
+    @java.lang.Override
     public void objectInit() {
-        source3D = "./Chickens/chicken_" + String.valueOf(playerFile) + ".g3db";
+        source3D = "./Chickens/chicken_" + playerFile + ".g3db";
         scale3D = new Vector3(1,1,1);
     }
 
-    @java.lang.Override
     /**
      * overrides the objectStart method in parent class GameObject3D, for changes after object creation
      */
+    @java.lang.Override
     public void objectStart(){
         //rotates object
         model3D.setRotation(new Vector3(0,1,0), 170f-(360f/24f)*tile);
@@ -166,10 +164,10 @@ public class Chicken extends GameObject3D {
         }
     }
 
-    @java.lang.Override
     /**
      * overrides the objectUpdate method in parent class GameObject3D, to make changes before render
      */
+    @java.lang.Override
     public void objectUpdate() {
         animation();
 
