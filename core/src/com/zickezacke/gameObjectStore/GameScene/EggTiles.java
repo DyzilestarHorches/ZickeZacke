@@ -1,14 +1,11 @@
 package com.zickezacke.gameObjectStore.GameScene;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
-import com.zickezacke.nclib.component.BoundingVisual;
 import com.zickezacke.nclib.gameObject.GameObject3D;
 
 /**
  * The EggTiles class is a Tile that the Chicken stands on
  *  is used in the Main Scene
- *
  */
 public class EggTiles extends GameObject3D {
     // determines if the tile has the chicken standing on it
@@ -73,13 +70,6 @@ public class EggTiles extends GameObject3D {
     public void objectUpdate() {}
 
     /**
-     * sets the state for the Egg Tile if it has chicken standing on it
-     *
-     * @param state - boolean - the state of the Egg Tile
-     */
-    public void setOccupy(boolean state) {this.occupy = state;}
-
-    /**
      * gets file's name of the Egg Tile
      *
      * @return - String - file's name of the Egg Tile
@@ -87,6 +77,13 @@ public class EggTiles extends GameObject3D {
     public String getType() {
         return this.eggTileFile;
     }
+
+    /**
+     * sets the state for the Egg Tile if it has chicken standing on it
+     *
+     * @param state - boolean - the state of the Egg Tile
+     */
+    public void setOccupy(boolean state) {this.occupy = state;}
 
     /**
      * gets the state of the Egg Tile

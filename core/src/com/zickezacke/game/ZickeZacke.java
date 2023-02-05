@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ZickeZacke extends Game {
-	public static final boolean DEVELOPER_MODE = false;
+	public static final boolean DEVELOPER_MODE = false;	//true for developer mode, use to enable debug tools
 	private List<GameScreen> gameScreens = new ArrayList<>();	//store all screens
 
 	//singleton
 	private static ZickeZacke instance = new ZickeZacke();
 
+	//sound system
 	private static final SoundSystem soundSystem = new SoundSystem();
-
 
 	public static SoundSystem getSoundSystem() {
 		return soundSystem;
@@ -34,10 +34,10 @@ public class ZickeZacke extends Game {
 
 	public ZickeZacke(){} //prevent new object
 
-	public static boolean[] playerList;
-	public static int playerCount;
-	public static int winner;
-	public static float brightnessVol = 0.2f;
+	public static boolean[] playerList;	//true if player is active
+	public static int playerCount;	//number of players
+	public static int winner;	//index of winner
+	public static float brightnessVol = 0.2f;	//Volume of brightness
 	public static int inGame = 1;
 
 	/**
@@ -59,7 +59,7 @@ public class ZickeZacke extends Game {
 
 	/**
 	 * change to GameScreen with id
-	 * @param id the unique identifier that is defined in initialization
+	 * @param id - int - the unique identifier that is defined in initialization
 	 */
 	public void setScreen(int id) {
 		for (GameScreen gameScreen: gameScreens) {
@@ -77,6 +77,7 @@ public class ZickeZacke extends Game {
 	//region support
 
 	private static int waitFrameCount = 0;
+
 	/**
 	 * must be called in Updates, returns false for a number of frames then return true
 	 * @param numFrames number of frames that the method returns false

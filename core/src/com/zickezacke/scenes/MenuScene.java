@@ -21,17 +21,20 @@ public class MenuScene extends GameWorld {
      *
      * @param has3DCamera - boolean - the scene has 3d camera
      * @param has2DCamera - boolean - the scene has 2d camera
-     *
-     * @return MenuScene - a scene for game menu
      */
     public MenuScene(boolean has3DCamera, boolean has2DCamera){
         super(has3DCamera,has2DCamera);
     }
+
     //creates a notification background.
     private NotiBackground notiPlayer = new NotiBackground(109,"noti_scene");
+
     //create back button the notification background.
     private FunctionalButton backBtn = new FunctionalButton(110,"back_btn",5.76,2.5,notiPlayer);
+
+    // list of Select Buttons in the MenuScene
     private List<SelectButton> selectButtonList = new ArrayList<>();
+
     /**
      * adds objects into scene
      */
@@ -56,10 +59,10 @@ public class MenuScene extends GameWorld {
         gameObjects.add(backBtn);
     }
 
-    @Override
     /**
      * updates list of select buttons
      */
+    @Override
     public void worldUpdate() {
         //inactivates notification when hits back button in the notification.
         backBtn.setActive(notiPlayer.isActive());

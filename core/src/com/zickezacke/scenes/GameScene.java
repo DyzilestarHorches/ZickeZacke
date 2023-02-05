@@ -44,6 +44,9 @@ public class GameScene extends GameWorld {
     // signals ending
     private boolean isEnd = false;
 
+    //check if the scene is built or not
+    public static boolean isBuilt = true;
+
     // list to manage player
     private final List<Chicken> players = new ArrayList<>();
 
@@ -67,6 +70,7 @@ public class GameScene extends GameWorld {
     //background of submenu.
     private NotiBackground menuInGame;
 
+    // initializes the position of the EggTiles
     private final float eggOffset = 3f;
     private final float[][] eggTilePosition = {{4f*eggOffset, 0, 0f},
                                     {3.75f*eggOffset, 0, 1f*eggOffset},
@@ -96,6 +100,7 @@ public class GameScene extends GameWorld {
                                     {3.5f*eggOffset, 0, -2f*eggOffset},
                                     {3.75f*eggOffset, 0, -1f*eggOffset}};
 
+    // initializes the position of the OctTiles
     private final float octOffset = 2.6f;
     private final float[][] octTilePosition = {{0.5f*octOffset, 0, 0.5f*octOffset},
                                                 {1.5f*octOffset, 0, 0.5f*octOffset},
@@ -110,9 +115,6 @@ public class GameScene extends GameWorld {
                                                 {-1.5f*octOffset, 0, 0.5f*octOffset},
                                                 {-0.5f*octOffset, 0, 1.5f*octOffset}
     };
-
-    //check if the scene is built or not
-    public static boolean isBuilt = true;
 
     /**
      * Constructor for the GameScene class
@@ -259,10 +261,10 @@ public class GameScene extends GameWorld {
         }
     }
 
-    @Override
     /**
      * overrides the worldUpdate method in parent class GameWorld, to implement the core logic of the game
      */
+    @Override
     public void worldUpdate() {
         //updates active status of buttons in submenu base on submenu status.
         for(FunctionalButton i : buttons){i.setActive(menuInGame.isActive());}
@@ -437,12 +439,22 @@ public class GameScene extends GameWorld {
             camera3D.lookAt(0,-1f,0.25f);
         }
     }
+
+    /**
+     * sets the Camera to the TopDown Position
+     */
     public void setTopDownCamera(){
         if (camera3D != null) {
             camera3D.position.set(0f, 22f, 0f);
             camera3D.lookAt(0,-1f,0f);
         }
     }
+
+    /**
+     * sets the Camera to the Tile Position
+     *
+     * @param tmp - Vector3 - the Position to move the camera to
+     */
     public void setTileCamera(Vector3 tmp){
         if (camera3D != null) {
             camera3D.position.set(tmp);
