@@ -10,7 +10,7 @@ public class Button extends GameObject {
     protected final int CELL_WIDTH =  Gdx.graphics.getWidth()/12;
     protected final int CELL_HEIGHT = Gdx.graphics.getHeight()/10;
 
-    //
+    //texture path for button.
     private String typeFile;
 
     /**

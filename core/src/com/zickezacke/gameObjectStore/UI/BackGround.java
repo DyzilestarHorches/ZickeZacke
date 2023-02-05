@@ -20,10 +20,10 @@ public class BackGround extends GameObject {
         this.typeFile = typeFile;
     }
 
-    @Override
     /**
      * initiates a background which is fit screen size
      */
+    @Override
     public void objectInit() {
         //initiates image based on file path
         source2D = "./UI/" + typeFile + ".jpg";
