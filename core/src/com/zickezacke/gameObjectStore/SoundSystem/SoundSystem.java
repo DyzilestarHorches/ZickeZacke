@@ -41,7 +41,7 @@ public class SoundSystem{
     }
 
     /**
-     * play the background music on loop
+     * plays the background music on loop
      */
     public void playBackgroundMusicOnLoop(){
         listofMusics.get(0).setLooping(true);
@@ -50,7 +50,7 @@ public class SoundSystem{
     }
 
     /**
-     * play chicken's sound
+     * plays chicken's sound
      */
     public void cucTaCucTac(){
         if (isCucTaCucTac) {
@@ -74,7 +74,7 @@ public class SoundSystem{
     }
 
     /**
-    * play the click's sound for the button
+    * plays the click's sound for the button
      */
     public void click(){
         listofMusics.get(2).play();
@@ -114,15 +114,15 @@ public class SoundSystem{
     }
 
     /**
-     * adjust the sound's volume
+     * adjusts the sound's volume
      * @return
      */
     public float getVolume (){
         return soundVol;
     };
-    
+
     /**
-     * return the sound's volume of the system
+     * returns the sound's volume of the system
      * @param value2
      */
     public void setVolume (float value2){
