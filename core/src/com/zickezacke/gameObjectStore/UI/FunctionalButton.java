@@ -169,6 +169,8 @@ public class FunctionalButton extends Button{
      */
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
+        //calls parent's mouse click
+        super.MouseDown(x,y,pointer,button);
         //cases where functional button has no object as reference or screen id
         if(this.sceneId == -1 && gameObj == null) {
             //camera button is true

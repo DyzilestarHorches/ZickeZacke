@@ -1,6 +1,7 @@
 package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject;
 /**
  * Button is a component to implement ui
@@ -43,9 +44,12 @@ public class Button extends GameObject {
         }
     }
 
+    /**
+     *implements click effect in each button
+     */
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
-        System.out.println("sayA"); //write sound here
+        ZickeZacke.getSoundSystem().click();
     }
 
     /**
