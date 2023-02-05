@@ -25,7 +25,7 @@ public class BackGround extends GameObject {
      */
     @Override
     public void objectInit() {
-        //initiates image base on file path
+        //initiates image based on file path
         source2D = "./UI/" + typeFile + ".jpg";
         //pivot of image object is fixed to bottom-left of the screen.
         position2D = new Vector2(0,0);

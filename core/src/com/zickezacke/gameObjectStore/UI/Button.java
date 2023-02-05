@@ -9,6 +9,8 @@ public class Button extends GameObject {
     //value of grid layout 12 columns and 10 rows
     protected final int CELL_WIDTH =  Gdx.graphics.getWidth()/12;
     protected final int CELL_HEIGHT = Gdx.graphics.getHeight()/10;
+
+    //texture path for button.
     private String typeFile;
 
     /**

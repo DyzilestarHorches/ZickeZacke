@@ -19,7 +19,11 @@ public class DragButton extends GameObject {
 
     //end point of toggle range.
     protected final float END_PIVOT_0 = 6* CELL_WIDTH - 0.5f* CELL_WIDTH - 1f;
+
+    //mouse is not tracked as default.
     protected boolean trackMouse = false;
+
+    //row of element in grid layout.
     private float y;
 
     //value for UI to present.

@@ -9,8 +9,12 @@ import com.zickezacke.game.ZickeZacke;
  * ToggleButton is used to create toggle two states button
  */
 public class ToggleButton extends DragButton {
-    private float value;
+
+    //row of element in grid layout.
     private float y;
+
+    //value for UI to present.
+    private float value;
 
     /**
      * constructor for ToggleButton class
@@ -27,10 +31,10 @@ public class ToggleButton extends DragButton {
         this.y = y;
     }
 
-    @Override
     /**
      * initiates a toggle button object
      */
+    @Override
     public void objectInit() {
         super.objectInit();
         //initiates toggle button position based on initial value.

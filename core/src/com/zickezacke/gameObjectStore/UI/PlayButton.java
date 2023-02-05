@@ -32,18 +32,17 @@ public class PlayButton extends Button {
         size2D = new Vector2(2* CELL_WIDTH,1* CELL_HEIGHT);
     }
 
-    @Override
     /**
      * updates menu object
      */
+    @Override
     public void objectUpdate() {
         thisMenuScene = ZickeZacke.getInstance().getGameScreens().get(1).getGameWorld();
     }
-
-    @Override
     /**
      * Clicks to play game, directs to GameScene
      */
+    @Override
     public void MouseDown(int x, int y, int pointer, int button) {
         //calls sound effect.
         ZickeZacke.getSoundSystem().cucTaCucTac();

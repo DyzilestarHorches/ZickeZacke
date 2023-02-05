@@ -347,6 +347,10 @@ public class GameWorld {
         return null;
     }
 
+    /**
+     * detects touches onto 3D game objects
+     * @return an InputAdapter specify behaviours when 3D game objects are clicked
+     */
     public InputAdapter create3DInputHandler(){
         InputAdapter inputAdapter3D = new InputAdapter(){
             @Override

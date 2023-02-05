@@ -36,11 +36,11 @@ public class nextTurnNoti extends GameObject {
         setActive(false);
     }
 
-    @Override
     /**
      * initiates a notification for next player
      */
-    public void objectInit() {
+    @Override
+        public void objectInit() {
         //initiates texture for banner corresponding player number.
         source2D = "./UI/next_noti_" + String.valueOf(nextPlayer) + ".png";
         //initiates position for banner.
@@ -49,10 +49,10 @@ public class nextTurnNoti extends GameObject {
         size2D = new Vector2(12*CELL_WIDTH,2*CELL_HEIGHT);
     }
 
-    @Override
     /**
      * updates a notification for next player
      */
+    @Override
     public void objectUpdate() {
         showNoti();
     }

@@ -1,6 +1,3 @@
-/**
- * Functional button is used to implement various UI button such as exit, back, play, pause,...
- */
 package com.zickezacke.gameObjectStore.UI;
 
 import com.badlogic.gdx.Gdx;
@@ -9,17 +6,27 @@ import com.badlogic.gdx.math.Vector3;
 import com.zickezacke.game.ZickeZacke;
 import com.zickezacke.nclib.gameObject.GameObject;
 import com.zickezacke.scenes.GameScene;
-
+/**
+ * Functional button is used to implement various UI button such as exit, back, play, pause,...
+ */
 public class FunctionalButton extends Button{
-
+    // screen it for button to direct
     private final int sceneId;
+
+    // index for switching camera modes.
     private int  i = 0;
+
+    // 3d position of camera in mode 2.
     private Vector3 vector3;
+
+    // object which allows button to modify.
     private GameObject gameObj;
+
+    // camera tag for camera button.
     private boolean isCameraAdj = false;
 
     /**
-     *constructor for FunctionalButton class - button can direct user to another screen
+     * constructor for FunctionalButton class - button can direct user to another screen
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
