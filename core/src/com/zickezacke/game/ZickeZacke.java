@@ -19,8 +19,11 @@ import java.util.List;
  * control the structure of the game
  */
 public class ZickeZacke extends Game {
-	public static final boolean DEVELOPER_MODE = false;	//true for developer mode, use to enable debug tools
-	private List<GameScreen> gameScreens = new ArrayList<>();	//store all screens
+	//true for developer mode, use to enable debug tools
+	public static final boolean DEVELOPER_MODE = false;
+
+	//store all screens
+	private List<GameScreen> gameScreens = new ArrayList<>();
 
 	//singleton
 	private static ZickeZacke instance = new ZickeZacke();
@@ -48,7 +51,7 @@ public class ZickeZacke extends Game {
 	//Volume of brightness
 	public static float brightnessVol = 0.2f;
 
-	//?
+	//Screen id for others menu return
 	public static int inGame = 1;
 
 	/**
@@ -69,7 +72,8 @@ public class ZickeZacke extends Game {
 	}
 
 	/**
-	 * change to GameScreen with id
+	 * changes to GameScreen with id
+	 *
 	 * @param id - int - the unique identifier that is defined in initialization
 	 */
 	public void setScreen(int id) {
@@ -96,6 +100,7 @@ public class ZickeZacke extends Game {
 
 	/**
 	 * must be called in Updates, returns false for a number of frames then return true
+	 *
 	 * @param numFrames number of frames that the method returns false
 	 * @return false until waitFrameCount = numFrames then true
 	 */

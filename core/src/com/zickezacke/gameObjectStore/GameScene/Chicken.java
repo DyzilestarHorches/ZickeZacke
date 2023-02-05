@@ -12,7 +12,7 @@ public class Chicken extends GameObject3D {
     private boolean isJumping = false;
 
     // constants used to control the number of Frames needed to perform a movement
-    private static final int JUMP_FRAME = 30;
+    private static final int JUMP_FRAME = 150;
     private static final float HEIGHT_SCALE = 0.1f;
 
     // variable to control the number of Frames needed to perform a movement
@@ -149,6 +149,7 @@ public class Chicken extends GameObject3D {
             if (count == JUMP_FRAME) {
                 Trigger = false;
                 isJumping = false;
+                OctTiles.setIsClickable(true);
                 count = 0;
 
             }

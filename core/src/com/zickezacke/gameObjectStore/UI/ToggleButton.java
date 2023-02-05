@@ -4,6 +4,7 @@ package com.zickezacke.gameObjectStore.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.game.ZickeZacke;
+
 /**
  * ToggleButton is used to create toggle two states button
  */
@@ -71,5 +72,6 @@ public class ToggleButton extends DragButton {
             }
         }
     }
+
 }
 

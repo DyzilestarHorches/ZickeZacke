@@ -69,4 +69,5 @@ public class SelectButton extends Button {
      * @return isChoose - boolean - value specifies that button is selected or not
      */
     public boolean getState(){return isChoose;}
+
 }

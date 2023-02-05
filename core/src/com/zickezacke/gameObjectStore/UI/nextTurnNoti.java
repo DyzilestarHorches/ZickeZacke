@@ -3,17 +3,21 @@ package com.zickezacke.gameObjectStore.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.zickezacke.nclib.gameObject.GameObject;
+
 /**
  * nextTurnNoti is a banner to display when the user finished turn.
  */
 public class nextTurnNoti extends GameObject {
     //time for notification can exist
     private final int SHOW_FRAME = 30;
+
     //value of grid layout 12 columns and 10 rows
     protected final int CELL_WIDTH =  Gdx.graphics.getWidth()/12;
     protected final int CELL_HEIGHT = Gdx.graphics.getHeight()/10;
+
     //index of next player
     private int nextPlayer;
+
     //timer to count from 0 to SHOW_FRAME
     private int count = 0;
 
@@ -23,7 +27,7 @@ public class nextTurnNoti extends GameObject {
      * @param id - int - unique identifier for object
      * @param nextPlayer - int - index of next player
      *
-     * @return nextTurnNoti - a temporary banner
+     * @return - nextTurnNoti - a temporary banner
      */
     public nextTurnNoti (int id, int nextPlayer){
         super(id,true);
@@ -52,6 +56,7 @@ public class nextTurnNoti extends GameObject {
     public void objectUpdate() {
         showNoti();
     }
+
     //shows the notification until timer count reaches SHOW_FRAME.
     public  void showNoti(){
         if(this.isActive){
