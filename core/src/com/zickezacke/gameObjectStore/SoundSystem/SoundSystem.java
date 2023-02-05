@@ -52,6 +52,7 @@ public class SoundSystem{
             listofMusics.get(1).play();
         }
     }
+
     public boolean getIsCucTaCucTac(){return isCucTaCucTac;}
     public void setIsCucTaCucTac(boolean conga){
         isCucTaCucTac = conga;
@@ -72,6 +73,7 @@ public class SoundSystem{
             listofMusics.get(3).play();
         }
     }
+
     public boolean getTheNextOne(){
         return theNextOne;
     }
@@ -86,7 +88,6 @@ public class SoundSystem{
         listofMusics.get(4).play();
     }
 
-
     /**
      * adjust the sound's volume
      * @return
@@ -94,6 +95,7 @@ public class SoundSystem{
     public float getVolume (){
         return soundVol;
     };
+
     public void setVolume (float value2){
         soundVol = value2;
         for (Music m : listofMusics) {
