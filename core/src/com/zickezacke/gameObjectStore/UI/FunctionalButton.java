@@ -19,7 +19,7 @@ public class FunctionalButton extends Button{
     private boolean isCameraAdj = false;
 
     /**
-     *constructor for FunctionalButton class - button can direct user to another screen
+     * constructor for FunctionalButton class - button can direct user to another screen
      *
      * @param id - int - unique identifier for object
      * @param typeFile - String -  image file of button
