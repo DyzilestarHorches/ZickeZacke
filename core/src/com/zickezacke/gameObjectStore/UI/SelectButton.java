@@ -53,6 +53,7 @@ public class SelectButton extends Button {
      */
     @Override
     public void MouseDown(int x, int y, int pointer, int button) {
+        super.MouseDown(x, y, pointer, button); //add this down here
         //switches isChoose status
         isChoose = !isChoose;
         //changes texture based on isChoose status.

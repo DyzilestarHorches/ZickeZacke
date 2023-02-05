@@ -43,6 +43,11 @@ public class Button extends GameObject {
         }
     }
 
+    @Override
+    public void MouseDown(int x, int y, int pointer, int button) {
+        System.out.println("sayA"); //write sound here
+    }
+
     /**
      * starts a button object
      */
