@@ -60,13 +60,15 @@ public class SoundSystem{
 
     /**
      *  gets the static variable isCucTaCucTac
-     *  @return
+     *
+     *  @return - boolean - the static variable isCucTaCucTac
      */
     public boolean getIsCucTaCucTac(){return isCucTaCucTac;}
 
     /**
      * if the static variable is true, play this sound
-     * @param conga
+     *
+     * @param conga - boolean - new value for the static variable
      */
     public void setIsCucTaCucTac(boolean conga){
         isCucTaCucTac = conga;
@@ -90,7 +92,8 @@ public class SoundSystem{
 
     /**
      * gets static boolean variable to play sound theNextOne
-     * @return
+     *
+     * @return - boolean - static boolean variable to play sound theNextOne
      */
     public boolean getTheNextOne(){
         return theNextOne;
@@ -98,10 +101,9 @@ public class SoundSystem{
 
     /**
      * if the static variable is true, play this sound
-     * @param next
+     * 
+     * @param next - boolean - new value for the static variable
      */
-
-    
     public void setTheNextOne(boolean next){
         theNextOne = next;
     }
@@ -116,7 +118,8 @@ public class SoundSystem{
 
     /**
      * adjust the sound's volume
-     * @return
+     *
+     * @return - float - the sound volume
      */
     public float getVolume (){
         return soundVol;
@@ -124,7 +127,8 @@ public class SoundSystem{
 
     /**
      * return the sound's volume of the system
-     * @param value2
+     *
+     * @param value2 - float - new variable for the sound volume
      */
     public void setVolume (float value2){
         soundVol = value2;
