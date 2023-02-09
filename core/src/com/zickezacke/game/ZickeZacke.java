@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ZickeZacke extends Game {
 	//true for developer mode, use to enable debug tools
-	public static final boolean DEVELOPER_MODE = false;
+	public static final boolean DEVELOPER_MODE = true;
 
 	//store all screens
 	private List<GameScreen> gameScreens = new ArrayList<>();
