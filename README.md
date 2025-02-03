@@ -2,17 +2,18 @@
 
 ZickeZacke is a 3D board game developed using the LibGDX framework, created as an academic project. The game replicates the well-known children's board game Zicke Zacke Hühnerkacke, adding interactive 3D elements and game logic.
 
-##Features:
+## Features:
 3D board and characters
 Interactive game engine
 Multiplayer support
-##Tech Stack:
+
+## Tech Stack:
 
 - Java
 - LibGDX
 - The NClib in core/src/com/zickezacke/nclib is a library that simulates Unity behavior and supports gameobject (2D and 3D), texture, textObject, interactions with 2D & 3D, components, and scene management.
 
-##Run the game:
+## Run the game:
 Get the release.rar file from the root of the project and extract it.
 
 Then run the game using this command:
@@ -21,7 +22,7 @@ Then run the game using this command:
 java -jar ./zicke-zacke.jar
 ```
 
-##Setup:
+## Setup:
 Clone the repository: git clone https://github.com/nguyenbhchuong/ZickeZacke.git
 
 For Windows:
